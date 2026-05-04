@@ -1,0 +1,216 @@
+{
+  "source": "Ballot Box Scotland: seat totals from Norstat 27-30 Apr 2026 poll projection (https://ballotbox.scot/scottish-parliament/sp26-hub/); vote shares from BBS poll-of-polls average (5-poll rolling, as of 28 Apr 2026)",
+  "fetched_at": "2026-05-04",
+  "national_projection": {
+    "seats": {
+      "SNP": 58,
+      "LAB": 18,
+      "CON": 14,
+      "LD": 9,
+      "GRN": 11,
+      "REF": 19,
+      "OTH": 0
+    },
+    "constituency_vote_pct": {
+      "SNP": 38.3,
+      "LAB": 18.5,
+      "CON": 11.5,
+      "LD": 10.5,
+      "GRN": 1.9,
+      "REF": 17.6,
+      "OTH": 1.6
+    },
+    "list_vote_pct": {
+      "SNP": 29.0,
+      "LAB": 16.2,
+      "CON": 12.0,
+      "LD": 10.0,
+      "GRN": 12.8,
+      "REF": 17.6,
+      "OTH": 2.4
+    }
+  },
+  "per_constituency_winner": null,
+  "marginals": [
+    {
+      "name": "Ayr",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 43.5,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 43.1,
+      "majority_2021_pct": 0.4,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Banffshire and Buchan Coast",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 45.2,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 42.9,
+      "majority_2021_pct": 2.3,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "East Lothian",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 39.2,
+      "runner_up_2021": "LAB",
+      "runner_up_2021_pct": 36.7,
+      "majority_2021_pct": 2.5,
+      "predicted_2026": "LAB"
+    },
+    {
+      "name": "Dumbarton",
+      "winner_2021": "LAB",
+      "winner_2021_pct": 46.3,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 42.5,
+      "majority_2021_pct": 3.8,
+      "predicted_2026": "LAB"
+    },
+    {
+      "name": "Aberdeen South and North Kincardine",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 42.3,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 38.0,
+      "majority_2021_pct": 4.3,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Perthshire South and Kinross-shire",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 45.7,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 41.2,
+      "majority_2021_pct": 4.5,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Aberdeenshire East",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 44.6,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 40.0,
+      "majority_2021_pct": 4.6,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Eastwood",
+      "winner_2021": "CON",
+      "winner_2021_pct": 41.9,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 36.8,
+      "majority_2021_pct": 5.1,
+      "predicted_2026": "CON"
+    },
+    {
+      "name": "Shetland",
+      "winner_2021": "LD",
+      "winner_2021_pct": 48.6,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 41.9,
+      "majority_2021_pct": 6.7,
+      "predicted_2026": "LD"
+    },
+    {
+      "name": "Caithness, Sutherland and Ross",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 43.1,
+      "runner_up_2021": "LD",
+      "runner_up_2021_pct": 36.1,
+      "majority_2021_pct": 7.0,
+      "predicted_2026": "LD"
+    },
+    {
+      "name": "Galloway and West Dumfries",
+      "winner_2021": "CON",
+      "winner_2021_pct": 47.0,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 39.9,
+      "majority_2021_pct": 7.1,
+      "predicted_2026": "CON"
+    },
+    {
+      "name": "Moray",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 48.6,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 40.9,
+      "majority_2021_pct": 7.7,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Aberdeenshire West",
+      "winner_2021": "CON",
+      "winner_2021_pct": 47.2,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 39.1,
+      "majority_2021_pct": 8.1,
+      "predicted_2026": "CON"
+    },
+    {
+      "name": "Edinburgh Southern",
+      "winner_2021": "LAB",
+      "winner_2021_pct": 45.9,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 37.0,
+      "majority_2021_pct": 8.9,
+      "predicted_2026": "LAB"
+    },
+    {
+      "name": "Angus North and Mearns",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 48.6,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 38.7,
+      "majority_2021_pct": 9.9,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Dumfriesshire",
+      "winner_2021": "CON",
+      "winner_2021_pct": 47.7,
+      "runner_up_2021": "SNP",
+      "runner_up_2021_pct": 37.7,
+      "majority_2021_pct": 10.0,
+      "predicted_2026": "CON"
+    },
+    {
+      "name": "Edinburgh Pentlands",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 42.4,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 32.3,
+      "majority_2021_pct": 10.1,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Perthshire North",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 49.5,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 39.4,
+      "majority_2021_pct": 10.1,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Clydesdale",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 43.2,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 32.0,
+      "majority_2021_pct": 11.2,
+      "predicted_2026": "SNP"
+    },
+    {
+      "name": "Edinburgh Central",
+      "winner_2021": "SNP",
+      "winner_2021_pct": 39.0,
+      "runner_up_2021": "CON",
+      "runner_up_2021_pct": 27.7,
+      "majority_2021_pct": 11.3,
+      "predicted_2026": "SNP"
+    }
+  ]
+}

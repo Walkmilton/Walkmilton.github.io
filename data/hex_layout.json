@@ -1,0 +1,294 @@
+{
+  "Shetland": [
+    8,
+    0
+  ],
+  "Orkney": [
+    8,
+    1
+  ],
+  "Na h-Eileanan an Iar": [
+    1,
+    2
+  ],
+  "Caithness, Sutherland and Ross": [
+    3,
+    3
+  ],
+  "Banffshire and Buchan Coast": [
+    11,
+    4
+  ],
+  "Inverness and Nairn": [
+    6,
+    5
+  ],
+  "Moray": [
+    8,
+    5
+  ],
+  "Aberdeenshire East": [
+    12,
+    5
+  ],
+  "Skye, Lochaber and Badenoch": [
+    2,
+    6
+  ],
+  "Aberdeenshire West": [
+    9,
+    6
+  ],
+  "Aberdeen Central": [
+    12,
+    6
+  ],
+  "Aberdeen Donside": [
+    13,
+    5
+  ],
+  "Aberdeen South and North Kincardine": [
+    11,
+    6
+  ],
+  "Angus South": [
+    9,
+    7
+  ],
+  "Angus North and Mearns": [
+    10,
+    7
+  ],
+  "Perthshire North": [
+    6,
+    8
+  ],
+  "Dundee City East": [
+    9,
+    8
+  ],
+  "Dundee City West": [
+    8,
+    8
+  ],
+  "Argyll and Bute": [
+    0,
+    9
+  ],
+  "Dumbarton": [
+    3,
+    9
+  ],
+  "Stirling": [
+    4,
+    9
+  ],
+  "Clackmannanshire and Dunblane": [
+    6,
+    9
+  ],
+  "Perthshire South and Kinross-shire": [
+    5,
+    8
+  ],
+  "Dunfermline": [
+    7,
+    9
+  ],
+  "Cowdenbeath": [
+    8,
+    9
+  ],
+  "Kirkcaldy": [
+    7,
+    8
+  ],
+  "Mid Fife and Glenrothes": [
+    9,
+    9
+  ],
+  "North East Fife": [
+    10,
+    9
+  ],
+  "Cunninghame North": [
+    2,
+    10
+  ],
+  "Greenock and Inverclyde": [
+    2,
+    9
+  ],
+  "Renfrewshire North and West": [
+    3,
+    10
+  ],
+  "Renfrewshire South": [
+    4,
+    10
+  ],
+  "Clydebank and Milngavie": [
+    5,
+    9
+  ],
+  "Eastwood": [
+    5,
+    10
+  ],
+  "Glasgow Anniesland": [
+    4,
+    11
+  ],
+  "Glasgow Cathcart": [
+    5,
+    11
+  ],
+  "Glasgow Kelvin": [
+    3,
+    8
+  ],
+  "Glasgow Maryhill and Springburn": [
+    4,
+    8
+  ],
+  "Glasgow Pollok": [
+    3,
+    11
+  ],
+  "Glasgow Southside": [
+    6,
+    10
+  ],
+  "Paisley": [
+    6,
+    11
+  ],
+  "Coatbridge and Chryston": [
+    7,
+    10
+  ],
+  "Cumbernauld and Kilsyth": [
+    7,
+    11
+  ],
+  "East Kilbride": [
+    4,
+    12
+  ],
+  "Glasgow Provan": [
+    5,
+    12
+  ],
+  "Glasgow Shettleston": [
+    6,
+    12
+  ],
+  "Rutherglen": [
+    4,
+    7
+  ],
+  "Strathkelvin and Bearsden": [
+    5,
+    7
+  ],
+  "Uddingston and Bellshill": [
+    6,
+    7
+  ],
+  "Airdrie and Shotts": [
+    8,
+    10
+  ],
+  "Falkirk East": [
+    8,
+    11
+  ],
+  "Falkirk West": [
+    7,
+    12
+  ],
+  "Motherwell and Wishaw": [
+    7,
+    7
+  ],
+  "Almond Valley": [
+    9,
+    10
+  ],
+  "Linlithgow": [
+    9,
+    11
+  ],
+  "Edinburgh Central": [
+    10,
+    10
+  ],
+  "Edinburgh Northern and Leith": [
+    10,
+    11
+  ],
+  "Edinburgh Pentlands": [
+    8,
+    12
+  ],
+  "Edinburgh Southern": [
+    9,
+    12
+  ],
+  "Edinburgh Western": [
+    8,
+    7
+  ],
+  "Edinburgh Eastern": [
+    10,
+    8
+  ],
+  "Midlothian North and Musselburgh": [
+    11,
+    9
+  ],
+  "East Lothian": [
+    11,
+    10
+  ],
+  "Ayr": [
+    2,
+    11
+  ],
+  "Cunninghame South": [
+    2,
+    12
+  ],
+  "Kilmarnock and Irvine Valley": [
+    3,
+    12
+  ],
+  "Hamilton, Larkhall and Stonehouse": [
+    4,
+    13
+  ],
+  "Clydesdale": [
+    5,
+    13
+  ],
+  "Midlothian South, Tweeddale and Lauderdale": [
+    11,
+    11
+  ],
+  "Ettrick, Roxburgh and Berwickshire": [
+    10,
+    12
+  ],
+  "Carrick, Cumnock and Doon Valley": [
+    3,
+    13
+  ],
+  "Dumfriesshire": [
+    7,
+    13
+  ],
+  "Galloway and West Dumfries": [
+    3,
+    14
+  ]
+}

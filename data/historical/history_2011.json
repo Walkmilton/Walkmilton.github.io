@@ -1,0 +1,54 @@
+{
+  "year": 2011,
+  "boundaries_era": "2011-2026",
+  "boundary_note": "Same boundaries as 2011-2021 dashboard maps. Per-constituency and per-region detail not yet compiled.",
+  "scotland": {
+    "constituency_vote_pct": {
+      "SNP": 45.4,
+      "LAB": 31.7,
+      "CON": 13.9,
+      "LD": 7.9,
+      "GRN": 0.0,
+      "REF": 0,
+      "OTH": 1.1
+    },
+    "list_vote_pct": {
+      "SNP": 44.0,
+      "LAB": 26.3,
+      "CON": 12.4,
+      "LD": 5.2,
+      "GRN": 4.4,
+      "REF": 0,
+      "OTH": 7.7
+    },
+    "seat_totals": {
+      "SNP": 69,
+      "LAB": 37,
+      "CON": 15,
+      "LD": 5,
+      "GRN": 2,
+      "REF": 0,
+      "OTH": 1
+    },
+    "constituency_seats": {
+      "SNP": 53,
+      "LAB": 15,
+      "CON": 3,
+      "LD": 2,
+      "GRN": 0,
+      "REF": 0,
+      "OTH": 0
+    },
+    "list_seats": {
+      "SNP": 16,
+      "LAB": 22,
+      "CON": 12,
+      "LD": 3,
+      "GRN": 2,
+      "REF": 0,
+      "OTH": 1
+    }
+  },
+  "constituencies": [],
+  "regions": []
+}

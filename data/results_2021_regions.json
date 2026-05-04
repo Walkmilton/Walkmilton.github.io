@@ -1,0 +1,218 @@
+[
+  {
+    "name": "Central Scotland",
+    "list_votes": {
+      "SNP": 148399,
+      "LAB": 77623,
+      "CON": 59896,
+      "LD": 6337,
+      "GRN": 19512,
+      "OTH": 15725
+    },
+    "constituency_seats_won": {
+      "SNP": 9,
+      "LAB": 0,
+      "CON": 0,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 3,
+      "CON": 3,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "Glasgow",
+    "list_votes": {
+      "SNP": 133917,
+      "LAB": 74088,
+      "CON": 37027,
+      "LD": 6079,
+      "GRN": 36114,
+      "OTH": 2427
+    },
+    "constituency_seats_won": {
+      "SNP": 9,
+      "LAB": 0,
+      "CON": 0,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 4,
+      "CON": 2,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "Highlands and Islands",
+    "list_votes": {
+      "SNP": 96413,
+      "LAB": 22713,
+      "CON": 60779,
+      "LD": 26771,
+      "GRN": 17729,
+      "OTH": 5420
+    },
+    "constituency_seats_won": {
+      "SNP": 6,
+      "LAB": 0,
+      "CON": 0,
+      "LD": 2,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 1,
+      "LAB": 1,
+      "CON": 4,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "Lothian",
+    "list_votes": {
+      "SNP": 141478,
+      "LAB": 76689,
+      "CON": 78595,
+      "LD": 28433,
+      "GRN": 49984,
+      "OTH": 4502
+    },
+    "constituency_seats_won": {
+      "SNP": 7,
+      "LAB": 1,
+      "CON": 0,
+      "LD": 1,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 2,
+      "CON": 3,
+      "LD": 0,
+      "GRN": 2,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "Mid Scotland and Fife",
+    "list_votes": {
+      "SNP": 136825,
+      "LAB": 52626,
+      "CON": 85909,
+      "LD": 25489,
+      "GRN": 28654,
+      "OTH": 818
+    },
+    "constituency_seats_won": {
+      "SNP": 8,
+      "LAB": 0,
+      "CON": 0,
+      "LD": 1,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 2,
+      "CON": 4,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "North East Scotland",
+    "list_votes": {
+      "SNP": 147910,
+      "LAB": 41062,
+      "CON": 110555,
+      "LD": 18050,
+      "GRN": 22735,
+      "OTH": 0
+    },
+    "constituency_seats_won": {
+      "SNP": 9,
+      "LAB": 0,
+      "CON": 1,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 2,
+      "CON": 4,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "South Scotland",
+    "list_votes": {
+      "SNP": 136741,
+      "LAB": 57236,
+      "CON": 121730,
+      "LD": 12422,
+      "GRN": 18964,
+      "OTH": 9417
+    },
+    "constituency_seats_won": {
+      "SNP": 6,
+      "LAB": 0,
+      "CON": 3,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 1,
+      "LAB": 3,
+      "CON": 3,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    }
+  },
+  {
+    "name": "West Scotland",
+    "list_votes": {
+      "SNP": 152671,
+      "LAB": 83775,
+      "CON": 82650,
+      "LD": 13570,
+      "GRN": 26632,
+      "OTH": 9505
+    },
+    "constituency_seats_won": {
+      "SNP": 8,
+      "LAB": 1,
+      "CON": 1,
+      "LD": 0,
+      "GRN": 0,
+      "OTH": 0
+    },
+    "list_seats_won": {
+      "SNP": 0,
+      "LAB": 3,
+      "CON": 3,
+      "LD": 0,
+      "GRN": 1,
+      "OTH": 0
+    }
+  }
+]

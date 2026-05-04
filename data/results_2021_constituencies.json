@@ -1,0 +1,1608 @@
+[
+  {
+    "name": "Aberdeen Central",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 56.0,
+    "vote_pct": {
+      "SNP": 44.9,
+      "LAB": 19.9,
+      "CON": 24.1,
+      "LD": 4.5,
+      "GRN": 6.6,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Aberdeen Donside",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 58.0,
+    "vote_pct": {
+      "SNP": 51.6,
+      "LAB": 15.3,
+      "CON": 26.4,
+      "LD": 6.0,
+      "GRN": 0.0,
+      "OTH": 0.7
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Aberdeen South and North Kincardine",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 42.3,
+      "LAB": 11.5,
+      "CON": 38.0,
+      "LD": 7.4,
+      "GRN": 0.0,
+      "OTH": 0.7
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Aberdeenshire East",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 44.6,
+      "LAB": 7.1,
+      "CON": 40.0,
+      "LD": 8.3,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Aberdeenshire West",
+    "region": "North East Scotland",
+    "winner": "CON",
+    "turnout_pct": 70.0,
+    "vote_pct": {
+      "SNP": 39.1,
+      "LAB": 5.7,
+      "CON": 47.2,
+      "LD": 8.1,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Airdrie and Shotts",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 59.0,
+    "vote_pct": {
+      "SNP": 50.6,
+      "LAB": 33.4,
+      "CON": 13.9,
+      "LD": 1.8,
+      "GRN": 0.0,
+      "OTH": 0.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Almond Valley",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 54.3,
+      "LAB": 25.2,
+      "CON": 16.6,
+      "LD": 3.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Angus North and Mearns",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 48.6,
+      "LAB": 7.6,
+      "CON": 38.7,
+      "LD": 5.1,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Angus South",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 50.7,
+      "LAB": 9.4,
+      "CON": 34.8,
+      "LD": 5.1,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Argyll and Bute",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 49.5,
+      "LAB": 7.3,
+      "CON": 22.8,
+      "LD": 20.5,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Ayr",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 43.5,
+      "LAB": 11.0,
+      "CON": 43.1,
+      "LD": 1.9,
+      "GRN": 0.0,
+      "OTH": 0.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Banffshire and Buchan Coast",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 56.0,
+    "vote_pct": {
+      "SNP": 45.2,
+      "LAB": 6.6,
+      "CON": 42.9,
+      "LD": 3.2,
+      "GRN": 0.0,
+      "OTH": 2.1
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Caithness, Sutherland and Ross",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 43.1,
+      "LAB": 5.5,
+      "CON": 14.0,
+      "LD": 36.1,
+      "GRN": 0.0,
+      "OTH": 1.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Carrick, Cumnock and Doon Valley",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 59.0,
+    "vote_pct": {
+      "SNP": 42.8,
+      "LAB": 24.2,
+      "CON": 30.6,
+      "LD": 2.5,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Clackmannanshire and Dunblane",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 47.2,
+      "LAB": 23.7,
+      "CON": 25.6,
+      "LD": 3.4,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Clydebank and Milngavie",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 47.2,
+      "LAB": 33.2,
+      "CON": 11.0,
+      "LD": 7.9,
+      "GRN": 0.0,
+      "OTH": 0.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Clydesdale",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 67.0,
+    "vote_pct": {
+      "SNP": 43.2,
+      "LAB": 22.0,
+      "CON": 32.0,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Coatbridge and Chryston",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 57.5,
+      "LAB": 31.1,
+      "CON": 8.5,
+      "LD": 1.7,
+      "GRN": 0.0,
+      "OTH": 1.1
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Cowdenbeath",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 48.3,
+      "LAB": 30.7,
+      "CON": 13.9,
+      "LD": 3.2,
+      "GRN": 3.9,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Cumbernauld and Kilsyth",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 58.6,
+      "LAB": 29.2,
+      "CON": 10.1,
+      "LD": 2.0,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Cunninghame North",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 49.0,
+      "LAB": 20.3,
+      "CON": 28.1,
+      "LD": 2.6,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Cunninghame South",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 58.0,
+    "vote_pct": {
+      "SNP": 50.5,
+      "LAB": 24.1,
+      "CON": 22.0,
+      "LD": 2.4,
+      "GRN": 0.0,
+      "OTH": 1.1
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dumbarton",
+    "region": "West Scotland",
+    "winner": "LAB",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 42.5,
+      "LAB": 46.3,
+      "CON": 8.3,
+      "LD": 1.8,
+      "GRN": 0.0,
+      "OTH": 1.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dumfriesshire",
+    "region": "South Scotland",
+    "winner": "CON",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 37.7,
+      "LAB": 11.4,
+      "CON": 47.7,
+      "LD": 3.2,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dunfermline",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 49.0,
+      "LAB": 27.8,
+      "CON": 15.4,
+      "LD": 7.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dundee City East",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 58.0,
+    "vote_pct": {
+      "SNP": 59.2,
+      "LAB": 18.1,
+      "CON": 17.3,
+      "LD": 4.4,
+      "GRN": 0.0,
+      "OTH": 0.9
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dundee City West",
+    "region": "North East Scotland",
+    "winner": "SNP",
+    "turnout_pct": 57.0,
+    "vote_pct": {
+      "SNP": 61.6,
+      "LAB": 21.5,
+      "CON": 10.3,
+      "LD": 3.9,
+      "GRN": 0.0,
+      "OTH": 2.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "East Kilbride",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 51.9,
+      "LAB": 30.6,
+      "CON": 14.5,
+      "LD": 3.0,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "East Lothian",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 69.0,
+    "vote_pct": {
+      "SNP": 39.2,
+      "LAB": 36.7,
+      "CON": 20.7,
+      "LD": 3.4,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Eastwood",
+    "region": "West Scotland",
+    "winner": "CON",
+    "turnout_pct": 76.0,
+    "vote_pct": {
+      "SNP": 36.8,
+      "LAB": 15.8,
+      "CON": 41.9,
+      "LD": 2.1,
+      "GRN": 0.0,
+      "OTH": 3.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Central",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 39.0,
+      "LAB": 16.4,
+      "CON": 27.7,
+      "LD": 6.1,
+      "GRN": 9.4,
+      "OTH": 1.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Eastern",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 52.4,
+      "LAB": 29.0,
+      "CON": 13.8,
+      "LD": 4.7,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Northern and Leith",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 47.9,
+      "LAB": 23.2,
+      "CON": 10.8,
+      "LD": 4.3,
+      "GRN": 13.1,
+      "OTH": 0.7
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Pentlands",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 42.4,
+      "LAB": 18.3,
+      "CON": 32.3,
+      "LD": 5.8,
+      "GRN": 0.0,
+      "OTH": 1.2
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Southern",
+    "region": "Lothian",
+    "winner": "LAB",
+    "turnout_pct": 71.0,
+    "vote_pct": {
+      "SNP": 37.0,
+      "LAB": 45.9,
+      "CON": 11.6,
+      "LD": 4.8,
+      "GRN": 0.0,
+      "OTH": 0.7
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Edinburgh Western",
+    "region": "Lothian",
+    "winner": "LD",
+    "turnout_pct": 71.0,
+    "vote_pct": {
+      "SNP": 33.5,
+      "LAB": 5.4,
+      "CON": 6.0,
+      "LD": 54.7,
+      "GRN": 0.0,
+      "OTH": 0.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Ettrick, Roxburgh and Berwickshire",
+    "region": "South Scotland",
+    "winner": "CON",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 32.5,
+      "LAB": 5.7,
+      "CON": 51.5,
+      "LD": 6.5,
+      "GRN": 3.0,
+      "OTH": 0.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Falkirk East",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 47.4,
+      "LAB": 27.9,
+      "CON": 19.6,
+      "LD": 2.6,
+      "GRN": 0.0,
+      "OTH": 2.5
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Falkirk West",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 62.0,
+    "vote_pct": {
+      "SNP": 54.3,
+      "LAB": 24.4,
+      "CON": 18.5,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Galloway and West Dumfries",
+    "region": "South Scotland",
+    "winner": "CON",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 39.9,
+      "LAB": 7.9,
+      "CON": 47.0,
+      "LD": 2.5,
+      "GRN": 2.6,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Anniesland",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 58.0,
+    "vote_pct": {
+      "SNP": 52.8,
+      "LAB": 32.9,
+      "CON": 11.1,
+      "LD": 3.2,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Cathcart",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 62.0,
+    "vote_pct": {
+      "SNP": 57.0,
+      "LAB": 29.7,
+      "CON": 10.6,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Kelvin",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 54.0,
+    "vote_pct": {
+      "SNP": 40.3,
+      "LAB": 23.9,
+      "CON": 7.9,
+      "LD": 2.7,
+      "GRN": 25.2,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Maryhill and Springburn",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 52.0,
+    "vote_pct": {
+      "SNP": 59.0,
+      "LAB": 30.5,
+      "CON": 8.0,
+      "LD": 2.5,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Pollok",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 54.0,
+    "vote_pct": {
+      "SNP": 53.7,
+      "LAB": 32.7,
+      "CON": 5.5,
+      "LD": 1.5,
+      "GRN": 4.9,
+      "OTH": 1.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Provan",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 52.0,
+    "vote_pct": {
+      "SNP": 52.9,
+      "LAB": 28.9,
+      "CON": 8.9,
+      "LD": 1.4,
+      "GRN": 7.9,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Shettleston",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 53.0,
+    "vote_pct": {
+      "SNP": 54.4,
+      "LAB": 29.4,
+      "CON": 13.8,
+      "LD": 2.4,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Glasgow Southside",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 59.0,
+    "vote_pct": {
+      "SNP": 60.2,
+      "LAB": 31.3,
+      "CON": 5.5,
+      "LD": 1.5,
+      "GRN": 0.0,
+      "OTH": 1.4
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Greenock and Inverclyde",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 54.2,
+      "LAB": 31.7,
+      "CON": 9.1,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 2.1
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Hamilton, Larkhall and Stonehouse",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 46.2,
+      "LAB": 33.6,
+      "CON": 17.5,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Inverness and Nairn",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 64.0,
+    "vote_pct": {
+      "SNP": 47.7,
+      "LAB": 11.7,
+      "CON": 27.7,
+      "LD": 6.3,
+      "GRN": 5.8,
+      "OTH": 0.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Kilmarnock and Irvine Valley",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 52.7,
+      "LAB": 24.0,
+      "CON": 20.4,
+      "LD": 2.3,
+      "GRN": 0.0,
+      "OTH": 0.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Kirkcaldy",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 58.0,
+    "vote_pct": {
+      "SNP": 52.4,
+      "LAB": 30.1,
+      "CON": 13.9,
+      "LD": 2.9,
+      "GRN": 0.0,
+      "OTH": 0.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Linlithgow",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 62.0,
+    "vote_pct": {
+      "SNP": 48.4,
+      "LAB": 26.9,
+      "CON": 20.2,
+      "LD": 4.5,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Mid Fife and Glenrothes",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 60.0,
+    "vote_pct": {
+      "SNP": 55.4,
+      "LAB": 24.1,
+      "CON": 13.8,
+      "LD": 5.5,
+      "GRN": 0.0,
+      "OTH": 1.2
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Midlothian North and Musselburgh",
+    "region": "Lothian",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 49.7,
+      "LAB": 31.1,
+      "CON": 15.3,
+      "LD": 3.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Midlothian South, Tweeddale and Lauderdale",
+    "region": "South Scotland",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 46.0,
+      "LAB": 12.6,
+      "CON": 30.2,
+      "LD": 6.1,
+      "GRN": 5.0,
+      "OTH": 0.2
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Moray",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 48.6,
+      "LAB": 7.2,
+      "CON": 40.9,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.5
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Motherwell and Wishaw",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 59.0,
+    "vote_pct": {
+      "SNP": 53.2,
+      "LAB": 30.3,
+      "CON": 13.1,
+      "LD": 1.6,
+      "GRN": 0.0,
+      "OTH": 1.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Na h-Eileanan an Iar",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 51.4,
+      "LAB": 27.7,
+      "CON": 14.6,
+      "LD": 2.4,
+      "GRN": 0.0,
+      "OTH": 3.9
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "North East Fife",
+    "region": "Mid Scotland and Fife",
+    "winner": "LD",
+    "turnout_pct": 69.0,
+    "vote_pct": {
+      "SNP": 36.6,
+      "LAB": 2.6,
+      "CON": 5.8,
+      "LD": 55.1,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Orkney",
+    "region": "Highlands and Islands",
+    "winner": "LD",
+    "turnout_pct": 65.0,
+    "vote_pct": {
+      "SNP": 29.1,
+      "LAB": 2.5,
+      "CON": 6.0,
+      "LD": 62.4,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Paisley",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 62.0,
+    "vote_pct": {
+      "SNP": 50.0,
+      "LAB": 32.7,
+      "CON": 9.6,
+      "LD": 3.2,
+      "GRN": 4.5,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Perthshire North",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 70.0,
+    "vote_pct": {
+      "SNP": 49.5,
+      "LAB": 5.8,
+      "CON": 39.4,
+      "LD": 4.5,
+      "GRN": 0.0,
+      "OTH": 0.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Perthshire South and Kinross-shire",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 70.0,
+    "vote_pct": {
+      "SNP": 45.7,
+      "LAB": 6.7,
+      "CON": 41.2,
+      "LD": 6.4,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Renfrewshire North and West",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 46.4,
+      "LAB": 27.2,
+      "CON": 22.9,
+      "LD": 2.4,
+      "GRN": 0.0,
+      "OTH": 1.1
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Renfrewshire South",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 50.5,
+      "LAB": 30.0,
+      "CON": 14.8,
+      "LD": 2.4,
+      "GRN": 0.0,
+      "OTH": 2.2
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Rutherglen",
+    "region": "Glasgow",
+    "winner": "SNP",
+    "turnout_pct": 63.0,
+    "vote_pct": {
+      "SNP": 50.5,
+      "LAB": 37.6,
+      "CON": 9.1,
+      "LD": 2.8,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Shetland",
+    "region": "Highlands and Islands",
+    "winner": "LD",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 41.9,
+      "LAB": 3.6,
+      "CON": 4.2,
+      "LD": 48.6,
+      "GRN": 0.0,
+      "OTH": 1.8
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Skye, Lochaber and Badenoch",
+    "region": "Highlands and Islands",
+    "winner": "SNP",
+    "turnout_pct": 68.0,
+    "vote_pct": {
+      "SNP": 56.1,
+      "LAB": 8.9,
+      "CON": 19.3,
+      "LD": 15.7,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Stirling",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 69.0,
+    "vote_pct": {
+      "SNP": 48.6,
+      "LAB": 16.0,
+      "CON": 31.8,
+      "LD": 3.6,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Strathkelvin and Bearsden",
+    "region": "West Scotland",
+    "winner": "SNP",
+    "turnout_pct": 72.0,
+    "vote_pct": {
+      "SNP": 45.5,
+      "LAB": 18.4,
+      "CON": 20.7,
+      "LD": 14.4,
+      "GRN": 0.0,
+      "OTH": 0.9
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Uddingston and Bellshill",
+    "region": "Central Scotland",
+    "winner": "SNP",
+    "turnout_pct": 61.0,
+    "vote_pct": {
+      "SNP": 49.9,
+      "LAB": 35.1,
+      "CON": 12.7,
+      "LD": 2.3,
+      "GRN": 0.0,
+      "OTH": 0.0
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  }
+]

@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' https://cdn.jsdelivr.net;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;
+               img-src 'self' data:;
+               connect-src 'self' https://docs.google.com;
+               base-uri 'self';
+               form-action 'self';
+               frame-ancestors 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Holyrood 2026 — Live Results Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<style>
+:root {
+  --bg-0: #0a0e14;
+  --bg-1: #11161e;
+  --bg-2: #181f29;
+  --bg-3: #1f2733;
+  --line: #2a3340;
+  --line-soft: #1f2632;
+  --text-0: #f3f5f8;
+  --text-1: #c5cdd9;
+  --text-2: #8a93a3;
+  --text-3: #5a6373;
+  --accent: #4ea1ff;
+  --accent-soft: #4ea1ff22;
+  --good: #3ddc97;
+  --bad: #ff5c8a;
+  --warn: #ffb547;
+
+  /* Party colours */
+  --p-SNP: #FDF38E;
+  --p-SNP-dark: #FFC700;
+  --p-LAB: #E4003B;
+  --p-CON: #0087DC;
+  --p-LD:  #FAA61A;
+  --p-GRN: #5DBB46;
+  --p-REF: #12B6CF;
+  --p-OTH: #8a93a3;
+
+  --shadow: 0 1px 0 #ffffff05 inset, 0 1px 2px #00000060;
+  --r: 12px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: radial-gradient(1100px 600px at 30% -10%, #18253a 0%, transparent 60%) , var(--bg-0);
+  color: var(--text-0);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: inherit; }
+a { color: var(--accent); text-decoration: none; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* ============ Layout ============ */
+.app { max-width: 1500px; margin: 0 auto; padding: 24px 28px 80px; }
+.muted { color: var(--text-2); }
+.dim   { color: var(--text-3); }
+.tiny  { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+
+/* Header */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; gap: 20px; flex-wrap: wrap;
+}
+.brand {
+  display: flex; align-items: center; gap: 14px;
+}
+.brand .logo {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, #233a64 0%, #0a253f 100%);
+  border: 1px solid #2a4673;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 14px #00000060, 0 1px 0 #ffffff15 inset;
+}
+.brand .logo svg { width: 22px; height: 22px; color: #b3d2ff; }
+.brand h1 {
+  margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+}
+.brand .sub { font-size: 12px; color: var(--text-2); margin-top: 1px; }
+
+.topbar .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.toggle-group {
+  display: inline-flex; background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 999px; padding: 3px;
+}
+.toggle-group button {
+  background: transparent; color: var(--text-1); border: 0; cursor: pointer;
+  padding: 6px 14px; border-radius: 999px; font-weight: 500; font-size: 13px;
+  transition: all .15s ease;
+}
+.toggle-group button.active {
+  background: linear-gradient(180deg, #2a3a55, #1d2a40);
+  color: #fff; box-shadow: var(--shadow);
+}
+.toggle-group button:not(.active):hover { color: #fff; }
+
+.btn {
+  background: var(--bg-2); color: var(--text-0); border: 1px solid var(--line);
+  padding: 7px 13px; border-radius: 8px; cursor: pointer; font-size: 13px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: all .15s ease;
+}
+.btn:hover { background: var(--bg-3); border-color: #36425a; }
+.btn.primary {
+  background: linear-gradient(180deg, #2563eb, #1d4ed8);
+  border-color: #1d4ed8; color: #fff;
+}
+.btn.primary:hover { filter: brightness(1.1); }
+.btn.danger {
+  background: transparent; border-color: #4a2333; color: #ff8aa8;
+}
+
+/* Card */
+.card {
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+.card h2 {
+  margin: 0; padding: 14px 18px 10px;
+  font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-2); font-weight: 600;
+  border-bottom: 1px solid var(--line-soft);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card h2 .right { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text-3); }
+.card .body { padding: 16px 18px; }
+
+/* ============ Hero summary ============ */
+.hero {
+  display: grid; gap: 14px;
+  grid-template-columns: 1.2fr 1fr;
+  margin-bottom: 16px;
+}
+@media (max-width: 980px) { .hero { grid-template-columns: 1fr; } }
+
+/* Seat bar */
+.seatbar-card .body { padding-bottom: 8px; }
+.seatbar-summary { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+.seatbar-summary .lead-party { font-size: 28px; font-weight: 800; letter-spacing: -.01em; }
+.seatbar-summary .lead-detail { color: var(--text-2); }
+.seatbar-summary .majline { margin-left: auto; font-size: 12px; color: var(--text-3); }
+
+.seatbar { position: relative; width: 100%; height: 26px; border-radius: 6px; overflow: hidden;
+  background: var(--bg-3); display: flex;
+  box-shadow: 0 1px 0 #ffffff08 inset, 0 0 0 1px var(--line) inset;
+}
+.seatbar > div { height: 100%; transition: width .35s ease; }
+.seatbar .majority-line {
+  position: absolute; top: -4px; bottom: -4px; left: 50%;
+  width: 2px; background: #fff; opacity: .7;
+}
+.seatbar .majority-line::after {
+  content: '65 — Majority'; position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: #fff; opacity: .8; white-space: nowrap; font-weight: 600;
+}
+.seatbar-legend { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+.seat-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 9px 5px 7px; background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 999px; font-size: 12px;
+}
+.seat-pill .swatch { width: 10px; height: 10px; border-radius: 3px; }
+.seat-pill .num { font-weight: 700; font-size: 13px; }
+.seat-pill .delta { color: var(--text-2); font-size: 11px; }
+.seat-pill .delta.up { color: var(--good); }
+.seat-pill .delta.down { color: var(--bad); }
+
+/* Status card */
+.status-card .body { display: grid; gap: 10px; }
+.status-row { display: flex; justify-content: space-between; align-items: baseline; }
+.status-row .label { color: var(--text-2); font-size: 13px; }
+.status-row .value { font-weight: 700; font-size: 16px; }
+.progress {
+  height: 6px; background: var(--bg-3); border-radius: 999px; overflow: hidden;
+  border: 1px solid var(--line);
+}
+.progress > div {
+  height: 100%; background: linear-gradient(90deg, #4ea1ff, #6dd6ff);
+  transition: width .35s ease;
+}
+
+/* ============ Maps row ============ */
+.maps-row {
+  display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin-bottom: 16px;
+}
+@media (max-width: 1100px) { .maps-row { grid-template-columns: 1fr; } }
+.map-card .body { padding: 0; position: relative; }
+.map-svg-wrap { position: relative; width: 100%; aspect-ratio: 1 / 1.05; max-height: 580px; }
+.map-svg-wrap svg { width: 100%; height: 100%; display: block; }
+.map-feat {
+  fill: var(--bg-3);
+  stroke: #0a0e14;
+  stroke-width: 0.6;
+  cursor: pointer;
+  transition: fill .15s ease, stroke .15s ease;
+}
+.map-feat.empty { fill: #232a37; }
+.map-feat:hover { stroke: #fff; stroke-width: 1.4; filter: brightness(1.15); }
+.map-feat.proj { opacity: .55; }
+
+.tooltip {
+  position: fixed; z-index: 50; pointer-events: none;
+  background: rgba(8,12,18,.96); border: 1px solid #303a4d;
+  border-radius: 10px; padding: 10px 12px;
+  font-size: 12px; color: var(--text-1);
+  box-shadow: 0 14px 30px #00000080;
+  min-width: 200px; max-width: 280px;
+  opacity: 0; transition: opacity .12s ease; backdrop-filter: blur(6px);
+}
+.tooltip.show { opacity: 1; }
+.tooltip h4 { margin: 0 0 4px; color: var(--text-0); font-size: 13px; }
+.tooltip .reg { color: var(--text-3); font-size: 11px; margin-bottom: 8px; }
+.tooltip .row { display: flex; justify-content: space-between; padding: 2px 0; gap: 12px; }
+.tooltip .row .ptag { display: inline-flex; align-items: center; gap: 6px; }
+.tooltip .row .ptag .sw { width: 8px; height: 8px; border-radius: 2px; }
+.tooltip .meta { margin-top: 6px; padding-top: 6px; border-top: 1px solid #2a3340; color: var(--text-3); font-size: 11px; }
+
+.map-overlay {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(8,12,18,.7); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 10px; font-size: 11px; color: var(--text-2);
+  backdrop-filter: blur(6px);
+}
+
+/* ============ Lower row: data entry + comparisons ============ */
+.lower-row {
+  display: grid; gap: 14px; grid-template-columns: 1.1fr 1fr; margin-bottom: 16px;
+}
+@media (max-width: 1100px) { .lower-row { grid-template-columns: 1fr; } }
+
+/* Data entry */
+.entry-form { display: grid; gap: 10px; }
+.entry-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.entry-form select,
+.entry-form input {
+  width: 100%; background: var(--bg-3); border: 1px solid var(--line);
+  color: var(--text-0); padding: 8px 10px; border-radius: 8px; font: inherit; font-size: 13px;
+  transition: border-color .15s;
+}
+.entry-form select:focus,
+.entry-form input:focus { outline: none; border-color: var(--accent); }
+.entry-form label { font-size: 11px; color: var(--text-2); display: block; margin-bottom: 3px; font-weight: 500; }
+.entry-form .vote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+.entry-form .vote-grid .vote-input {
+  position: relative;
+}
+.entry-form .vote-grid .vote-input .ptag {
+  position: absolute; left: 8px; top: 8px; font-size: 10px; font-weight: 700;
+  letter-spacing: .04em;
+}
+.entry-form .vote-grid input { padding-top: 22px; padding-bottom: 6px; }
+.entry-form .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.declared-list { max-height: 280px; overflow-y: auto; border-top: 1px solid var(--line-soft); margin-top: 12px; padding-top: 10px; }
+.declared-list .item {
+  display: flex; align-items: center; gap: 10px; padding: 6px 4px; border-radius: 6px;
+}
+.declared-list .item:hover { background: var(--bg-3); }
+.declared-list .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+.declared-list .name { flex: 1; font-size: 13px; }
+.declared-list .pct { font-size: 11px; color: var(--text-2); font-family: 'JetBrains Mono', monospace; }
+.declared-list .x { background: transparent; border: 0; color: var(--text-3); cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+.declared-list .x:hover { color: var(--bad); background: #2a1a22; }
+
+/* Comparison view */
+.compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.compare-table th { text-align: left; font-size: 11px; color: var(--text-3); font-weight: 600; padding: 6px 8px; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--line); }
+.compare-table th.num { text-align: right; }
+.compare-table td { padding: 8px 8px; border-bottom: 1px solid var(--line-soft); }
+.compare-table td.num { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.compare-table tr:last-child td { border-bottom: 0; }
+.compare-table .party-cell { display: flex; align-items: center; gap: 8px; }
+.compare-table .party-cell .sw { width: 12px; height: 12px; border-radius: 3px; }
+.compare-table .delta { font-weight: 700; }
+.compare-table .delta.up { color: var(--good); }
+.compare-table .delta.down { color: var(--bad); }
+.compare-table .delta.flat { color: var(--text-3); }
+
+/* Polling card */
+.poll-card .body { display: grid; gap: 12px; }
+.poll-presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.poll-presets button {
+  background: var(--bg-3); border: 1px solid var(--line); color: var(--text-1);
+  padding: 4px 10px; border-radius: 999px; font-size: 11px; cursor: pointer;
+}
+.poll-presets button:hover { background: var(--bg-2); border-color: var(--accent); }
+.poll-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+.poll-grid .ptype { grid-column: 1 / -1; font-size: 11px; color: var(--text-3); margin-top: 6px; text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.poll-grid label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-1); }
+.poll-grid label .sw { width: 10px; height: 10px; border-radius: 2px; }
+.poll-grid .name { flex: 1; }
+.poll-grid input { width: 70px; background: var(--bg-3); border: 1px solid var(--line); color: var(--text-0); padding: 5px 8px; border-radius: 6px; font: inherit; font-size: 12px; text-align: right; font-family: 'JetBrains Mono', monospace; }
+.poll-grid input:focus { outline: none; border-color: var(--accent); }
+.poll-result { background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+
+/* Mini hemicycle for projection card */
+.mini-bar { height: 16px; border-radius: 4px; overflow: hidden; display: flex; background: var(--bg-3); border: 1px solid var(--line); margin-top: 6px; }
+.mini-bar > div { height: 100%; transition: width .35s ease; }
+
+/* Toggle eye for region/constituency map */
+.map-toggle { display: inline-flex; gap: 4px; }
+.map-toggle button {
+  background: transparent; color: var(--text-2); border: 1px solid var(--line);
+  padding: 3px 9px; border-radius: 6px; cursor: pointer; font-size: 11px;
+}
+.map-toggle button.active { color: #fff; background: var(--bg-3); border-color: #36425a; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #1a3330; border: 1px solid #2d6f4f; color: #b6f3d4;
+  padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  box-shadow: 0 10px 40px #00000080;
+  opacity: 0; transition: opacity .3s, transform .3s;
+  pointer-events: none; z-index: 100;
+}
+.toast.show { opacity: 1; transform: translate(-50%, -8px); }
+
+/* Footer note */
+.footer { color: var(--text-3); font-size: 11px; text-align: center; padding: 24px 0 0; line-height: 1.7; }
+.footer a { color: var(--text-2); }
+
+/* Modal */
+.modal-back {
+  position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px);
+  z-index: 90; display: none; align-items: center; justify-content: center;
+}
+.modal-back.show { display: flex; }
+.modal {
+  width: min(520px, 92vw); background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 14px; padding: 0; box-shadow: 0 30px 60px #000000aa;
+}
+.modal header { padding: 14px 18px; border-bottom: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; }
+.modal header h3 { margin: 0; font-size: 15px; }
+.modal header button { background: transparent; border: 0; color: var(--text-2); cursor: pointer; font-size: 18px; }
+.modal .body { padding: 16px 18px; }
+.modal footer { padding: 12px 18px 16px; display: flex; justify-content: flex-end; gap: 8px; }
+
+/* hidden file input */
+.file-input { display: none; }
+
+/* ============ Region list-seat dot panels ============ */
+.region-leader {
+  stroke: rgba(255,255,255,0.35);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  fill: none;
+}
+html[data-theme="light"] .region-leader { stroke: rgba(15,23,42,0.35); }
+.region-panel-bg {
+  fill: rgba(8,12,18,0.85);
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 1;
+}
+html[data-theme="light"] .region-panel-bg {
+  fill: rgba(255,255,255,0.92);
+  stroke: rgba(15,23,42,0.2);
+}
+.region-panel-title {
+  fill: var(--text-1); font-size: 9px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  text-anchor: middle;
+}
+.region-seat-dot {
+  stroke: rgba(0,0,0,0.18);
+  stroke-width: 0.6;
+}
+.region-seat-dot.empty {
+  fill: var(--bg-3);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+.region-poly-base {
+  fill: var(--bg-3);
+  stroke: #0a0e14;
+  stroke-width: 1.2;
+  cursor: pointer;
+  transition: fill .15s ease;
+}
+.region-poly-base:hover { fill: var(--bg-2); stroke: var(--accent); stroke-width: 2; }
+html[data-theme="light"] .region-poly-base { fill: #d8dee9; stroke: #ffffff; }
+html[data-theme="light"] .region-poly-base:hover { fill: #c5cdd9; stroke: var(--accent); }
+
+/* ============ Hex map ============ */
+.hex-cell {
+  fill: var(--bg-3);
+  stroke: var(--bg-0);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: fill .15s ease, stroke .15s ease;
+}
+.hex-cell.empty { fill: #232a37; }
+.hex-cell:hover { stroke: #fff; stroke-width: 2.5; filter: brightness(1.15); }
+.hex-cell.proj { opacity: .55; }
+.hex-label {
+  font-size: 7.5px;
+  fill: rgba(0,0,0,0.85);
+  font-weight: 700;
+  pointer-events: none;
+  text-anchor: middle;
+}
+html[data-theme="light"] .hex-cell { stroke: #ffffff; }
+html[data-theme="light"] .hex-cell.empty { fill: #e1e7ef; }
+html[data-theme="light"] .hex-label { fill: rgba(0,0,0,0.85); }
+.hex-cell.empty + .hex-label, .hex-cell.empty ~ .hex-label { fill: var(--text-2); }
+
+/* ============ Parliament hemicycle ============ */
+.hemicycle {
+  width: 100%;
+  margin: 4px 0 6px;
+}
+.hemicycle svg { display: block; width: 100%; height: auto; max-height: 300px; }
+.hemicycle .seat-dot {
+  stroke: rgba(0,0,0,0.18);
+  stroke-width: 0.8;
+  transition: filter .25s ease;
+}
+.hemicycle .seat-dot.empty {
+  fill: var(--bg-3);
+  stroke: var(--line);
+  stroke-width: 0.8;
+}
+.hemicycle .seat-dot.declared {
+  filter: drop-shadow(0 0 1px rgba(0,0,0,.3));
+}
+.hemicycle .seat-dot.proj {
+  opacity: 0.55;
+}
+.hemicycle .maj-line {
+  stroke: var(--text-0);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+html[data-theme="light"] .hemicycle .seat-dot { stroke: rgba(0,0,0,0.25); }
+.hemicycle .maj-label {
+  fill: var(--text-1); font-size: 11px; font-weight: 700;
+  paint-order: stroke; stroke: var(--bg-2); stroke-width: 4;
+}
+
+/* CI badge on legend pill */
+.seat-pill .ci {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-left: 2px;
+}
+
+/* ============ Story so far ============ */
+.story-so-far {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-1);
+}
+.story-so-far b { color: var(--text-0); }
+.story-so-far .story-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent); margin-right: 6px;
+}
+
+/* ============ Path to Majority ============ */
+.path-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.path-card {
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-left: 3px solid var(--card-accent, var(--line));
+  border-radius: 10px; padding: 12px 14px;
+}
+.path-card .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.path-card .head .pname { font-weight: 700; font-size: 14px; }
+.path-card .head .pcount { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-2); }
+.path-card .summary { font-size: 12px; color: var(--text-2); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line-soft); }
+.path-card .summary b { color: var(--text-0); }
+.path-card.majority .summary { color: var(--good); }
+.path-card.no-route .summary { color: var(--text-3); font-style: italic; }
+.path-card .target {
+  display: grid; grid-template-columns: 1fr 50px;
+  gap: 6px; padding: 4px 2px; font-size: 12px;
+  cursor: pointer; border-radius: 4px;
+}
+.path-card .target:hover { background: var(--bg-2); }
+.path-card .target .name { display: flex; align-items: center; gap: 6px; }
+.path-card .target .name .sw { width: 8px; height: 8px; border-radius: 2px; }
+.path-card .target .swing-need { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--warn); font-weight: 600; }
+.path-card .target.flipped .swing-need { color: var(--good); }
+.path-card .target.flipped .name { text-decoration: line-through; opacity: 0.6; }
+.path-card .more { font-size: 11px; color: var(--text-3); margin-top: 6px; padding-top: 4px; border-top: 1px solid var(--line-soft); text-align: center; }
+
+/* ============ Expected next declarations strip ============ */
+.expected-next {
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.expected-next .label {
+  font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 6px;
+}
+.expected-item {
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 8px; font-size: 12px; padding: 3px 4px;
+  align-items: center;
+}
+.expected-item .time {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); font-weight: 600;
+}
+.expected-item .name { color: var(--text-1); }
+.expected-item .name .nnote { color: var(--text-3); font-size: 10px; margin-left: 6px; }
+.expected-item:hover { background: var(--bg-3); border-radius: 4px; cursor: pointer; }
+
+/* ============ Smart paste preview ============ */
+#paste-preview .row { display: flex; justify-content: space-between; padding: 3px 0; }
+#paste-preview .row .pname { display: flex; align-items: center; gap: 6px; }
+#paste-preview .row .pname .sw { width: 9px; height: 9px; border-radius: 2px; }
+#paste-preview .row .v { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+/* Year-view selector styling */
+#view-year {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--text-0);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font: inherit; font-size: 13px;
+  cursor: pointer;
+}
+#view-year:focus { outline: none; border-color: var(--accent); }
+
+/* When viewing historical year, highlight that fact */
+html[data-historical] .live-btn,
+html[data-historical] #export-btn,
+html[data-historical] #import-file + .btn,
+html[data-historical] #reset-btn,
+html[data-historical] .toggle-group {
+  display: none !important;
+}
+html[data-historical] .topbar::after {
+  content: 'Viewing historical year ' attr(data-historical) ' — read-only';
+  position: fixed; top: 4px; left: 50%; transform: translateX(-50%);
+  background: rgba(255,181,71,.15); color: var(--warn);
+  padding: 3px 14px; border: 1px solid rgba(255,181,71,.4);
+  border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  z-index: 80;
+  pointer-events: none;
+}
+
+/* ============ Watchlist strip ============ */
+.watchlist-card .body { padding: 14px 18px; }
+.watchlist-strip {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.watch-item {
+  position: relative; cursor: pointer;
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-left: 4px solid var(--card-accent, var(--line));
+  border-radius: 8px; padding: 10px 12px;
+  transition: all .15s ease;
+}
+.watch-item:hover { border-color: var(--accent); transform: translateY(-1px); }
+.watch-item .name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+.watch-item .meta { font-size: 11px; color: var(--text-3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.watch-item .row { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.watch-item .row .sw { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.watch-item .row .who { flex: 1; }
+.watch-item .row .pct { font-family: 'JetBrains Mono', monospace; color: var(--text-2); font-size: 11px; }
+.watch-item .status-tag {
+  position: absolute; top: 8px; right: 8px;
+  font-size: 9px; font-weight: 800; letter-spacing: .05em;
+  padding: 2px 6px; border-radius: 4px; text-transform: uppercase;
+}
+.watch-item .status-tag.declared { background: var(--card-accent, var(--good)); color: #0a0e14; }
+.watch-item .status-tag.projected { background: transparent; color: var(--warn); border: 1px dashed var(--warn); }
+.watch-item .status-tag.pending { background: rgba(138,147,163,0.15); color: var(--text-3); border: 1px solid var(--line); }
+.watch-item .unstar {
+  position: absolute; bottom: 8px; right: 8px;
+  background: transparent; border: 0; color: var(--text-3); cursor: pointer;
+  font-size: 11px; padding: 2px 4px; border-radius: 3px;
+}
+.watch-item .unstar:hover { color: var(--bad); background: rgba(255,92,138,0.1); }
+
+/* Star button used elsewhere (modal, key seats) */
+.star-btn {
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--text-3); padding: 4px; border-radius: 4px;
+  font-size: 16px; line-height: 1;
+  transition: color .15s, transform .15s;
+}
+.star-btn:hover { color: #FFC700; transform: scale(1.15); }
+.star-btn.starred { color: #FFC700; }
+
+/* ============ Coalition arithmetic ============ */
+.coalition-grid {
+  display: grid; gap: 8px;
+  grid-template-columns: 1fr;
+}
+.coalition-row {
+  display: grid; grid-template-columns: 1fr 60px 90px;
+  align-items: center; gap: 10px;
+  padding: 8px 12px;
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 8px; font-size: 13px;
+}
+.coalition-row.majority {
+  border-color: rgba(61,220,151,0.5);
+  background: linear-gradient(90deg, rgba(61,220,151,0.10), var(--bg-3) 60%);
+}
+.coalition-row.close {
+  border-color: rgba(255,181,71,0.4);
+}
+.coalition-row .combo { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.coalition-row .combo .pchip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-weight: 600; font-size: 12px;
+  padding: 2px 7px; border-radius: 999px;
+  background: var(--bg-2);
+}
+.coalition-row .combo .pchip .sw { width: 7px; height: 7px; border-radius: 2px; }
+.coalition-row .combo .plus { color: var(--text-3); font-size: 11px; padding: 0 1px; }
+.coalition-row .seats {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  font-size: 16px; text-align: right;
+}
+.coalition-row .verdict {
+  font-size: 11px; font-weight: 700; text-align: right;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.coalition-row.majority .verdict { color: var(--good); }
+.coalition-row.close .verdict { color: var(--warn); }
+.coalition-row.short .verdict { color: var(--text-3); }
+
+/* ============ Recent declarations feed ============ */
+.recent-feed { max-height: 320px; overflow-y: auto; padding-right: 4px; }
+.recent-empty {
+  padding: 20px 4px; text-align: center; color: var(--text-3); font-size: 12px;
+}
+.feed-item {
+  display: grid; grid-template-columns: 56px 1fr auto;
+  gap: 10px; padding: 8px 6px; border-bottom: 1px solid var(--line-soft);
+  cursor: pointer; align-items: center;
+}
+.feed-item:hover { background: var(--bg-3); }
+.feed-item .time {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--text-3);
+}
+.feed-item .body-cell { display: flex; flex-direction: column; gap: 2px; }
+.feed-item .body-cell .top {
+  font-size: 13px;
+  display: flex; align-items: center; gap: 6px;
+}
+.feed-item .body-cell .top .sw {
+  width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0;
+}
+.feed-item .body-cell .sub {
+  font-size: 11px; color: var(--text-3);
+}
+.feed-item .badge-flip {
+  font-size: 9px; font-weight: 800; letter-spacing: .05em;
+  padding: 2px 6px; border-radius: 3px; background: var(--warn); color: #1a1100;
+}
+.feed-item .badge-hold {
+  font-size: 9px; font-weight: 800; letter-spacing: .05em;
+  padding: 2px 6px; border-radius: 3px; background: rgba(138,147,163,0.2); color: var(--text-2);
+}
+
+/* Map flash animation */
+.map-feat.flash {
+  animation: mapFlash 1.6s ease-out;
+}
+@keyframes mapFlash {
+  0%, 100% { stroke-width: 0.6; filter: brightness(1); }
+  20%      { stroke-width: 4; stroke: #fff; filter: brightness(1.6) drop-shadow(0 0 12px currentColor); }
+  60%      { stroke-width: 2; filter: brightness(1.2); }
+}
+
+/* ============ Notable contests badge ============ */
+.notable-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 4px;
+  background: linear-gradient(135deg, #4a3520, #2c1f12);
+  color: #f4c987; border: 1px solid #6e4f2a;
+  cursor: help;
+}
+html[data-theme="light"] .notable-badge {
+  background: linear-gradient(135deg, #fff6e3, #fce4ad);
+  color: #6b4213; border-color: #d8a85a;
+}
+.notable-callout {
+  background: linear-gradient(135deg, rgba(255,199,0,0.10), rgba(255,199,0,0.04));
+  border: 1px solid rgba(255,199,0,0.3);
+  border-radius: 8px;
+  padding: 10px 12px; margin: 12px 0;
+  font-size: 12px;
+}
+.notable-callout .ntitle { font-weight: 800; color: #f4c987; margin-bottom: 4px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.notable-callout .nbody { color: var(--text-1); line-height: 1.45; }
+html[data-theme="light"] .notable-callout .ntitle { color: #6b4213; }
+
+/* ============ TV / big-screen mode ============ */
+html.tv-mode .topbar > .controls > .btn:not(#tv-btn):not(#theme-btn),
+html.tv-mode .tv-hide,
+html.tv-mode .map-overlay,
+html.tv-mode .filter-pill,
+html.tv-mode .topbar .toggle-group {
+  display: none !important;
+}
+html.tv-mode #watchlist-section { display: block !important; }
+html.tv-mode .app { padding: 10px 18px; max-width: none; }
+html.tv-mode .topbar { margin-bottom: 12px; }
+html.tv-mode .brand h1 { font-size: 22px; }
+html.tv-mode .brand .sub { font-size: 13px; }
+html.tv-mode .seatbar { height: 38px; }
+html.tv-mode .seatbar-summary .lead-party { font-size: 38px; }
+html.tv-mode .seatbar-summary .lead-detail { font-size: 16px; }
+html.tv-mode .seat-pill { padding: 8px 12px; font-size: 14px; }
+html.tv-mode .seat-pill .num { font-size: 16px; }
+html.tv-mode .map-svg-wrap { max-height: 720px; }
+html.tv-mode .card h2 { font-size: 15px; padding: 16px 22px 12px; }
+html.tv-mode .card .body { padding: 18px 22px; }
+html.tv-mode .keyseat-card .name { font-size: 16px; }
+html.tv-mode .keyseat-card .row { font-size: 14px; }
+html.tv-mode .swing-row .name { font-size: 14px; }
+html.tv-mode .swing-row .val  { font-size: 14px; }
+html.tv-mode .seatbar .majority-line::after { font-size: 13px; top: -20px; }
+html.tv-mode .hero { gap: 16px; }
+html.tv-mode .maps-row { gap: 16px; }
+
+/* TV mode active button state */
+html.tv-mode #tv-btn { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ============ Live mode indicator ============ */
+.live-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.live-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--text-3);
+  flex-shrink: 0;
+  position: relative;
+  transition: background .2s ease;
+}
+.live-btn.on .live-dot {
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239,68,68,.6);
+}
+.live-btn.on .live-dot::after {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 2px solid rgba(239,68,68,.5);
+  animation: livePulse 1.5s ease-out infinite;
+}
+@keyframes livePulse {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.0); opacity: 0; }
+}
+.live-btn.on { border-color: #5b1f1f; color: #ffd5d5; }
+.live-btn.error .live-dot { background: var(--warn); box-shadow: 0 0 8px rgba(255,181,71,.6); }
+.live-btn.error { border-color: #5d3e0f; color: var(--warn); }
+
+/* ============ National Swing bars ============ */
+.swing-bars { display: grid; gap: 8px; }
+.swing-row { display: grid; grid-template-columns: 100px 1fr 70px; align-items: center; gap: 12px; font-size: 13px; }
+.swing-row .lab { display: flex; align-items: center; gap: 8px; }
+.swing-row .lab .sw { width: 12px; height: 12px; border-radius: 3px; }
+.swing-row .lab .name { font-weight: 500; }
+.swing-row .track {
+  position: relative; height: 22px; background: var(--bg-3);
+  border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+}
+.swing-row .track .center {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
+  background: rgba(255,255,255,.25);
+}
+.swing-row .track .bar {
+  position: absolute; top: 1px; bottom: 1px;
+  border-radius: 4px;
+  transition: width .35s ease, left .35s ease;
+}
+.swing-row .val { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-align: right; font-weight: 600; }
+.swing-row .val.up { color: var(--good); }
+.swing-row .val.down { color: var(--bad); }
+.swing-row .val.flat { color: var(--text-3); }
+.swing-row .scale {
+  position: absolute; bottom: -16px; font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============ Key seats grid ============ */
+.keyseats-grid {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.keyseat-card {
+  position: relative;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--card-accent, var(--line));
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all .15s ease;
+  overflow: hidden;
+}
+.keyseat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--card-accent, transparent);
+  opacity: 0; pointer-events: none;
+  transition: opacity .15s ease;
+}
+.keyseat-card.status-declared::before { opacity: 0.12; }
+.keyseat-card.status-projected::before { opacity: 0.05; }
+.keyseat-card.status-pending::before { opacity: 0; }
+.keyseat-card.status-projected { border-left-style: dashed; }
+.keyseat-card.status-pending { border-left-color: var(--line); opacity: 0.78; }
+.keyseat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px #00000050;
+}
+.keyseat-card:hover.status-declared,
+.keyseat-card:hover.status-projected,
+.keyseat-card:hover.status-pending { border-left-color: var(--card-accent, var(--line)); }
+.keyseat-card > * { position: relative; z-index: 1; }
+.keyseat-card .card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 10px; margin-bottom: 8px;
+}
+.keyseat-card .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+.keyseat-card .reg { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.keyseat-card .status-badge {
+  font-size: 9px; font-weight: 800; letter-spacing: .06em;
+  padding: 3px 7px; border-radius: 4px;
+  text-transform: uppercase; flex-shrink: 0;
+  white-space: nowrap;
+}
+.keyseat-card .status-badge.declared {
+  background: var(--card-accent, var(--line));
+  color: #0a0e14;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+}
+html[data-theme="light"] .keyseat-card .status-badge.declared {
+  color: #0a0e14;
+}
+.keyseat-card .status-badge.projected {
+  background: transparent; color: var(--warn);
+  border: 1px dashed var(--warn);
+}
+.keyseat-card .status-badge.pending {
+  background: rgba(138,147,163,0.15); color: var(--text-3);
+  border: 1px solid var(--line);
+}
+.keyseat-card .row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 12px; }
+.keyseat-card .row .sw { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.keyseat-card .row .who { flex: 1; }
+.keyseat-card .row .pct { font-family: 'JetBrains Mono', monospace; color: var(--text-2); font-size: 11px; }
+.keyseat-card .maj { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 11px; color: var(--text-3); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.keyseat-card .maj .pred {
+  font-weight: 700; font-size: 12px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.keyseat-card .maj .pred .pred-sw {
+  width: 8px; height: 8px; border-radius: 2px;
+}
+.keyseat-card .maj .pred.flip {
+  color: var(--card-accent);
+}
+.keyseat-card .maj .pred.hold { color: var(--text-1); }
+.keyseat-card .maj .pred .verb {
+  font-size: 10px; font-weight: 800; letter-spacing: .04em;
+  padding: 1px 5px; border-radius: 3px;
+  background: var(--card-accent);
+  color: #0a0e14;
+}
+.keyseat-card .maj .pred.hold .verb {
+  background: rgba(138,147,163,0.2);
+  color: var(--text-1);
+}
+
+/* ============ All seats table ============ */
+.filter-pill input {
+  background: var(--bg-3); border: 1px solid var(--line); color: var(--text-1);
+  padding: 5px 10px; border-radius: 6px; font: inherit; font-size: 12px; min-width: 200px;
+}
+.filter-pill input:focus { outline: none; border-color: var(--accent); }
+.table-wrap { max-height: 540px; overflow-y: auto; }
+.seats-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.seats-table thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg-2); padding: 10px 12px;
+  text-align: left; font-size: 11px; color: var(--text-3); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .04em;
+  border-bottom: 1px solid var(--line);
+}
+.seats-table thead th.sort { cursor: pointer; user-select: none; }
+.seats-table thead th.sort:hover { color: var(--text-1); }
+.seats-table thead th.sort.active { color: var(--accent); }
+.seats-table thead th.num { text-align: right; }
+.seats-table tbody td { padding: 8px 12px; border-bottom: 1px solid var(--line-soft); }
+.seats-table tbody td.num { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.seats-table tbody tr { cursor: pointer; }
+.seats-table tbody tr:hover { background: var(--bg-3); }
+.seats-table .party-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 8px; border-radius: 6px; background: var(--bg-3);
+  font-weight: 600; font-size: 12px;
+}
+.seats-table .party-pill .sw { width: 8px; height: 8px; border-radius: 2px; }
+.seats-table .swing-cell { font-weight: 600; }
+.seats-table .swing-cell.up { color: var(--good); }
+.seats-table .swing-cell.down { color: var(--bad); }
+.seats-table .status-cell .badge {
+  font-size: 10px; padding: 2px 7px; border-radius: 999px;
+  font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  display: inline-block;
+}
+.seats-table .status-cell .badge.dec { background: rgba(61,220,151,.18); color: var(--good); }
+.seats-table .status-cell .badge.proj { background: rgba(255,181,71,.18); color: var(--warn); }
+.seats-table .status-cell .badge.pend { background: rgba(138,147,163,.18); color: var(--text-2); }
+.seats-table .row-flip { background: linear-gradient(90deg, rgba(255,181,71,0.06), transparent 30%); }
+.seats-table .row-kind {
+  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ============ Per-seat modal enhancements ============ */
+.modal.large {
+  width: min(720px, 95vw);
+}
+.seat-modal-grid {
+  display: grid; gap: 16px; grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 720px) { .seat-modal-grid { grid-template-columns: 1fr; } }
+.compare-seat {
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 10px; padding: 12px;
+}
+.compare-seat h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-3); font-weight: 600; }
+.compare-seat .row {
+  display: grid; grid-template-columns: 1fr 60px 50px;
+  align-items: center; gap: 8px; padding: 4px 0; font-size: 12px;
+}
+.compare-seat .row .who { display: flex; align-items: center; gap: 6px; }
+.compare-seat .row .who .sw { width: 9px; height: 9px; border-radius: 2px; }
+.compare-seat .row .pct { text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--text-1); font-size: 12px; }
+.compare-seat .row .change { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.compare-seat .row.winner { font-weight: 700; }
+.compare-seat .row.winner .pct { color: var(--text-0); }
+.compare-seat .row .badge {
+  font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.compare-seat .row .badge.win { background: rgba(255,199,0,0.2); color: #FFC700; }
+.compare-seat .row .badge.run { background: rgba(138,147,163,0.2); color: var(--text-2); }
+.compare-seat .row .change.up { color: var(--good); }
+.compare-seat .row .change.down { color: var(--bad); }
+
+.seat-swingometer {
+  margin-top: 8px;
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 10px; padding: 12px;
+}
+
+/* ============ Sky-style dial swingometer ============ */
+.seat-dial {
+  margin-top: 16px;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-3));
+  border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px;
+}
+.seat-dial .dial-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.seat-dial .dial-head h4 {
+  margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--text-3); font-weight: 600;
+}
+.seat-dial .dial-head .verdict {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  background: var(--bg-3);
+}
+.seat-dial svg { display: block; width: 100%; height: auto; }
+.seat-dial .dial-foot {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px; margin-top: 8px; padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.seat-dial .dial-foot .col { display: flex; flex-direction: column; gap: 3px; }
+.seat-dial .dial-foot .col h5 {
+  margin: 0 0 2px; font-size: 10px; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--text-3); font-weight: 600;
+}
+.seat-dial .dial-foot .pty {
+  display: flex; align-items: center; gap: 6px;
+}
+.seat-dial .dial-foot .pty .sw { width: 9px; height: 9px; border-radius: 2px; }
+.seat-dial .dial-foot .pty .v { font-family: 'JetBrains Mono', monospace; margin-left: auto; font-weight: 600; }
+.seat-dial .dial-foot .col.center { text-align: center; align-items: center; }
+.seat-dial .dial-foot .col.right { text-align: right; }
+.seat-dial .dial-foot .verdict-big {
+  font-size: 14px; font-weight: 700; margin-top: 2px;
+}
+.seat-dial .seat-bg-track {
+  fill: var(--bg-3);
+}
+.seat-dial .seat-needle {
+  stroke: var(--text-0);
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.35));
+}
+.seat-dial .seat-needle-hub {
+  fill: var(--text-0);
+  stroke: var(--bg-1);
+  stroke-width: 2;
+}
+.seat-dial .tip-line {
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+html[data-theme="light"] .seat-dial .tip-line { stroke: #0f172a; }
+.seat-dial .tip-marker {
+  fill: var(--text-0);
+  stroke: var(--bg-1);
+  stroke-width: 1.5;
+}
+.seat-dial .tip-label {
+  fill: var(--text-0); font-size: 10px; font-weight: 700;
+  paint-order: stroke; stroke: var(--bg-1); stroke-width: 4;
+}
+.seat-dial .scale-tick { stroke: rgba(255,255,255,0.6); stroke-width: 1; }
+html[data-theme="light"] .seat-dial .scale-tick { stroke: rgba(15,23,42,0.4); }
+.seat-dial .scale-label {
+  fill: var(--text-2); font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.seat-dial .arc-label {
+  font-size: 12px; font-weight: 800;
+  fill: #ffffff;
+  paint-order: stroke;
+  stroke: rgba(0,0,0,0.6);
+  stroke-width: 3;
+  letter-spacing: 0.04em;
+}
+.seat-dial .empty-msg {
+  font-size: 12px; font-style: italic;
+  fill: var(--text-2);
+  paint-order: stroke; stroke: var(--bg-2); stroke-width: 4;
+}
+.seat-dial .swing-badge text {
+  fill: #fff; font-size: 16px; font-weight: 800; font-family: 'Inter', sans-serif;
+}
+.seat-dial .swing-badge .label {
+  fill: rgba(255,255,255,.85); font-size: 8px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+
+/* ============ Light theme ============ */
+html[data-theme="light"] {
+  --bg-0: #f8fafc;
+  --bg-1: #ffffff;
+  --bg-2: #fafcff;
+  --bg-3: #f0f3f8;
+  --line: #d8dee9;
+  --line-soft: #e7ecf2;
+  --text-0: #0f172a;
+  --text-1: #334155;
+  --text-2: #64748b;
+  --text-3: #94a3b8;
+  --accent: #2563eb;
+  --accent-soft: #2563eb12;
+  --good: #16a34a;
+  --bad: #dc2626;
+  --warn: #d97706;
+  --shadow: 0 1px 0 #ffffffaa inset, 0 1px 3px #0f172a14;
+}
+html[data-theme="light"] body {
+  background: radial-gradient(1100px 600px at 30% -10%, #e0eaf6 0%, transparent 60%), var(--bg-0);
+}
+html[data-theme="light"] .map-feat { stroke: #ffffff; }
+html[data-theme="light"] .map-feat.empty { fill: #e1e7ef; }
+html[data-theme="light"] .seatbar > div:not(.majority-line) { box-shadow: 0 0 0 1px rgba(0,0,0,0.06) inset; }
+html[data-theme="light"] .seatbar { background: #e3e9f1; }
+html[data-theme="light"] .seatbar .majority-line { background: #0f172a; }
+html[data-theme="light"] .seatbar .majority-line::after { color: #0f172a; }
+html[data-theme="light"] .tooltip { background: rgba(255,255,255,0.97); border-color: #d8dee9; color: var(--text-1); box-shadow: 0 14px 30px #0f172a30; }
+html[data-theme="light"] .tooltip h4 { color: var(--text-0); }
+html[data-theme="light"] .toggle-group button.active { background: linear-gradient(180deg, #ffffff, #f0f3f8); color: var(--text-0); border: 1px solid #d8dee9; }
+html[data-theme="light"] .declared-list .x:hover { background: #fde8ec; color: var(--bad); }
+html[data-theme="light"] .seats-table thead th { background: var(--bg-1); }
+html[data-theme="light"] .keyseat-card { background: #ffffff; }
+html[data-theme="light"] .swing-row .track { background: #e8edf4; }
+html[data-theme="light"] .map-overlay { background: rgba(255,255,255,0.8); color: var(--text-2); }
+html[data-theme="light"] .modal { background: var(--bg-1); }
+html[data-theme="light"] .modal-back { background: rgba(15,23,42,0.4); }
+html[data-theme="light"] .seatbar-card .body, html[data-theme="light"] .status-card .body { color: var(--text-1); }
+html[data-theme="light"] svg text { fill: #0f172a !important; stroke: #ffffff !important; }
+html[data-theme="light"] .status-cell .badge.dec { background: rgba(22,163,74,0.15); color: var(--good); }
+html[data-theme="light"] .status-cell .badge.proj { background: rgba(217,119,6,0.15); color: var(--warn); }
+html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139,0.15); color: var(--text-2); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ Top bar ============ -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V11M3 11l9-7 9 7M3 11l9 4 9-4M21 21V11M9 21v-7h6v7"/></svg>
+      </div>
+      <div>
+        <h1>Holyrood 2026 — Live Results</h1>
+        <div class="sub">Scottish Parliament election · poll closes Thu 7 May, 22:00 · count begins Fri 8 May</div>
+      </div>
+    </div>
+    <div class="controls">
+      <select id="view-year" class="btn" title="View results from a different election">
+        <option value="live" selected>2026 — Live</option>
+        <option value="2021">2021 (historical)</option>
+        <option value="2016">2016 (historical)</option>
+        <option value="2011">2011 (historical)</option>
+        <option value="2007">2007 (different boundaries)</option>
+        <option value="2003">2003 (different boundaries)</option>
+        <option value="1999">1999 (different boundaries)</option>
+      </select>
+      <div class="toggle-group" id="mode-toggle">
+        <button data-mode="declared" class="active">Declared only</button>
+        <button data-mode="projected">Projected (BBS)</button>
+      </div>
+      <button class="btn" id="tv-btn" title="Toggle big-screen / TV mode (or press T)" aria-label="TV mode">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg>
+      </button>
+      <button class="btn" id="sound-btn" title="Toggle declaration sound alerts" aria-label="Sound">
+        <svg id="sound-icon-on"  viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        <svg id="sound-icon-off" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+      </button>
+      <button class="btn live-btn" id="live-btn" title="Live mode — auto-poll Google Sheet">
+        <span class="live-dot" id="live-dot"></span>
+        <span id="live-label">Live: off</span>
+      </button>
+      <button class="btn" id="theme-btn" title="Toggle light/dark mode" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-icon-light" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button class="btn" id="export-btn" title="Export entries as JSON">⬇ Export</button>
+      <label class="btn" title="Import entries from JSON file">⬆ Import<input type="file" class="file-input" id="import-file" accept=".json"></label>
+      <button class="btn danger" id="reset-btn" title="Clear all entered results">⟲ Reset</button>
+    </div>
+  </div>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="card seatbar-card">
+      <h2>Seats Projection · 129 total <span class="right" id="hero-mode-label">Declared only</span></h2>
+      <div class="body">
+        <div class="seatbar-summary">
+          <div class="lead-party" id="lead-party">—</div>
+          <div class="lead-detail" id="lead-detail">No results entered yet</div>
+          <div class="majline" id="lead-majline">65 needed for majority</div>
+        </div>
+        <div class="hemicycle" id="hemicycle"></div>
+        <div class="seatbar-legend" id="seatbar-legend"></div>
+        <div class="story-so-far" id="story-so-far"></div>
+      </div>
+    </div>
+
+    <div class="card status-card">
+      <h2>Count progress</h2>
+      <div class="body">
+        <div class="status-row"><span class="label">Constituencies declared</span><span class="value mono"><span id="stat-declared">0</span> / 73</span></div>
+        <div class="progress"><div id="progress-bar" style="width:0%"></div></div>
+        <div class="status-row"><span class="label">Regions complete</span><span class="value mono"><span id="stat-regions">0</span> / 8</span></div>
+        <div class="status-row"><span class="label">Implied list seats allocated</span><span class="value mono"><span id="stat-list-seats">—</span> / 56</span></div>
+        <div class="status-row"><span class="label">Last update</span><span class="value mono" id="stat-updated" style="font-size:13px; color:var(--text-2);">never</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Watchlist strip ============ -->
+  <section id="watchlist-section" style="margin-bottom: 16px; display: none;">
+    <div class="card watchlist-card">
+      <h2>★ Watch list <span class="right" id="watchlist-count">0 seats pinned</span></h2>
+      <div class="body">
+        <div id="watchlist-strip" class="watchlist-strip"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Maps ============ -->
+  <section class="maps-row">
+    <div class="card map-card">
+      <h2>Constituency map · 73 seats
+        <span class="right">
+          <span class="map-toggle" id="map-spc-toggle">
+            <button data-view="geo" class="active">Geographic</button>
+            <button data-view="hex">Hex grid</button>
+          </span>
+        </span>
+      </h2>
+      <div class="body">
+        <div class="map-svg-wrap" id="map-spc-geo-wrap"><svg id="map-spc" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="map-svg-wrap" id="map-spc-hex-wrap" style="display:none"><svg id="map-spc-hex" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="map-overlay" id="map-spc-overlay">Click a constituency to enter results</div>
+      </div>
+    </div>
+    <div class="card map-card">
+      <h2>Regional list map · 8 regions × 7 list seats <span class="right">Each dot = one list MSP, by party</span></h2>
+      <div class="body">
+        <div class="map-svg-wrap"><svg id="map-sper" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="map-overlay" id="map-sper-overlay">Click a region to enter list votes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Data entry + Comparison ============ -->
+  <section class="lower-row tv-hide">
+    <div class="card">
+      <h2>Enter declared results <span class="right" id="entry-help">Constituency results</span></h2>
+      <div class="body">
+        <div class="entry-form" id="entry-form">
+          <div class="row">
+            <div>
+              <label>Region</label>
+              <select id="entry-region"></select>
+            </div>
+            <div>
+              <label>Constituency</label>
+              <select id="entry-constituency"></select>
+            </div>
+          </div>
+          <div>
+            <label>Vote counts (or vote shares — use whole numbers)</label>
+            <div class="vote-grid">
+              <div class="vote-input"><span class="ptag" style="color:var(--p-SNP)">SNP</span><input type="number" min="0" data-party="SNP" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-LAB)">LAB</span><input type="number" min="0" data-party="LAB" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-CON)">CON</span><input type="number" min="0" data-party="CON" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-LD)">LD</span><input type="number" min="0" data-party="LD" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-GRN)">GRN</span><input type="number" min="0" data-party="GRN" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-REF)">REF</span><input type="number" min="0" data-party="REF" placeholder="0"></div>
+              <div class="vote-input"><span class="ptag" style="color:var(--p-OTH)">OTH</span><input type="number" min="0" data-party="OTH" placeholder="0"></div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="entry-save">Save result</button>
+            <button class="btn" id="entry-clear">Clear form</button>
+            <button class="btn" id="entry-paste">📋 Smart paste…</button>
+            <span class="muted" style="font-size: 12px; margin-left: auto;" id="entry-context"></span>
+          </div>
+        </div>
+        <div class="declared-list" id="declared-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Comparison · 2021 → now <span class="right">Auto-updates as results arrive</span></h2>
+      <div class="body">
+        <table class="compare-table" id="compare-table">
+          <thead>
+            <tr>
+              <th>Party</th>
+              <th class="num">2021 seats</th>
+              <th class="num">Now</th>
+              <th class="num">Δ</th>
+              <th class="num">Const. vote%</th>
+              <th class="num">List vote%</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ National swing + Recent declarations feed ============ -->
+  <section class="lower-row" style="margin-bottom: 16px;">
+    <div class="card">
+      <h2>National swing · 2021 → now <span class="right" id="swing-mode-label">From declared results</span></h2>
+      <div class="body">
+        <div id="swing-bars" class="swing-bars"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Recent declarations <span class="right" id="recent-mode-label">Newest first</span></h2>
+      <div class="body">
+        <div id="expected-next" class="expected-next"></div>
+        <div id="recent-feed" class="recent-feed"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Key seats ============ -->
+  <section style="margin-top: 16px;">
+    <div class="card">
+      <h2>Key seats · most marginal in 2021 <span class="right" id="keyseats-source">Source: Ballot Box Scotland poll-of-polls</span></h2>
+      <div class="body">
+        <div id="keyseats-grid" class="keyseats-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Path to majority ============ -->
+  <section style="margin-top: 16px;">
+    <div class="card">
+      <h2>Path to majority <span class="right" id="path-help">Seats each party needs to flip to reach 65</span></h2>
+      <div class="body">
+        <div id="path-grid" class="path-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ All seats table ============ -->
+  <section class="tv-hide" style="margin-top: 16px;">
+    <div class="card">
+      <h2>All seats <span class="right">
+        <span class="filter-pill"><input id="seats-filter" type="search" placeholder="Filter by name or region…" /></span>
+        <span class="muted" style="margin-left: 10px;" id="seats-count">81 rows</span>
+      </span></h2>
+      <div class="body" style="padding: 0;">
+        <div class="table-wrap">
+          <table class="seats-table" id="seats-table">
+            <thead>
+              <tr>
+                <th data-sort="kind" class="sort">Type</th>
+                <th data-sort="name" class="sort">Name</th>
+                <th data-sort="region" class="sort">Region</th>
+                <th data-sort="w21">2021 winner</th>
+                <th data-sort="m21" class="num sort">2021 maj.</th>
+                <th data-sort="wnow">Now</th>
+                <th data-sort="pctnow" class="num sort">Now %</th>
+                <th data-sort="swing" class="num sort">Swing</th>
+                <th data-sort="status">Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Coalition arithmetic (bottom — niche) ============ -->
+  <section class="tv-hide" style="margin-top: 16px;">
+    <div class="card">
+      <h2>Coalition arithmetic <span class="right" id="coalition-help">65 seats for majority</span></h2>
+      <div class="body">
+        <div id="coalition-grid" class="coalition-grid"></div>
+        <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
+          <button class="btn" id="coalition-toggle" data-mode="2">Show 3-party combos</button>
+          <span class="muted" style="font-size:11px;">Filtering out unrealistic combos. Click for full list.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Smart-paste modal -->
+<div class="modal-back" id="paste-modal-back">
+  <div class="modal large">
+    <header>
+      <h3>📋 Smart paste — extract votes from text</h3>
+      <button id="paste-modal-close">×</button>
+    </header>
+    <div class="body">
+      <p style="margin: 0 0 8px; font-size: 13px; color: var(--text-1);">
+        Paste a chunk of BBC live blog, council press release or news report. The parser will try to find party names + vote counts.
+      </p>
+      <div class="entry-form">
+        <div>
+          <label>Paste text here</label>
+          <textarea id="paste-input" rows="6" placeholder="e.g. SNP - Kaukab Stewart - 15,422\nLabour - Zubir Ahmed - 11,238\n..." style="width: 100%; background: var(--bg-3); border: 1px solid var(--line); color: var(--text-0); padding: 10px; border-radius: 8px; font: inherit; font-size: 13px; resize: vertical;"></textarea>
+        </div>
+        <div>
+          <label>Constituency (optional — overrides what's in the text)</label>
+          <select id="paste-constituency"></select>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="paste-parse">Parse & preview</button>
+          <span class="muted" style="font-size:12px; margin-left:auto;" id="paste-status"></span>
+        </div>
+        <div id="paste-preview" style="display:none; padding: 10px 12px; background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; font-size: 13px;"></div>
+      </div>
+    </div>
+    <footer>
+      <button class="btn" id="paste-modal-cancel">Cancel</button>
+      <button class="btn primary" id="paste-apply" style="display:none;">Apply to constituency</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Live mode (Google Sheet) settings modal -->
+<div class="modal-back" id="live-modal-back">
+  <div class="modal large">
+    <header>
+      <h3>🔴 Live mode · Google Sheet polling</h3>
+      <button id="live-modal-close">×</button>
+    </header>
+    <div class="body">
+      <p style="margin: 0 0 12px; font-size: 13px; color: var(--text-1);">
+        Point the dashboard at a published Google Sheet and it will auto-fetch results every few seconds.
+        Multiple people can update the sheet at the same time.
+      </p>
+
+      <details style="margin-bottom: 14px; background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;">
+        <summary style="cursor: pointer; font-weight: 600; font-size: 13px;">How to set up the sheet (3 steps)</summary>
+        <ol style="margin: 10px 0 0; padding-left: 18px; font-size: 12px; line-height: 1.7; color: var(--text-1);">
+          <li>Create a new Google Sheet with <strong>this exact header row</strong>:<br/>
+              <code style="display:block; background: var(--bg-1); padding: 6px 10px; margin: 4px 0; border-radius: 4px; font-size: 11px;">Type,Name,SNP,LAB,CON,LD,GRN,REF,OTH</code>
+              <span class="muted">Example file: <code>live-template.csv</code> in your dashboard folder.</span></li>
+          <li>For each declared seat add a row, e.g.<br/>
+              <code style="display:block; background: var(--bg-1); padding: 6px 10px; margin: 4px 0; border-radius: 4px; font-size: 11px;">CON,Glasgow Southside,15422,11000,800,2200,1100,2700,950</code>
+              Use <code>CON</code> for constituency, <code>REG</code> for region. Names must match the dashboard exactly (e.g. "Glasgow Southside", "Highlands and Islands").</li>
+          <li>In Sheets: <strong>File → Share → Publish to web</strong>. Pick the sheet, format <strong>Comma-separated values (.csv)</strong>, click <strong>Publish</strong>. Copy the URL it gives you and paste it below.</li>
+        </ol>
+      </details>
+
+      <div class="entry-form">
+        <div>
+          <label>Published CSV URL</label>
+          <input type="url" id="live-url" placeholder="https://docs.google.com/spreadsheets/d/e/2PACX-…/pub?output=csv" />
+        </div>
+        <div class="row">
+          <div>
+            <label>Poll every</label>
+            <select id="live-interval">
+              <option value="15">15 seconds</option>
+              <option value="30" selected>30 seconds</option>
+              <option value="60">60 seconds</option>
+              <option value="120">2 minutes</option>
+              <option value="300">5 minutes</option>
+            </select>
+          </div>
+          <div>
+            <label>Status</label>
+            <div id="live-status" class="muted" style="font-size: 13px; padding: 8px 0;">Not polling</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="live-test">Test connection</button>
+          <button class="btn primary" id="live-start">Start live mode</button>
+          <button class="btn" id="live-stop" style="display: none;">Stop</button>
+          <span class="muted" style="margin-left:auto; font-size:12px;" id="live-last-result"></span>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <button class="btn" id="live-modal-cancel">Done</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Per-constituency modal: 2021 vs now + swingometer + entry form -->
+<div class="modal-back" id="seat-modal-back">
+  <div class="modal large">
+    <header>
+      <h3 id="seat-modal-title" style="display:flex; align-items:center; gap:8px;">
+        <button class="star-btn" id="seat-modal-star" title="Add to / remove from watch list">☆</button>
+        <span id="seat-modal-name-text">Constituency</span>
+      </h3>
+      <button id="seat-modal-close">×</button>
+    </header>
+    <div class="body">
+      <div class="muted" style="font-size:12px; margin-bottom:12px;" id="seat-modal-region"></div>
+      <div id="seat-modal-notable"></div>
+      <div class="seat-modal-grid">
+        <div class="compare-seat">
+          <h4>2021 result</h4>
+          <table id="seat-modal-2021" style="width:100%; border-collapse: collapse;"><tbody></tbody></table>
+        </div>
+        <div class="compare-seat">
+          <h4>Now <span style="font-weight:600; font-size:11px; margin-left:6px;" id="seat-modal-now-label">Pending</span></h4>
+          <table id="seat-modal-now" style="width:100%; border-collapse: collapse;"><tbody></tbody></table>
+        </div>
+      </div>
+      <div class="seat-dial" id="seat-modal-dial"></div>
+      <div class="seat-swingometer" id="seat-modal-swingometer"></div>
+      <div class="entry-form" style="margin-top: 16px;">
+        <div>
+          <label>Enter / update vote counts</label>
+          <div class="vote-grid">
+            <div class="vote-input"><span class="ptag" style="color:var(--p-SNP)">SNP</span><input type="number" min="0" data-party="SNP" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-LAB)">LAB</span><input type="number" min="0" data-party="LAB" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-CON)">CON</span><input type="number" min="0" data-party="CON" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-LD)">LD</span><input type="number" min="0" data-party="LD" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-GRN)">GRN</span><input type="number" min="0" data-party="GRN" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-REF)">REF</span><input type="number" min="0" data-party="REF" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-OTH)">OTH</span><input type="number" min="0" data-party="OTH" placeholder="0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <button class="btn" id="seat-modal-cancel">Close</button>
+      <button class="btn danger" id="seat-modal-clear">Clear seat</button>
+      <button class="btn primary" id="seat-modal-save">Save result</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Region list-vote modal -->
+<div class="modal-back" id="region-modal-back">
+  <div class="modal">
+    <header>
+      <h3 id="region-modal-title">Region list votes</h3>
+      <button id="region-modal-close">×</button>
+    </header>
+    <div class="body">
+      <div class="entry-form">
+        <div>
+          <label>List vote shares or counts</label>
+          <div class="vote-grid">
+            <div class="vote-input"><span class="ptag" style="color:var(--p-SNP)">SNP</span><input type="number" min="0" data-rparty="SNP" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-LAB)">LAB</span><input type="number" min="0" data-rparty="LAB" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-CON)">CON</span><input type="number" min="0" data-rparty="CON" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-LD)">LD</span><input type="number" min="0" data-rparty="LD" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-GRN)">GRN</span><input type="number" min="0" data-rparty="GRN" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-REF)">REF</span><input type="number" min="0" data-rparty="REF" placeholder="0"></div>
+            <div class="vote-input"><span class="ptag" style="color:var(--p-OTH)">OTH</span><input type="number" min="0" data-rparty="OTH" placeholder="0"></div>
+          </div>
+        </div>
+        <div class="muted" style="font-size: 12px;" id="region-modal-help"></div>
+      </div>
+    </div>
+    <footer>
+      <button class="btn" id="region-modal-cancel">Cancel</button>
+      <button class="btn danger" id="region-modal-clear">Clear region</button>
+      <button class="btn primary" id="region-modal-save">Save list votes</button>
+    </footer>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

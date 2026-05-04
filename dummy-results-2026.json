@@ -1,0 +1,903 @@
+{
+  "version": 1,
+  "exportedAt": "2026-05-08T15:30:00.000Z",
+  "mode": "declared",
+  "entered": {
+    "constituencies": {
+      "Aberdeen Central": {
+        "votes": {
+          "SNP": 11154,
+          "LAB": 7665,
+          "CON": 5022,
+          "LD": 1351,
+          "GRN": 3292,
+          "REF": 5104,
+          "OTH": 697
+        }
+      },
+      "Aberdeen Donside": {
+        "votes": {
+          "SNP": 14499,
+          "LAB": 7357,
+          "CON": 5492,
+          "LD": 3656,
+          "GRN": 47,
+          "REF": 5034,
+          "OTH": 1059
+        }
+      },
+      "Aberdeen South and North Kincardine": {
+        "votes": {
+          "SNP": 11613,
+          "LAB": 3656,
+          "CON": 12359,
+          "LD": 1490,
+          "GRN": 1431,
+          "REF": 6626,
+          "OTH": 966
+        }
+      },
+      "Aberdeenshire East": {
+        "votes": {
+          "SNP": 10754,
+          "LAB": 3331,
+          "CON": 11701,
+          "LD": 2243,
+          "GRN": 1713,
+          "REF": 5543,
+          "OTH": 1232
+        }
+      },
+      "Aberdeenshire West": {
+        "votes": {
+          "SNP": 8040,
+          "LAB": 3106,
+          "CON": 11698,
+          "LD": 1998,
+          "GRN": 886,
+          "REF": 4812,
+          "OTH": 1045
+        }
+      },
+      "Airdrie and Shotts": {
+        "votes": {
+          "SNP": 12812,
+          "LAB": 11807,
+          "CON": 1198,
+          "LD": 430,
+          "GRN": 956,
+          "REF": 2734,
+          "OTH": 985
+        }
+      },
+      "Almond Valley": {
+        "votes": {
+          "SNP": 14902,
+          "LAB": 8923,
+          "CON": 2263,
+          "LD": 2515,
+          "GRN": 1514,
+          "REF": 3263,
+          "OTH": 954
+        }
+      },
+      "Angus North and Mearns": {
+        "votes": {
+          "SNP": 11971,
+          "LAB": 4072,
+          "CON": 6890,
+          "LD": 2690,
+          "GRN": 1385,
+          "REF": 5132,
+          "OTH": 808
+        }
+      },
+      "Angus South": {
+        "votes": {
+          "SNP": 11369,
+          "LAB": 8175,
+          "CON": 11031,
+          "LD": 2841,
+          "GRN": 1263,
+          "REF": 6371,
+          "OTH": 459
+        }
+      },
+      "Argyll and Bute": {
+        "votes": {
+          "SNP": 15747,
+          "LAB": 4441,
+          "CON": 5091,
+          "LD": 6248,
+          "GRN": 1853,
+          "REF": 4972,
+          "OTH": 734
+        }
+      },
+      "Ayr": {
+        "votes": {
+          "SNP": 16108,
+          "LAB": 4125,
+          "CON": 16751,
+          "LD": 1236,
+          "GRN": 667,
+          "REF": 8261,
+          "OTH": 1114
+        }
+      },
+      "Banffshire and Buchan Coast": {
+        "votes": {
+          "SNP": 6591,
+          "LAB": 2708,
+          "CON": 11352,
+          "LD": 3706,
+          "GRN": 919,
+          "REF": 5412,
+          "OTH": 1333
+        }
+      },
+      "Caithness, Sutherland and Ross": {
+        "votes": {
+          "SNP": 14052,
+          "LAB": 4039,
+          "CON": 2979,
+          "LD": 15860,
+          "GRN": 1911,
+          "REF": 5429,
+          "OTH": 1965
+        }
+      },
+      "Carrick, Cumnock and Doon Valley": {
+        "votes": {
+          "SNP": 8442,
+          "LAB": 8369,
+          "CON": 7511,
+          "LD": 383,
+          "GRN": 1095,
+          "REF": 4110,
+          "OTH": 606
+        }
+      },
+      "Clackmannanshire and Dunblane": {
+        "votes": {
+          "SNP": 12734,
+          "LAB": 8443,
+          "CON": 5476,
+          "LD": 0,
+          "GRN": 1182,
+          "REF": 4562,
+          "OTH": 1160
+        }
+      },
+      "Clydebank and Milngavie": {
+        "votes": {
+          "SNP": 10632,
+          "LAB": 12191,
+          "CON": 2025,
+          "LD": 2782,
+          "GRN": 1835,
+          "REF": 5400,
+          "OTH": 1477
+        }
+      },
+      "Clydesdale": {
+        "votes": {
+          "SNP": 11026,
+          "LAB": 13503,
+          "CON": 9803,
+          "LD": 833,
+          "GRN": 1165,
+          "REF": 5788,
+          "OTH": 980
+        }
+      },
+      "Coatbridge and Chryston": {
+        "votes": {
+          "SNP": 13940,
+          "LAB": 12130,
+          "CON": 152,
+          "LD": 101,
+          "GRN": 1178,
+          "REF": 4557,
+          "OTH": 972
+        }
+      },
+      "Cowdenbeath": {
+        "votes": {
+          "SNP": 14583,
+          "LAB": 10136,
+          "CON": 469,
+          "LD": 1283,
+          "GRN": 3470,
+          "REF": 4879,
+          "OTH": 1126
+        }
+      },
+      "Cumbernauld and Kilsyth": {
+        "votes": {
+          "SNP": 16790,
+          "LAB": 12909,
+          "CON": 539,
+          "LD": 2330,
+          "GRN": 1677,
+          "REF": 5262,
+          "OTH": 561
+        }
+      },
+      "Cunninghame North": {
+        "votes": {
+          "SNP": 13860,
+          "LAB": 7900,
+          "CON": 6221,
+          "LD": 2227,
+          "GRN": 1455,
+          "REF": 5085,
+          "OTH": 1051
+        }
+      },
+      "Cunninghame South": {
+        "votes": {
+          "SNP": 10639,
+          "LAB": 10760,
+          "CON": 6510,
+          "LD": 2608,
+          "GRN": 1419,
+          "REF": 3876,
+          "OTH": 765
+        }
+      },
+      "Dumbarton": {
+        "votes": {
+          "SNP": 10112,
+          "LAB": 24105,
+          "CON": 0,
+          "LD": 823,
+          "GRN": 1092,
+          "REF": 4766,
+          "OTH": 2062
+        }
+      },
+      "Dumfriesshire": {
+        "votes": {
+          "SNP": 7549,
+          "LAB": 6176,
+          "CON": 13423,
+          "LD": 0,
+          "GRN": 465,
+          "REF": 4000,
+          "OTH": 781
+        }
+      },
+      "Dunfermline": {
+        "votes": {
+          "SNP": 13469,
+          "LAB": 14734,
+          "CON": 2388,
+          "LD": 2453,
+          "GRN": 829,
+          "REF": 5083,
+          "OTH": 1029
+        }
+      },
+      "Dundee City East": {
+        "votes": {
+          "SNP": 12726,
+          "LAB": 8845,
+          "CON": 3659,
+          "LD": 269,
+          "GRN": 1179,
+          "REF": 5164,
+          "OTH": 1956
+        }
+      },
+      "Dundee City West": {
+        "votes": {
+          "SNP": 14413,
+          "LAB": 6612,
+          "CON": 2466,
+          "LD": 2934,
+          "GRN": 1208,
+          "REF": 5472,
+          "OTH": 978
+        }
+      },
+      "East Kilbride": {
+        "votes": {
+          "SNP": 19996,
+          "LAB": 12951,
+          "CON": 3926,
+          "LD": 0,
+          "GRN": 871,
+          "REF": 7688,
+          "OTH": 1241
+        }
+      },
+      "East Lothian": {
+        "votes": {
+          "SNP": 9638,
+          "LAB": 16706,
+          "CON": 3854,
+          "LD": 1638,
+          "GRN": 1126,
+          "REF": 6576,
+          "OTH": 823
+        }
+      },
+      "Eastwood": {
+        "votes": {
+          "SNP": 13318,
+          "LAB": 6837,
+          "CON": 14462,
+          "LD": 512,
+          "GRN": 2350,
+          "REF": 7864,
+          "OTH": 3101
+        }
+      },
+      "Edinburgh Central": {
+        "votes": {
+          "SNP": 11647,
+          "LAB": 7937,
+          "CON": 8321,
+          "LD": 5018,
+          "GRN": 8398,
+          "REF": 5277,
+          "OTH": 1212
+        }
+      },
+      "Edinburgh Eastern": {
+        "votes": {
+          "SNP": 13458,
+          "LAB": 12167,
+          "CON": 2741,
+          "LD": 3483,
+          "GRN": 3484,
+          "REF": 3120,
+          "OTH": 309
+        }
+      },
+      "Edinburgh Northern and Leith": {
+        "votes": {
+          "SNP": 13627,
+          "LAB": 8990,
+          "CON": 896,
+          "LD": 2874,
+          "GRN": 8199,
+          "REF": 5069,
+          "OTH": 1216
+        }
+      },
+      "Edinburgh Pentlands": {
+        "votes": {
+          "SNP": 8672,
+          "LAB": 7139,
+          "CON": 6021,
+          "LD": 2475,
+          "GRN": 2537,
+          "REF": 2916,
+          "OTH": 1238
+        }
+      },
+      "Edinburgh Southern": {
+        "votes": {
+          "SNP": 8128,
+          "LAB": 17150,
+          "CON": 3085,
+          "LD": 2790,
+          "GRN": 2903,
+          "REF": 4855,
+          "OTH": 1986
+        }
+      },
+      "Edinburgh Western": {
+        "votes": {
+          "SNP": 10086,
+          "LAB": 3788,
+          "CON": 0,
+          "LD": 20654,
+          "GRN": 3202,
+          "REF": 3531,
+          "OTH": 758
+        }
+      },
+      "Ettrick, Roxburgh and Berwickshire": {
+        "votes": {
+          "SNP": 4167,
+          "LAB": 2232,
+          "CON": 12585,
+          "LD": 2165,
+          "GRN": 1787,
+          "REF": 4705,
+          "OTH": 1199
+        }
+      },
+      "Falkirk East": {
+        "votes": {
+          "SNP": 9438,
+          "LAB": 12610,
+          "CON": 3278,
+          "LD": 1589,
+          "GRN": 1073,
+          "REF": 4794,
+          "OTH": 1746
+        }
+      },
+      "Falkirk West": {
+        "votes": {
+          "SNP": 17427,
+          "LAB": 9665,
+          "CON": 3788,
+          "LD": 1253,
+          "GRN": 2163,
+          "REF": 5687,
+          "OTH": 1493
+        }
+      },
+      "Galloway and West Dumfries": {
+        "votes": {
+          "SNP": 9059,
+          "LAB": 7426,
+          "CON": 15928,
+          "LD": 374,
+          "GRN": 2617,
+          "REF": 5024,
+          "OTH": 1331
+        }
+      },
+      "Glasgow Anniesland": {
+        "votes": {
+          "SNP": 13124,
+          "LAB": 13020,
+          "CON": 304,
+          "LD": 2009,
+          "GRN": 2574,
+          "REF": 3239,
+          "OTH": 1149
+        }
+      },
+      "Glasgow Cathcart": {
+        "votes": {
+          "SNP": 14679,
+          "LAB": 12194,
+          "CON": 185,
+          "LD": 828,
+          "GRN": 2665,
+          "REF": 2783,
+          "OTH": 620
+        }
+      },
+      "Glasgow Kelvin": {
+        "votes": {
+          "SNP": 9647,
+          "LAB": 7381,
+          "CON": 0,
+          "LD": 0,
+          "GRN": 10345,
+          "REF": 2852,
+          "OTH": 343
+        }
+      },
+      "Glasgow Maryhill and Springburn": {
+        "votes": {
+          "SNP": 13447,
+          "LAB": 8366,
+          "CON": 0,
+          "LD": 806,
+          "GRN": 1937,
+          "REF": 2005,
+          "OTH": 1062
+        }
+      },
+      "Glasgow Pollok": {
+        "votes": {
+          "SNP": 12080,
+          "LAB": 11896,
+          "CON": 0,
+          "LD": 279,
+          "GRN": 5061,
+          "REF": 3542,
+          "OTH": 1565
+        }
+      },
+      "Glasgow Provan": {
+        "votes": {
+          "SNP": 12388,
+          "LAB": 10647,
+          "CON": 82,
+          "LD": 0,
+          "GRN": 6010,
+          "REF": 1924,
+          "OTH": 721
+        }
+      },
+      "Glasgow Shettleston": {
+        "votes": {
+          "SNP": 11141,
+          "LAB": 11454,
+          "CON": 22,
+          "LD": 876,
+          "GRN": 2513,
+          "REF": 3752,
+          "OTH": 729
+        }
+      },
+      "Glasgow Southside": {
+        "votes": {
+          "SNP": 14817,
+          "LAB": 15422,
+          "CON": 0,
+          "LD": 3386,
+          "GRN": 2167,
+          "REF": 2702,
+          "OTH": 957
+        }
+      },
+      "Greenock and Inverclyde": {
+        "votes": {
+          "SNP": 12645,
+          "LAB": 10147,
+          "CON": 648,
+          "LD": 613,
+          "GRN": 1553,
+          "REF": 4242,
+          "OTH": 1379
+        }
+      },
+      "Hamilton, Larkhall and Stonehouse": {
+        "votes": {
+          "SNP": 10503,
+          "LAB": 14944,
+          "CON": 1833,
+          "LD": 0,
+          "GRN": 1866,
+          "REF": 5458,
+          "OTH": 685
+        }
+      },
+      "Inverness and Nairn": {
+        "votes": {
+          "SNP": 13869,
+          "LAB": 5607,
+          "CON": 7086,
+          "LD": 2079,
+          "GRN": 4104,
+          "REF": 4116,
+          "OTH": 1592
+        }
+      },
+      "Kilmarnock and Irvine Valley": {
+        "votes": {
+          "SNP": 16257,
+          "LAB": 8436,
+          "CON": 4390,
+          "LD": 186,
+          "GRN": 2138,
+          "REF": 5363,
+          "OTH": 982
+        }
+      },
+      "Kirkcaldy": {
+        "votes": {
+          "SNP": 11993,
+          "LAB": 15907,
+          "CON": 3020,
+          "LD": 0,
+          "GRN": 1474,
+          "REF": 6762,
+          "OTH": 1102
+        }
+      },
+      "Linlithgow": {
+        "votes": {
+          "SNP": 10210,
+          "LAB": 10376,
+          "CON": 2875,
+          "LD": 732,
+          "GRN": 2906,
+          "REF": 3853,
+          "OTH": 734
+        }
+      },
+      "Mid Fife and Glenrothes": {
+        "votes": {
+          "SNP": 17614,
+          "LAB": 11896,
+          "CON": 49,
+          "LD": 1361,
+          "GRN": 153,
+          "REF": 6088,
+          "OTH": 1728
+        }
+      },
+      "Midlothian North and Musselburgh": {
+        "votes": {
+          "SNP": 14439,
+          "LAB": 9114,
+          "CON": 3023,
+          "LD": 2844,
+          "GRN": 2826,
+          "REF": 4299,
+          "OTH": 972
+        }
+      },
+      "Midlothian South, Tweeddale and Lauderdale": {
+        "votes": {
+          "SNP": 13602,
+          "LAB": 8507,
+          "CON": 8437,
+          "LD": 1078,
+          "GRN": 4098,
+          "REF": 5674,
+          "OTH": 1251
+        }
+      },
+      "Moray": {
+        "votes": {
+          "SNP": 13697,
+          "LAB": 3098,
+          "CON": 12513,
+          "LD": 2038,
+          "GRN": 2378,
+          "REF": 5828,
+          "OTH": 897
+        }
+      },
+      "Motherwell and Wishaw": {
+        "votes": {
+          "SNP": 15216,
+          "LAB": 12261,
+          "CON": 1626,
+          "LD": 218,
+          "GRN": 1909,
+          "REF": 4946,
+          "OTH": 1553
+        }
+      },
+      "Na h-Eileanan an Iar": {
+        "votes": {
+          "SNP": 4566,
+          "LAB": 4745,
+          "CON": 1173,
+          "LD": 147,
+          "GRN": 600,
+          "REF": 1407,
+          "OTH": 1010
+        }
+      },
+      "North East Fife": {
+        "votes": {
+          "SNP": 9313,
+          "LAB": 3736,
+          "CON": 1793,
+          "LD": 18852,
+          "GRN": 1131,
+          "REF": 5323,
+          "OTH": 910
+        }
+      },
+      "Orkney": {
+        "votes": {
+          "SNP": 1650,
+          "LAB": 1692,
+          "CON": 0,
+          "LD": 7647,
+          "GRN": 345,
+          "REF": 1496,
+          "OTH": 352
+        }
+      },
+      "Paisley": {
+        "votes": {
+          "SNP": 11094,
+          "LAB": 12390,
+          "CON": 571,
+          "LD": 837,
+          "GRN": 3348,
+          "REF": 4857,
+          "OTH": 778
+        }
+      },
+      "Perthshire North": {
+        "votes": {
+          "SNP": 12473,
+          "LAB": 2018,
+          "CON": 13444,
+          "LD": 2131,
+          "GRN": 589,
+          "REF": 5247,
+          "OTH": 1883
+        }
+      },
+      "Perthshire South and Kinross-shire": {
+        "votes": {
+          "SNP": 11794,
+          "LAB": 2086,
+          "CON": 12052,
+          "LD": 4298,
+          "GRN": 1568,
+          "REF": 4070,
+          "OTH": 781
+        }
+      },
+      "Renfrewshire North and West": {
+        "votes": {
+          "SNP": 14225,
+          "LAB": 14503,
+          "CON": 2594,
+          "LD": 77,
+          "GRN": 1531,
+          "REF": 4374,
+          "OTH": 1231
+        }
+      },
+      "Renfrewshire South": {
+        "votes": {
+          "SNP": 10588,
+          "LAB": 14270,
+          "CON": 2961,
+          "LD": 1369,
+          "GRN": 1685,
+          "REF": 4625,
+          "OTH": 1806
+        }
+      },
+      "Rutherglen": {
+        "votes": {
+          "SNP": 9018,
+          "LAB": 12477,
+          "CON": 999,
+          "LD": 0,
+          "GRN": 2769,
+          "REF": 3372,
+          "OTH": 1040
+        }
+      },
+      "Shetland": {
+        "votes": {
+          "SNP": 3597,
+          "LAB": 1218,
+          "CON": 0,
+          "LD": 6503,
+          "GRN": 511,
+          "REF": 1473,
+          "OTH": 626
+        }
+      },
+      "Skye, Lochaber and Badenoch": {
+        "votes": {
+          "SNP": 17140,
+          "LAB": 3106,
+          "CON": 7327,
+          "LD": 6311,
+          "GRN": 2349,
+          "REF": 5364,
+          "OTH": 903
+        }
+      },
+      "Stirling": {
+        "votes": {
+          "SNP": 13656,
+          "LAB": 7554,
+          "CON": 8284,
+          "LD": 1027,
+          "GRN": 1398,
+          "REF": 5452,
+          "OTH": 1240
+        }
+      },
+      "Strathkelvin and Bearsden": {
+        "votes": {
+          "SNP": 15357,
+          "LAB": 7564,
+          "CON": 4263,
+          "LD": 9462,
+          "GRN": 109,
+          "REF": 5586,
+          "OTH": 474
+        }
+      },
+      "Uddingston and Bellshill": {
+        "votes": {
+          "SNP": 10740,
+          "LAB": 13448,
+          "CON": 1213,
+          "LD": 0,
+          "GRN": 1029,
+          "REF": 4720,
+          "OTH": 906
+        }
+      }
+    },
+    "regions": {
+      "Central Scotland": {
+        "listVotes": {
+          "SNP": 105138,
+          "LAB": 79531,
+          "CON": 30211,
+          "LD": 0,
+          "GRN": 31148,
+          "REF": 53121,
+          "OTH": 25534
+        }
+      },
+      "Glasgow": {
+        "listVotes": {
+          "SNP": 86258,
+          "LAB": 76850,
+          "CON": 16382,
+          "LD": 9381,
+          "GRN": 55260,
+          "REF": 30703,
+          "OTH": 6038
+        }
+      },
+      "Highlands and Islands": {
+        "listVotes": {
+          "SNP": 65480,
+          "LAB": 35564,
+          "CON": 37262,
+          "LD": 26136,
+          "GRN": 33296,
+          "REF": 24276,
+          "OTH": 9535
+        }
+      },
+      "Lothian": {
+        "listVotes": {
+          "SNP": 108296,
+          "LAB": 92342,
+          "CON": 26925,
+          "LD": 22816,
+          "GRN": 74315,
+          "REF": 35475,
+          "OTH": 9689
+        }
+      },
+      "Mid Scotland and Fife": {
+        "listVotes": {
+          "SNP": 74180,
+          "LAB": 49824,
+          "CON": 42983,
+          "LD": 43622,
+          "GRN": 41738,
+          "REF": 60745,
+          "OTH": 8979
+        }
+      },
+      "North East Scotland": {
+        "listVotes": {
+          "SNP": 111913,
+          "LAB": 48567,
+          "CON": 67100,
+          "LD": 7397,
+          "GRN": 30755,
+          "REF": 61212,
+          "OTH": 9874
+        }
+      },
+      "South Scotland": {
+        "listVotes": {
+          "SNP": 86048,
+          "LAB": 73017,
+          "CON": 89675,
+          "LD": 2635,
+          "GRN": 35404,
+          "REF": 65140,
+          "OTH": 15280
+        }
+      },
+      "West Scotland": {
+        "listVotes": {
+          "SNP": 83387,
+          "LAB": 110035,
+          "CON": 40147,
+          "LD": 12324,
+          "GRN": 42435,
+          "REF": 61409,
+          "OTH": 14562
+        }
+      }
+    },
+    "polling": null
+  }
+}

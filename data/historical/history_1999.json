@@ -1,0 +1,54 @@
+{
+  "year": 1999,
+  "boundaries_era": "1999-2011",
+  "boundary_note": "Different constituencies \u2014 pre-2011 boundaries; not directly comparable to map.",
+  "scotland": {
+    "constituency_vote_pct": {
+      "SNP": 28.7,
+      "LAB": 38.8,
+      "CON": 15.6,
+      "LD": 14.2,
+      "GRN": 0.0,
+      "REF": 0,
+      "OTH": 2.7
+    },
+    "list_vote_pct": {
+      "SNP": 27.3,
+      "LAB": 33.6,
+      "CON": 15.4,
+      "LD": 12.4,
+      "GRN": 3.6,
+      "REF": 0,
+      "OTH": 7.7
+    },
+    "seat_totals": {
+      "SNP": 35,
+      "LAB": 56,
+      "CON": 18,
+      "LD": 17,
+      "GRN": 1,
+      "REF": 0,
+      "OTH": 2
+    },
+    "constituency_seats": {
+      "SNP": 7,
+      "LAB": 53,
+      "CON": 0,
+      "LD": 12,
+      "GRN": 0,
+      "REF": 0,
+      "OTH": 1
+    },
+    "list_seats": {
+      "SNP": 28,
+      "LAB": 3,
+      "CON": 18,
+      "LD": 5,
+      "GRN": 1,
+      "REF": 0,
+      "OTH": 1
+    }
+  },
+  "constituencies": [],
+  "regions": []
+}
