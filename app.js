@@ -25,6 +25,13 @@ const MAJORITY = 65;
 const STORAGE_KEY = 'holyrood2026.v2';
 const LIVE_KEY = 'holyrood2026.live';
 
+// Default live source — every visitor auto-starts polling this URL on first
+// load. Visitors who set their own URL via the live-mode modal keep their
+// own. Reset wipes the override and restores this default. Set to '' to
+// disable auto-start entirely.
+const DEFAULT_LIVE_URL = 'https://docs.google.com/spreadsheets/d/1C9cm3kWSmxxyu9z-eJ6cMaV51GXSPhYPVKnC9ohTcpA/export?format=csv';
+const DEFAULT_LIVE_INTERVAL_SEC = 30;
+
 /* ---------------- State ---------------- */
 const state = {
   topo: null,
@@ -3365,6 +3372,16 @@ async function boot() {
   await loadData();
   loadFromStorage();
   loadLive();
+
+  // Apply the default live source for visitors who haven't set their own.
+  // This auto-starts polling on first load and after reset, so anyone hitting
+  // the URL sees live results without configuring anything.
+  if (DEFAULT_LIVE_URL && !state.live.url) {
+    state.live.url = DEFAULT_LIVE_URL;
+    state.live.intervalSec = state.live.intervalSec || DEFAULT_LIVE_INTERVAL_SEC;
+    state.live.running = true;
+  }
+
   applyTheme();
   applyTvMode();
   applySoundIcon();
@@ -3374,7 +3391,8 @@ async function boot() {
   wire();
   rerender();
   updateLiveStatus();
-  // Auto-restart live polling if it was running last session
+  // Auto-restart live polling if it was running last session OR if the
+  // default kicked in just above.
   if (state.live.running && state.live.url) {
     startLive();
   }
