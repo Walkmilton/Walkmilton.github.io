@@ -342,17 +342,36 @@ a { color: var(--accent); text-decoration: none; }
 .modal-back {
   position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px);
   z-index: 90; display: none; align-items: center; justify-content: center;
+  padding: 16px;                       /* breathing room so big modals don't kiss the viewport */
+  overflow-y: auto;                    /* fallback scroll on the backdrop if a modal is enormous */
 }
 .modal-back.show { display: flex; }
 .modal {
   width: min(520px, 92vw); background: var(--bg-1); border: 1px solid var(--line);
   border-radius: 14px; padding: 0; box-shadow: 0 30px 60px #000000aa;
+  max-height: calc(100vh - 32px);      /* never bigger than viewport minus padding */
+  display: flex; flex-direction: column; /* let the body scroll while header/footer stay put */
 }
-.modal header { padding: 14px 18px; border-bottom: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; }
+.modal header {
+  padding: 14px 18px; border-bottom: 1px solid var(--line-soft);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;                      /* header stays pinned even when body scrolls */
+}
 .modal header h3 { margin: 0; font-size: 15px; }
 .modal header button { background: transparent; border: 0; color: var(--text-2); cursor: pointer; font-size: 18px; }
-.modal .body { padding: 16px 18px; }
-.modal footer { padding: 12px 18px 16px; display: flex; justify-content: flex-end; gap: 8px; }
+.modal .body {
+  padding: 16px 18px;
+  flex: 1 1 auto;
+  overflow-y: auto;                    /* the magic: long content scrolls inside the body */
+  overscroll-behavior: contain;        /* don't bubble the scroll up to the page when at top/bottom */
+}
+.modal footer {
+  padding: 12px 18px 16px;
+  display: flex; justify-content: flex-end; gap: 8px;
+  flex-shrink: 0;                      /* footer stays pinned at bottom */
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-1);
+}
 
 /* hidden file input */
 .file-input { display: none; }
@@ -654,6 +673,32 @@ html[data-historical] .topbar::after {
 .coalition-row.close .verdict { color: var(--warn); }
 .coalition-row.short .verdict { color: var(--text-3); }
 
+/* Realism chip on each coalition combo */
+.realism-chip {
+  display: inline-flex; align-items: center;
+  font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px;
+  margin-left: 6px; cursor: help;
+  white-space: nowrap;
+}
+.realism-likely {
+  background: rgba(61,220,151,0.18);
+  color: var(--good);
+  border: 1px solid rgba(61,220,151,0.35);
+}
+.realism-possible {
+  background: rgba(255,181,71,0.13);
+  color: var(--warn);
+  border: 1px solid rgba(255,181,71,0.30);
+}
+.realism-cross {
+  background: rgba(138,147,163,0.12);
+  color: var(--text-3);
+  border: 1px dashed var(--line);
+}
+.coalition-row.realism-row-cross { opacity: 0.65; }
+.coalition-row.realism-row-cross .pchip { background: var(--bg-1); }
+
 /* ============ Recent declarations feed ============ */
 .recent-feed { max-height: 320px; overflow-y: auto; padding-right: 4px; }
 .recent-empty {
@@ -902,6 +947,63 @@ html[data-theme="light"] .keyseat-card .status-badge.declared {
 .keyseat-card .maj .pred.hold .verb {
   background: rgba(138,147,163,0.2);
   color: var(--text-1);
+}
+
+/* ============ Declaration schedule ============ */
+.schedule-tier { margin-bottom: 14px; }
+.schedule-tier:last-child { margin-bottom: 0; }
+.schedule-tier-head {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-2);
+  padding: 6px 10px; margin-bottom: 6px;
+  background: var(--bg-3); border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+.schedule-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 4px 12px;
+}
+.schedule-row {
+  display: grid; grid-template-columns: 60px 1fr auto;
+  gap: 10px; align-items: center;
+  padding: 5px 8px;
+  font-size: 12.5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background .12s ease;
+}
+.schedule-row:hover { background: var(--bg-3); }
+.schedule-row.is-declared { opacity: 0.55; }
+.schedule-row.is-declared .schedule-name b { text-decoration: line-through; text-decoration-color: var(--text-3); }
+.schedule-time {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); font-weight: 600;
+}
+.schedule-name { color: var(--text-1); }
+.schedule-name b { font-weight: 600; color: var(--text-0); }
+.schedule-note {
+  display: inline-block; margin-left: 6px; padding: 1px 6px;
+  font-size: 10px; color: var(--text-3);
+  border-left: 2px solid var(--line); padding-left: 6px;
+}
+.schedule-kind {
+  display: inline-block; margin-left: 4px;
+  font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  padding: 1px 5px; border-radius: 3px;
+  background: rgba(78,161,255,0.15); color: var(--accent);
+}
+.schedule-status {
+  font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px;
+  white-space: nowrap;
+}
+.schedule-status.declared {
+  background: rgba(61,220,151,0.18); color: var(--good);
+}
+.schedule-status.pending {
+  background: rgba(138,147,163,0.12); color: var(--text-3);
+  border: 1px solid var(--line);
 }
 
 /* ============ All seats table ============ */
@@ -1335,6 +1437,30 @@ html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139
       <h2>Path to majority <span class="right" id="path-help">Seats each party needs to flip to reach 65</span></h2>
       <div class="body">
         <div id="path-grid" class="path-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Full declaration schedule ============ -->
+  <section style="margin-top: 16px;">
+    <div class="card">
+      <h2>Declaration schedule
+        <span class="right">
+          <select id="schedule-filter" class="btn" style="padding:4px 8px; font-size:12px;">
+            <option value="all" selected>All</option>
+            <option value="pending">Pending only</option>
+            <option value="declared">Declared only</option>
+          </select>
+          <span class="muted" style="margin-left: 10px;" id="schedule-count">0/73 declared</span>
+        </span>
+      </h2>
+      <div class="body">
+        <div class="muted" style="font-size:11px; margin-bottom: 12px;">
+          Times sourced from PA Media via the
+          <a href="https://www.dailyrecord.co.uk/lifestyle/full-list-scottish-parliament-election-37111819" target="_blank" rel="noopener" style="color: var(--text-2);">Daily Record</a>.
+          All on Friday 8 May 2026.
+        </div>
+        <div id="schedule-grid"></div>
       </div>
     </div>
   </section>

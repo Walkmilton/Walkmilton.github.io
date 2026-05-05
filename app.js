@@ -155,10 +155,15 @@ async function loadData() {
   try {
     const sched = await fetch('data/declaration_schedule.json').then(r => r.json());
     state.declarationSchedule = {};
-    for (const c of sched.constituencies) {
+    state.declarationScheduleRegions = {};
+    state.declarationScheduleSource = sched._meta && sched._meta.source;
+    for (const c of (sched.constituencies || [])) {
       state.declarationSchedule[c.name] = c;
     }
-  } catch (e) { state.declarationSchedule = null; }
+    for (const r of (sched.regions || [])) {
+      state.declarationScheduleRegions[r.name] = r;
+    }
+  } catch (e) { state.declarationSchedule = null; state.declarationScheduleRegions = null; }
   // Historical elections — load all 6 in parallel
   state.historical = {};
   await Promise.all([1999, 2003, 2007, 2011, 2016, 2021].map(async y => {
@@ -2191,19 +2196,42 @@ async function liveTick() {
   }
 }
 
+// Minimum poll interval used when the tab is in the background. Browsers
+// throttle setInterval/setTimeout in hidden tabs anyway (Chrome floors at
+// ~1 minute after a few minutes hidden), so we explicitly slow to 60s to
+// stay within that envelope and conserve bandwidth.
+const HIDDEN_MIN_INTERVAL_SEC = 60;
+
+// Self-rescheduling setTimeout — more robust than setInterval for tabs
+// that get backgrounded. Each tick schedules the next one based on
+// current visibility.
+function scheduleLiveTick() {
+  if (state.live.timer) { clearTimeout(state.live.timer); state.live.timer = null; }
+  if (!state.live.running) return;
+  const baseSec = state.live.intervalSec;
+  const sec = document.hidden
+    ? Math.max(HIDDEN_MIN_INTERVAL_SEC, baseSec)
+    : baseSec;
+  state.live.timer = setTimeout(async () => {
+    if (!state.live.running) return;
+    try { await liveTick(); } catch (e) { /* liveTick handles its own errors */ }
+    scheduleLiveTick();
+  }, sec * 1000);
+}
+
 function startLive() {
   const url = normaliseSheetUrl(state.live.url);
   if (!url) { showToast('Add a Google Sheet URL first'); return; }
   stopLive();
   state.live.running = true;
   saveLive();
-  liveTick();   // immediate first fetch
-  state.live.timer = setInterval(liveTick, state.live.intervalSec * 1000);
+  liveTick();          // immediate first fetch
+  scheduleLiveTick();  // then auto-reschedule
   updateLiveStatus();
 }
 
 function stopLive() {
-  if (state.live.timer) { clearInterval(state.live.timer); state.live.timer = null; }
+  if (state.live.timer) { clearTimeout(state.live.timer); state.live.timer = null; }
   state.live.running = false;
   saveLive();
   updateLiveStatus();
@@ -2277,14 +2305,13 @@ function updateLiveStatus() {
 setInterval(() => { if (state.live.running || state.live.lastFetch) updateLiveStatus(); }, 1000);
 
 // Pause polling when tab is hidden, resume on focus
+// When the tab becomes visible again, fetch immediately + return to the
+// fast cadence. When it goes hidden, just let the next scheduled tick
+// adopt the slower (≥60s) interval automatically.
 document.addEventListener('visibilitychange', () => {
   if (!state.live.running) return;
-  if (document.hidden) {
-    if (state.live.timer) { clearInterval(state.live.timer); state.live.timer = null; }
-  } else {
-    liveTick();
-    state.live.timer = setInterval(liveTick, state.live.intervalSec * 1000);
-  }
+  if (!document.hidden) liveTick();
+  scheduleLiveTick();
 });
 
 function openLiveModal() {
@@ -2484,6 +2511,94 @@ function renderExpectedNext(s) {
   }).join('');
   el.querySelectorAll('.expected-item').forEach(it => {
     it.addEventListener('click', () => openSeatModal(it.dataset.name));
+  });
+}
+
+/* ---------------- Full declaration schedule ---------------- */
+const TIER_LABELS = {
+  early:     'Early afternoon (12:00–14:30)',
+  mid:       'Mid afternoon (14:30–16:00)',
+  late:      'Late afternoon (16:00–18:00)',
+  very_late: 'Last to declare (after 18:00)',
+};
+const TIER_ORDER = ['early', 'mid', 'late', 'very_late'];
+
+function fmtScheduledTime(iso) {
+  const d = new Date(iso);
+  const day = d.getDay() === 6 ? 'Sat ' : '';
+  return day + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+}
+
+function renderDeclarationSchedule(s) {
+  const el = $('#schedule-grid');
+  const filterEl = $('#schedule-filter');
+  if (!el || !state.declarationSchedule) return;
+
+  const filter = (filterEl && filterEl.value) || 'all';   // 'all' | 'pending' | 'declared'
+  const constituencies = Object.values(state.declarationSchedule);
+  const regions = Object.values(state.declarationScheduleRegions || {});
+
+  const enriched = [];
+  for (const c of constituencies) {
+    const isDeclared = !!state.entered.constituencies[c.name];
+    if (filter === 'pending' && isDeclared) continue;
+    if (filter === 'declared' && !isDeclared) continue;
+    enriched.push({ ...c, kind: 'CON', declared: isDeclared });
+  }
+  for (const r of regions) {
+    const isDeclared = !!(state.entered.regions[r.name] && totals(state.entered.regions[r.name].listVotes) > 0);
+    if (filter === 'pending' && isDeclared) continue;
+    if (filter === 'declared' && !isDeclared) continue;
+    enriched.push({ ...r, kind: 'REG', declared: isDeclared });
+  }
+
+  // Group by tier
+  const byTier = { early: [], mid: [], late: [], very_late: [] };
+  for (const item of enriched) {
+    const t = item.tier || 'mid';
+    (byTier[t] || byTier.mid).push(item);
+  }
+  for (const t of TIER_ORDER) {
+    byTier[t].sort((a, b) => (a.expected_time || '').localeCompare(b.expected_time || '') || a.name.localeCompare(b.name));
+  }
+
+  // Counts shown in header
+  const totalDeclared = constituencies.filter(c => state.entered.constituencies[c.name]).length;
+  const totalRegionsDeclared = regions.filter(r => state.entered.regions[r.name] && totals(state.entered.regions[r.name].listVotes) > 0).length;
+  $('#schedule-count').textContent = `${totalDeclared}/${constituencies.length} constituencies · ${totalRegionsDeclared}/${regions.length} regions declared`;
+
+  // Build HTML
+  let html = '';
+  for (const tier of TIER_ORDER) {
+    const rows = byTier[tier];
+    if (!rows.length) continue;
+    html += `<div class="schedule-tier">
+      <div class="schedule-tier-head">${TIER_LABELS[tier]} <span class="muted">· ${rows.length}</span></div>
+      <div class="schedule-list">`;
+    for (const item of rows) {
+      const time = fmtScheduledTime(item.expected_time);
+      const note = item.note ? `<span class="schedule-note">${item.note}</span>` : '';
+      const kindBadge = item.kind === 'REG' ? '<span class="schedule-kind">List</span>' : '';
+      const statusBadge = item.declared
+        ? '<span class="schedule-status declared">✓ Declared</span>'
+        : '<span class="schedule-status pending">Pending</span>';
+      html += `<div class="schedule-row ${item.declared ? 'is-declared' : ''}" data-name="${item.name}" data-kind="${item.kind}">
+        <span class="schedule-time">${time}</span>
+        <span class="schedule-name"><b>${item.name}</b>${kindBadge} ${note}</span>
+        ${statusBadge}
+      </div>`;
+    }
+    html += '</div></div>';
+  }
+  if (!html) {
+    html = `<div class="muted" style="text-align:center; padding:14px; font-size:13px;">No items match this filter.</div>`;
+  }
+  el.innerHTML = html;
+  el.querySelectorAll('.schedule-row').forEach(row => {
+    row.addEventListener('click', () => {
+      if (row.dataset.kind === 'REG') openRegionModal(row.dataset.name);
+      else openSeatModal(row.dataset.name);
+    });
   });
 }
 
@@ -2766,22 +2881,65 @@ function generateCombos(parties, k) {
   recur(0, []);
   return out;
 }
-// Heuristic: filter out combinations no political analyst would seriously discuss.
-// Keep all 2-party combos (they're informative even if absurd). For 3-party,
-// drop combos that mix Reform with the Greens (extremely unlikely partners).
-function realisticCombo(combo) {
-  if (combo.length <= 2) return true;
-  if (combo.includes('REF') && combo.includes('GRN')) return false;
-  return true;
+/**
+ * Score a coalition for political plausibility, not just arithmetic.
+ *
+ * Scottish politics is divided primarily along the constitutional axis
+ * (independence vs union), and parties almost never cross that line in
+ * formal coalitions. Within each bloc, certain pairs have a track record
+ * (Bute House Agreement; the 1999–2007 Lab–LD coalition).
+ *
+ * Returns { tier, label, note }:
+ *   tier: 'likely' | 'possible' | 'cross'
+ *   label: short human-readable
+ *   note: tooltip text explaining the tier
+ */
+const PRO_INDY_BLOC = new Set(['SNP', 'GRN']);
+const PRO_UNION_BLOC = new Set(['LAB', 'CON', 'LD', 'REF']);
+// Pairs with recent cooperation history or strong ideological alignment.
+const TRACK_RECORD_PAIRS = [
+  ['SNP', 'GRN'],   // Bute House Agreement 2021–2024
+  ['LAB', 'LD'],    // Lab–LD coalition 1999–2007
+  ['CON', 'REF'],   // Right-wing alignment / unionist right
+];
+function pairHasTrackRecord(combo, [a, b]) {
+  return combo.includes(a) && combo.includes(b);
 }
+function coalitionRealism(combo) {
+  const indy = combo.filter(p => PRO_INDY_BLOC.has(p));
+  const union = combo.filter(p => PRO_UNION_BLOC.has(p));
+  if (indy.length > 0 && union.length > 0) {
+    return {
+      tier: 'cross',
+      label: 'Cross-divide',
+      note: 'Bridges the constitutional divide (pro-indy + pro-union). Almost no precedent in Scottish politics.',
+    };
+  }
+  for (const pair of TRACK_RECORD_PAIRS) {
+    if (pairHasTrackRecord(combo, pair)) {
+      return {
+        tier: 'likely',
+        label: 'Likely',
+        note: 'Includes a pair with recent cooperation track record.',
+      };
+    }
+  }
+  return {
+    tier: 'possible',
+    label: 'Possible',
+    note: 'Same constitutional bloc, but no recent coalition history.',
+  };
+}
+
+const COALITION_TIER_ORDER = { likely: 0, possible: 1, cross: 2 };
 
 function renderCoalitions(s) {
   const grid = $('#coalition-grid');
   const totals = s.totalByParty;
   const allocated = PARTIES.reduce((a, p) => a + totals[p], 0);
   $('#coalition-help').textContent = allocated === 0
-    ? '65 seats for majority — enter results to see arithmetic'
-    : `${allocated} of 129 seats allocated · 65 for majority`;
+    ? '65 for majority · ranked by political plausibility'
+    : `${allocated} of 129 seats allocated · 65 for majority · ranked by plausibility`;
 
   if (allocated === 0) {
     grid.innerHTML = `<div class="muted" style="font-size:13px; padding: 12px 4px; text-align:center;">No seats allocated yet — try Projected mode or import dummy data.</div>`;
@@ -2792,29 +2950,33 @@ function renderCoalitions(s) {
   const combos = [];
   for (const k of sizes) {
     for (const c of generateCombos(PARTIES, k)) {
-      if (!realisticCombo(c)) continue;
       const seats = c.reduce((a, p) => a + totals[p], 0);
-      // Only keep combos where every party has ≥1 seat, and the total isn't trivial
-      if (c.some(p => totals[p] === 0)) continue;
+      if (c.some(p => totals[p] === 0)) continue; // every party in the combo must have ≥1 seat
       if (seats < 5) continue;
-      combos.push({ c, seats });
+      combos.push({ c, seats, realism: coalitionRealism(c) });
     }
   }
-  combos.sort((a, b) => b.seats - a.seats);
-  // Keep top 14 (enough to see all the interesting cases without overwhelming)
-  const top = combos.slice(0, 14);
+  // Sort by realism tier first (Likely → Possible → Cross-divide), then by seats descending.
+  combos.sort((a, b) => {
+    const t = COALITION_TIER_ORDER[a.realism.tier] - COALITION_TIER_ORDER[b.realism.tier];
+    if (t !== 0) return t;
+    return b.seats - a.seats;
+  });
+  // Keep top 18 — enough to see Likely + Possible without an overwhelming wall of Cross-divide.
+  const top = combos.slice(0, 18);
 
-  grid.innerHTML = top.map(({ c, seats }) => {
+  grid.innerHTML = top.map(({ c, seats, realism }) => {
     const margin = seats - MAJORITY;
-    const cls = margin >= 0 ? 'majority' : (margin >= -10 ? 'close' : 'short');
-    const verdict = margin >= 0 ? `+${margin} maj` : (margin >= -5 ? `${margin} short` : `${margin} short`);
+    const seatsCls = margin >= 0 ? 'majority' : (margin >= -10 ? 'close' : 'short');
+    const verdict = margin >= 0 ? `+${margin} maj` : `${margin} short`;
     const combo = c.map((p, i) => {
       const sw = `<span class="sw" style="background:${partyColor(p)}"></span>`;
       const pchip = `<span class="pchip">${sw}${PARTY_NAMES[p]} <b>${totals[p]}</b></span>`;
       return i === 0 ? pchip : `<span class="plus">+</span>${pchip}`;
     }).join('');
-    return `<div class="coalition-row ${cls}">
-      <div class="combo">${combo}</div>
+    const realismChip = `<span class="realism-chip realism-${realism.tier}" title="${realism.note}">${realism.label}</span>`;
+    return `<div class="coalition-row ${seatsCls} realism-row-${realism.tier}">
+      <div class="combo">${combo} ${realismChip}</div>
       <div class="seats">${seats}</div>
       <div class="verdict">${margin >= 0 ? '✓ MAJORITY · ' + verdict : verdict}</div>
     </div>`;
@@ -2983,6 +3145,7 @@ function rerender() {
   renderExpectedNext(s);
   renderStorySoFar(s);
   renderPathToMajority(s);
+  renderDeclarationSchedule(s);
   if (state.modalSeat) renderSeatModalCompare(state.modalSeat);
 }
 
@@ -3074,6 +3237,12 @@ function wire() {
     state.coalitionMode = state.coalitionMode === 3 ? 2 : 3;
     rerender();
   });
+
+  // Schedule filter
+  const schedFilter = $('#schedule-filter');
+  if (schedFilter) {
+    schedFilter.addEventListener('change', () => renderDeclarationSchedule(computeSeats()));
+  }
 
   // Press T to toggle TV mode (handy when projecting)
   document.addEventListener('keydown', e => {
