@@ -25,10 +25,10 @@ const MAJORITY = 65;
 const STORAGE_KEY = 'holyrood2026.v2';
 const LIVE_KEY = 'holyrood2026.live';
 
-// Default live source — every visitor auto-starts polling this URL on first
-// load. Visitors who set their own URL via the live-mode modal keep their
-// own. Reset wipes the override and restores this default. Set to '' to
-// disable auto-start entirely.
+// Default live source — pre-fills the URL in the live-mode modal so visitors
+// just hit Start to begin polling. Live mode is OFF by default; users must
+// click Start. Visitors who set their own URL keep their override. Reset
+// wipes the override and restores this default. Set to '' to disable.
 const DEFAULT_LIVE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT0LlK4skK6VFwKSsyzkh9pwD9blUO3D8lCk8YFQIdD2KjUBSgHhrCFohcAuBsOkne1mIspJfycjr3D/pub?output=csv';
 const DEFAULT_LIVE_INTERVAL_SEC = 30;
 
@@ -3373,13 +3373,14 @@ async function boot() {
   loadFromStorage();
   loadLive();
 
-  // Apply the default live source for visitors who haven't set their own.
-  // This auto-starts polling on first load and after reset, so anyone hitting
-  // the URL sees live results without configuring anything.
+  // Pre-fill the default live URL for visitors who haven't set their own,
+  // so the live-mode modal opens with the URL already populated. We do NOT
+  // auto-start polling — the user has to click "Start live mode" to begin.
   if (DEFAULT_LIVE_URL && !state.live.url) {
     state.live.url = DEFAULT_LIVE_URL;
     state.live.intervalSec = state.live.intervalSec || DEFAULT_LIVE_INTERVAL_SEC;
-    state.live.running = true;
+    // state.live.running stays as loaded — false for new visitors,
+    // true only if they had it running last session.
   }
 
   applyTheme();
@@ -3391,8 +3392,8 @@ async function boot() {
   wire();
   rerender();
   updateLiveStatus();
-  // Auto-restart live polling if it was running last session OR if the
-  // default kicked in just above.
+  // Only restart polling if the user explicitly had it running last session.
+  // New visitors stay paused until they click Start.
   if (state.live.running && state.live.url) {
     startLive();
   }
