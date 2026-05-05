@@ -62,7 +62,7 @@
     { "name": "Dundee City West",                            "expected_time": "2026-05-08T16:00", "tier": "late" },
     { "name": "Dunfermline",                                 "expected_time": "2026-05-08T16:00", "tier": "late" },
     { "name": "East Kilbride",                               "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Eastwood",                                    "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "Findlay (Tory leader)" },
+    { "name": "Eastwood",                                    "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "Jackson Carlaw (Tory)" },
     { "name": "Falkirk West",                                "expected_time": "2026-05-08T16:00", "tier": "late" },
     { "name": "Hamilton, Larkhall and Stonehouse",           "expected_time": "2026-05-08T16:00", "tier": "late" },
     { "name": "Kilmarnock and Irvine Valley",                "expected_time": "2026-05-08T16:00", "tier": "late" },

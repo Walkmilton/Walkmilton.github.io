@@ -2668,18 +2668,30 @@ function buildStorySoFar(s) {
       sentences.push(`Notable: ${notableEvents.slice(0, 3).join(' · ')}.`);
     }
   }
-  // Coalition status
+  // Coalition status — only suggest politically realistic pairings.
+  // Cross-divide combos (SNP+LAB, SNP+CON, GRN+CON etc) are ruled out; we
+  // prefer Likely tier (track record: SNP+GRN, LAB+LD, CON+REF) over Possible.
   if (declared >= 30 && totals[lead] < MAJORITY) {
-    // Find best 2-party combo
     let best = null;
     for (const p of PARTIES) {
-      if (p === lead) continue;
-      if (!totals[p]) continue;
+      if (p === lead || !totals[p]) continue;
+      const realism = coalitionRealism([lead, p]);
+      if (realism.tier === 'cross') continue;            // skip cross-divide
       const sum = totals[lead] + totals[p];
-      if (sum >= MAJORITY && (!best || sum > best.sum)) best = { partner: p, sum };
+      if (sum < MAJORITY) continue;
+      const tierRank = COALITION_TIER_ORDER[realism.tier];
+      if (!best ||
+          tierRank < best.tierRank ||
+          (tierRank === best.tierRank && sum > best.sum)) {
+        best = { partner: p, sum, tier: realism.tier, tierRank };
+      }
     }
     if (best) {
-      sentences.push(`Possible majority coalition: <b style="color:${partyColor(lead)}">${PARTY_NAMES[lead]}</b> + <b style="color:${partyColor(best.partner)}">${PARTY_NAMES[best.partner]}</b> = <b>${best.sum} seats</b>.`);
+      const label = best.tier === 'likely' ? 'Likely' : 'Possible';
+      sentences.push(`${label} majority coalition: <b style="color:${partyColor(lead)}">${PARTY_NAMES[lead]}</b> + <b style="color:${partyColor(best.partner)}">${PARTY_NAMES[best.partner]}</b> = <b>${best.sum} seats</b>.`);
+    } else {
+      // No realistic majority partner — flag the impasse rather than invent one
+      sentences.push(`No realistic 2-party majority — minority government or extended negotiation likely.`);
     }
   }
   return `<span class="story-tag">Story so far</span> ${sentences.join(' ')}`;

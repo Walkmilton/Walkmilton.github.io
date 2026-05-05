@@ -28,11 +28,11 @@
     },
     "Edinburgh Western": {
       "title": "LD leader's seat",
-      "watch_for": "Alex Cole-Hamilton (Scottish Lib Dem leader) defends here. Renamed Edinburgh North Western under 2026 boundaries. A loss would be a huge story; a strengthened majority signals an LD revival."
+      "watch_for": "Alex Cole-Hamilton (Scottish Lib Dem leader) defends here. Redrawn and renamed Edinburgh North Western under 2026 boundaries — losing Drylaw and Muirhouse to the new Edinburgh Northern seat. A loss would be a huge story; a strengthened majority signals an LD revival."
     },
     "Edinburgh Eastern": {
       "title": "The Ash Regan defection seat",
-      "watch_for": "Won by Ash Regan for the SNP in 2021 with a 10,117 majority before she defected to Alba. Labour's Katherine Sangster — backed by Co-op, GMB, Unison and Usdaw — is the challenger."
+      "watch_for": "Won by Ash Regan (then Denham) for the SNP in 2021 with a 10,117 majority. She defected to Alba in 2023 and now sits as an independent. Labour's Katherine Sangster — backed by Co-op, GMB, Unison and Usdaw — is the challenger."
     },
     "Edinburgh Central": {
       "title": "Greens' best constituency shot",
@@ -63,8 +63,8 @@
       "watch_for": "Lib Dem Liam McArthur seeking re-election (MSP since 2007). Safe LD; often declares early. A swing here is meaningful even if the seat doesn't change hands."
     },
     "Eastwood": {
-      "title": "Tory leader's constituency target",
-      "watch_for": "Russell Findlay (Scottish Conservative leader) is contesting Eastwood while heading the West Scotland regional list. A Conservative seat under serious Labour and SNP pressure as the central-belt Tory vote softens."
+      "title": "Jackson Carlaw's seat — Tory leader's marquee campaign",
+      "watch_for": "Jackson Carlaw (Tory MSP since 2007) is seeking re-election. Conservative leader Russell Findlay is NOT contesting the constituency — he sits on the West Scotland regional list — but has been campaigning here for Carlaw. A Carlaw loss would be a major blow as the central-belt Tory vote softens under Labour and SNP pressure."
     },
     "Aberdeen South and North Kincardine": {
       "title": "Stephen Flynn's bid",
@@ -72,7 +72,7 @@
     },
     "Aberdeenshire East": {
       "title": "Tory–SNP marginal",
-      "watch_for": "Acting Energy Secretary Gillian Martin defends a 1,889 majority against Conservative MSP Douglas Lumsden — who's hoping to deliver an Aberdeenshire double for the Tories."
+      "watch_for": "Climate Action and Energy Secretary Gillian Martin defends a 1,889 majority against Conservative MSP Douglas Lumsden — who's hoping to deliver an Aberdeenshire double for the Tories."
     },
     "Aberdeenshire West": {
       "title": "Conservative's NE base",
@@ -88,7 +88,7 @@
     },
     "East Lothian": {
       "title": "Top Labour target",
-      "watch_for": "Housing Minister Paul McLennan won by only 1,185 in 2021. Labour took the Westminster equivalent in 2024 and Sarwar has flagged it as a must-win — an early Labour gain here sets the tone for the night."
+      "watch_for": "Former Housing Minister Paul McLennan (he stepped down in June 2025 on health grounds) won by just 1,179 in 2021. Labour took the Westminster equivalent in 2024 and Sarwar has flagged it as a must-win — an early Labour gain here sets the tone for the night."
     },
     "Dumbarton": {
       "title": "Jackie Baillie's marginal",
@@ -108,7 +108,7 @@
     },
     "Glasgow Kelvin": {
       "title": "Greens stronghold + Stewart vacating",
-      "watch_for": "Current MSP Kaukab Stewart is moving to defend Glasgow Southside. Greens have been climbing here; ex-SNP Westminster MP Alison Thewliss has been linked with the new Glasgow-area boundaries."
+      "watch_for": "Current MSP Kaukab Stewart is moving to defend Glasgow Southside. Greens have been climbing here; ex-SNP Westminster MP Alison Thewliss is standing in the neighbouring new Glasgow Central seat and tops the SNP's Glasgow regional list."
     }
   },
   "regions": {
@@ -134,7 +134,7 @@
     },
     "West Scotland": {
       "title": "Russell Findlay's regional list base",
-      "watch_for": "Tory leader Russell Findlay is top of the West Scotland regional list. If he loses Eastwood (his constituency target), this is his fallback — losing both would be calamitous."
+      "watch_for": "Tory leader Russell Findlay is top of the West Scotland regional list — that's how he sits in Holyrood (he's not contesting a constituency). If the Tory list vote here collapses, his own seat is at risk."
     }
   }
 }
