@@ -3302,10 +3302,41 @@ function wire() {
     r.readAsText(f); e.target.value = '';
   });
   $('#reset-btn').addEventListener('click', () => {
-    if (!confirm('Clear all entered results? This cannot be undone (export first if you want a backup).')) return;
-    state.entered = { constituencies: {}, regions: {} };
-    persist(); rerender();
-    showToast('Cleared all entries');
+    const msg = [
+      'Reset the dashboard to a brand-new state? This will wipe ALL local data:',
+      '',
+      '  • all entered constituency + region results',
+      '  • the recent declarations log',
+      '  • your watch list',
+      '  • the saved Google Sheet URL + live-mode settings',
+      '  • theme + TV mode + sound preferences',
+      '  • the year-view selection',
+      '',
+      'This cannot be undone. Export entries first if you want a backup.',
+    ].join('\n');
+    if (!confirm(msg)) return;
+
+    // Stop any running live polling so timers don't re-write storage after reset
+    try { stopLive(); } catch (e) {}
+
+    // Wipe every key this dashboard owns. Anything starting with our prefix.
+    try {
+      const toRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('holyrood2026.') || k === STORAGE_KEY || k === LIVE_KEY)) {
+          toRemove.push(k);
+        }
+      }
+      toRemove.forEach(k => localStorage.removeItem(k));
+    } catch (e) {
+      console.warn('Could not clear localStorage:', e);
+    }
+
+    // Reload — simplest way to guarantee a fully clean state across all
+    // in-memory caches (D3 paint state, audio context, scheduled timers, etc.)
+    showToast('Resetting…');
+    setTimeout(() => location.reload(), 400);
   });
 
   // Esc closes any modal
