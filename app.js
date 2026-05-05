@@ -29,7 +29,7 @@ const LIVE_KEY = 'holyrood2026.live';
 // load. Visitors who set their own URL via the live-mode modal keep their
 // own. Reset wipes the override and restores this default. Set to '' to
 // disable auto-start entirely.
-const DEFAULT_LIVE_URL = 'https://docs.google.com/spreadsheets/d/1C9cm3kWSmxxyu9z-eJ6cMaV51GXSPhYPVKnC9ohTcpA/export?format=csv';
+const DEFAULT_LIVE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT0LlK4skK6VFwKSsyzkh9pwD9blUO3D8lCk8YFQIdD2KjUBSgHhrCFohcAuBsOkne1mIspJfycjr3D/pub?output=csv';
 const DEFAULT_LIVE_INTERVAL_SEC = 30;
 
 /* ---------------- State ---------------- */
