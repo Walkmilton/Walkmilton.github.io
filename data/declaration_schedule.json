@@ -235,21 +235,10 @@
       "tier": "mid"
     },
     {
-      "name": "Glasgow Maryhill and Springburn",
-      "expected_time": "2026-05-08T15:30",
-      "tier": "mid"
-    },
-    {
       "name": "Glasgow Cathcart",
       "expected_time": "2026-05-08T15:45",
       "tier": "mid",
       "note": "Sarwar's bid (new combined seat)"
-    },
-    {
-      "name": "Glasgow Pollok",
-      "expected_time": "2026-05-08T15:45",
-      "tier": "mid",
-      "note": "Yousaf vacating"
     },
     {
       "name": "Angus North and Mearns",
@@ -394,6 +383,19 @@
       "expected_time": "2026-05-08T18:30",
       "tier": "very_late",
       "note": "Kate Forbes stepping down"
+    },
+    {
+      "name": "Glasgow Central",
+      "expected_time": "2026-05-08T14:15",
+      "tier": "early",
+      "region": "Glasgow"
+    },
+    {
+      "name": "Edinburgh Northern",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid",
+      "note": "Lorna Slater (Greens) standing",
+      "region": "Edinburgh and Lothians East"
     }
   ],
   "regions": [

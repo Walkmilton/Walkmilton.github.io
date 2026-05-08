@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "description": "Curated list of constituencies and regions worth watching during the 2026 count, with brief commentary on why each one matters. Edit freely — this just drives extra commentary in the dashboard.",
+    "description": "Curated list of constituencies and regions worth watching during the 2026 count, with brief commentary on why each one matters. Edit freely \u2014 this just drives extra commentary in the dashboard.",
     "compiled": "2026-05-04",
     "sources": [
-      "Scotsman: 2026 Scottish Parliament election — the 16 seats to watch out for (https://www.scotsman.com/news/politics/2026-scottish-parliament-election-the-16-seats-to-watch-out-for-5120120)",
+      "Scotsman: 2026 Scottish Parliament election \u2014 the 16 seats to watch out for (https://www.scotsman.com/news/politics/2026-scottish-parliament-election-the-16-seats-to-watch-out-for-5120120)",
       "Wikipedia 2026 Scottish Parliament election + individual MSP pages",
       "Ballot Box Scotland SP26 hub"
     ],
@@ -12,50 +12,46 @@
   "constituencies": {
     "Perthshire North": {
       "title": "First Minister's seat",
-      "watch_for": "John Swinney's seat — MSP for Perthshire North since 2011 (and North Tayside before that, since 1999). A reduced majority would mark a rough night for the SNP."
+      "watch_for": "John Swinney's seat \u2014 MSP for Perthshire North since 2011 (and North Tayside before that, since 1999). A reduced majority would mark a rough night for the SNP."
     },
     "Glasgow Southside": {
-      "title": "Sturgeon's old seat — open contest",
+      "title": "Sturgeon's old seat \u2014 open contest",
       "watch_for": "Nicola Sturgeon is standing down after 27 years. SNP defending with Equalities Minister Kaukab Stewart (currently Glasgow Kelvin MSP) against the near-9,500 majority Sturgeon left behind."
     },
     "Glasgow Cathcart": {
       "title": "Sarwar's bid for a constituency",
-      "watch_for": "Anas Sarwar (Scottish Labour leader) is standing in the new Glasgow Cathcart and Pollok seat — overlaps Cathcart and Pollok in old boundaries. He's never won a constituency, having sat as a Glasgow regional list MSP since 2016."
-    },
-    "Glasgow Pollok": {
-      "title": "Yousaf's seat being vacated",
-      "watch_for": "Former First Minister Humza Yousaf is not standing again. Under new boundaries this seat merges with Cathcart, where Anas Sarwar is the Labour candidate."
+      "watch_for": "Anas Sarwar (Scottish Labour leader) is standing in the new Glasgow Cathcart and Pollok seat \u2014 overlaps Cathcart and Pollok in old boundaries. He's never won a constituency, having sat as a Glasgow regional list MSP since 2016."
     },
     "Edinburgh Western": {
       "title": "LD leader's seat",
-      "watch_for": "Alex Cole-Hamilton (Scottish Lib Dem leader) defends here. Redrawn and renamed Edinburgh North Western under 2026 boundaries — losing Drylaw and Muirhouse to the new Edinburgh Northern seat. A loss would be a huge story; a strengthened majority signals an LD revival."
+      "watch_for": "Alex Cole-Hamilton (Scottish Lib Dem leader) defends here. Redrawn and renamed Edinburgh North Western under 2026 boundaries \u2014 losing Drylaw and Muirhouse to the new Edinburgh Northern seat. A loss would be a huge story; a strengthened majority signals an LD revival."
     },
     "Edinburgh Eastern": {
       "title": "The Ash Regan defection seat",
-      "watch_for": "Won by Ash Regan (then Denham) for the SNP in 2021 with a 10,117 majority. She defected to Alba in 2023 and now sits as an independent. Labour's Katherine Sangster — backed by Co-op, GMB, Unison and Usdaw — is the challenger."
+      "watch_for": "Won by Ash Regan (then Denham) for the SNP in 2021 with a 10,117 majority. She defected to Alba in 2023 and now sits as an independent. Labour's Katherine Sangster \u2014 backed by Co-op, GMB, Unison and Usdaw \u2014 is the challenger."
     },
     "Edinburgh Central": {
       "title": "Greens' best constituency shot",
-      "watch_for": "SNP-held (Angus Robertson, 2021). Lorna Slater — former Greens co-leader — is the Greens candidate here, the closest the party has come to a Holyrood constituency win."
+      "watch_for": "SNP-held (Angus Robertson, 2021). Lorna Slater \u2014 former Greens co-leader \u2014 is the Greens candidate here, the closest the party has come to a Holyrood constituency win."
     },
     "Edinburgh Southern": {
-      "title": "Lab–SNP marginal",
+      "title": "Lab\u2013SNP marginal",
       "watch_for": "Labour-held by Daniel Johnson on a 2021 majority of 8.9pp. Now a tight three-way contest with SNP and LD as polling shifts."
     },
     "Skye, Lochaber and Badenoch": {
-      "title": "Forbes stepping down — biggest majority in Holyrood",
+      "title": "Forbes stepping down \u2014 biggest majority in Holyrood",
       "watch_for": "Deputy FM Kate Forbes is standing down (cited family reasons). Held the largest majority of any MSP at 15,861. Lib Dems are targeting after taking the equivalent Westminster seat in 2024."
     },
     "Inverness and Nairn": {
       "title": "Fergus Ewing wildcard",
-      "watch_for": "Long-serving Fergus Ewing left the SNP and confirmed in June 2025 that he is standing as an independent in his own seat — campaigning explicitly against the SNP–Green coalition record on the A9 and A96. SNP regional MSP Emma Roddick is the SNP candidate; the Lib Dems are also pushing hard."
+      "watch_for": "Long-serving Fergus Ewing left the SNP and confirmed in June 2025 that he is standing as an independent in his own seat \u2014 campaigning explicitly against the SNP\u2013Green coalition record on the A9 and A96. SNP regional MSP Emma Roddick is the SNP candidate; the Lib Dems are also pushing hard."
     },
     "Caithness, Sutherland and Ross": {
-      "title": "SNP–LD marginal",
-      "watch_for": "SNP minister Maree Todd defends a 2,591 majority. Lib Dems publicly targeting after taking the Westminster equivalent — its return would signal a full LD recovery in the far north."
+      "title": "SNP\u2013LD marginal",
+      "watch_for": "SNP minister Maree Todd defends a 2,591 majority. Lib Dems publicly targeting after taking the Westminster equivalent \u2014 its return would signal a full LD recovery in the far north."
     },
     "Shetland": {
-      "title": "LD seat — open after Wishart steps down",
+      "title": "LD seat \u2014 open after Wishart steps down",
       "watch_for": "Lib Dem MSP Beatrice Wishart is stepping down. LD vote share fell 18.8pp in 2021 while the SNP rose by the same amount; SNP's Hannah Mary Goodlad is standing. Often declares first."
     },
     "Orkney": {
@@ -63,23 +59,23 @@
       "watch_for": "Lib Dem Liam McArthur seeking re-election (MSP since 2007). Safe LD; often declares early. A swing here is meaningful even if the seat doesn't change hands."
     },
     "Eastwood": {
-      "title": "Jackson Carlaw's seat — Tory leader's marquee campaign",
-      "watch_for": "Jackson Carlaw — MSP for Eastwood since 2016 (and West Scotland regional list 2007–2016) — is seeking re-election with a 2,216 majority from 2021. Conservative leader Russell Findlay is NOT contesting the constituency — he sits on the West Scotland regional list — but has been campaigning here for Carlaw. A Carlaw loss would be a major blow as the central-belt Tory vote softens under Labour and SNP pressure."
+      "title": "Jackson Carlaw's seat \u2014 Tory leader's marquee campaign",
+      "watch_for": "Jackson Carlaw \u2014 MSP for Eastwood since 2016 (and West Scotland regional list 2007\u20132016) \u2014 is seeking re-election with a 2,216 majority from 2021. Conservative leader Russell Findlay is NOT contesting the constituency \u2014 he sits on the West Scotland regional list \u2014 but has been campaigning here for Carlaw. A Carlaw loss would be a major blow as the central-belt Tory vote softens under Labour and SNP pressure."
     },
     "Aberdeen South and North Kincardine": {
       "title": "Stephen Flynn's bid",
       "watch_for": "SNP Westminster leader Stephen Flynn is the candidate, displacing incumbent Audrey Nicoll. Her 2021 majority was just 1,671 and Flynn's own 2024 vote share fell 12.5pp."
     },
     "Aberdeenshire East": {
-      "title": "Tory–SNP marginal",
-      "watch_for": "Climate Action and Energy Secretary Gillian Martin defends a 1,889 majority against Conservative MSP Douglas Lumsden — who's hoping to deliver an Aberdeenshire double for the Tories."
+      "title": "Tory\u2013SNP marginal",
+      "watch_for": "Climate Action and Energy Secretary Gillian Martin defends a 1,889 majority against Conservative MSP Douglas Lumsden \u2014 who's hoping to deliver an Aberdeenshire double for the Tories."
     },
     "Aberdeenshire West": {
       "title": "Conservative's NE base",
       "watch_for": "One of the few Conservative-held constituencies. Whether the Tories hold their rural NE base against Reform is the test of whether the Scottish Conservatives survive at all."
     },
     "Banffshire and Buchan Coast": {
-      "title": "Salmond's old seat — knife-edge",
+      "title": "Salmond's old seat \u2014 knife-edge",
       "watch_for": "Karen Adam (SNP) holds Alex Salmond's old home seat by just 772 votes. Tories won the overlapping Westminster seat in 2024 and will target it; strong Reform vote expected too."
     },
     "Dundee City East": {
@@ -88,7 +84,7 @@
     },
     "East Lothian": {
       "title": "Top Labour target",
-      "watch_for": "Former Housing Minister Paul McLennan (he stepped down in June 2025 on health grounds) won by just 1,179 in 2021. Labour took the Westminster equivalent in 2024 and Sarwar has flagged it as a must-win — an early Labour gain here sets the tone for the night."
+      "watch_for": "Former Housing Minister Paul McLennan (he stepped down in June 2025 on health grounds) won by just 1,179 in 2021. Labour took the Westminster equivalent in 2024 and Sarwar has flagged it as a must-win \u2014 an early Labour gain here sets the tone for the night."
     },
     "Dumbarton": {
       "title": "Jackie Baillie's marginal",
@@ -96,7 +92,7 @@
     },
     "Ayr": {
       "title": "Smallest majority in Holyrood",
-      "watch_for": "SNP minister Siobhian Brown holds by just 170 votes — the slimmest sitting majority in the chamber. Labour won the Westminster equivalent in 2024 by over 8,600. Tightest contest in Scotland."
+      "watch_for": "SNP minister Siobhian Brown holds by just 170 votes \u2014 the slimmest sitting majority in the chamber. Labour won the Westminster equivalent in 2024 by over 8,600. Tightest contest in Scotland."
     },
     "Midlothian North and Musselburgh": {
       "title": "Operation Branchform aftermath",
@@ -104,7 +100,7 @@
     },
     "Hamilton, Larkhall and Stonehouse": {
       "title": "Davy Russell defends June 2025 by-election gain",
-      "watch_for": "Christina McKelvie (SNP) died in March 2025. Davy Russell took the seat for Labour in the June 2025 by-election by just 602 votes over the SNP's Katy Loudon — Reform finished a close third with 26.1%, their strongest Scottish result. The 2021 dashboard baseline still shows SNP-held; the 2026 contest is Russell defending against an SNP comeback and a serious Reform challenge."
+      "watch_for": "Christina McKelvie (SNP) died in March 2025. Davy Russell took the seat for Labour in the June 2025 by-election by just 602 votes over the SNP's Katy Loudon \u2014 Reform finished a close third with 26.1%, their strongest Scottish result. The 2021 dashboard baseline still shows SNP-held; the 2026 contest is Russell defending against an SNP comeback and a serious Reform challenge."
     },
     "Glasgow Kelvin": {
       "title": "Greens stronghold + Stewart vacating",
@@ -114,11 +110,7 @@
   "regions": {
     "Glasgow": {
       "title": "Where the Greens win seats",
-      "watch_for": "Greens regularly take 1–2 list seats here, with Patrick Harvie now top of the Greens regional list (he stepped down as co-leader in summer 2025 but is standing as MSP). A Reform breakthrough on the list would be most surprising in Glasgow."
-    },
-    "Lothian": {
-      "title": "Highest list-vote diversity",
-      "watch_for": "Often the only region where every major party gets at least one MSP. Greens, Reform and Lib Dems all have a shot at list seats here."
+      "watch_for": "Greens regularly take 1\u20132 list seats here, with Patrick Harvie now top of the Greens regional list (he stepped down as co-leader in summer 2025 but is standing as MSP). A Reform breakthrough on the list would be most surprising in Glasgow."
     },
     "North East Scotland": {
       "title": "Reform's likely best region",
@@ -126,15 +118,19 @@
     },
     "Highlands and Islands": {
       "title": "Vast geographies, slow count",
-      "watch_for": "Last region to fully declare. Mix of SNP, LD and Conservative — list outcome is genuinely unpredictable. Includes Forbes's seat, Ewing's wildcard, McArthur's Orkney."
+      "watch_for": "Last region to fully declare. Mix of SNP, LD and Conservative \u2014 list outcome is genuinely unpredictable. Includes Forbes's seat, Ewing's wildcard, McArthur's Orkney."
     },
     "South Scotland": {
-      "title": "Tory–Lab–Ref three-way",
+      "title": "Tory\u2013Lab\u2013Ref three-way",
       "watch_for": "Tory list strongholds (Dumfriesshire, Borders) under Reform attack while Labour climb back in old mining areas like Carrick, Cumnock and Doon Valley."
     },
     "West Scotland": {
       "title": "Russell Findlay's regional list base",
-      "watch_for": "Tory leader Russell Findlay is top of the West Scotland regional list — that's how he sits in Holyrood (he's not contesting a constituency). If the Tory list vote here collapses, his own seat is at risk."
+      "watch_for": "Tory leader Russell Findlay is top of the West Scotland regional list \u2014 that's how he sits in Holyrood (he's not contesting a constituency). If the Tory list vote here collapses, his own seat is at risk."
+    },
+    "Edinburgh and Lothians East": {
+      "title": "Highest list-vote diversity",
+      "watch_for": "Often the only region where every major party gets at least one MSP. Greens, Reform and Lib Dems all have a shot at list seats here."
     }
   }
 }

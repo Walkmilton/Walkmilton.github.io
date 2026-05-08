@@ -1311,15 +1311,15 @@ function abbrevSeat(name) {
   const SHORT = {
     'Glasgow Anniesland': 'GLA-A',
     'Glasgow Cathcart': 'GLA-C',
+    'Glasgow Central': 'GLA-Ce',
     'Glasgow Kelvin': 'GLA-K',
-    'Glasgow Maryhill and Springburn': 'GLA-M',
-    'Glasgow Pollok': 'GLA-P',
     'Glasgow Provan': 'GLA-Pr',
     'Glasgow Shettleston': 'GLA-S',
     'Glasgow Southside': 'GLA-So',
     'Edinburgh Central': 'EDI-C',
     'Edinburgh Eastern': 'EDI-E',
-    'Edinburgh Northern and Leith': 'EDI-N',
+    'Edinburgh Northern': 'EDI-N',
+    'Edinburgh Northern and Leith': 'EDI-NL',
     'Edinburgh Pentlands': 'EDI-Pe',
     'Edinburgh Southern': 'EDI-So',
     'Edinburgh Western': 'EDI-W',
@@ -1497,49 +1497,8 @@ function paintRegionDots(s) {
       .on('click', () => openRegionModal(region));
   }
 
-  // Title + legend (in screen-space, not affected by pan/zoom)
-  drawRegionMapChrome(svg);
-}
-
-function drawRegionMapChrome(svg) {
-  const W = 600;  // matches viewBox
-  const chrome = svg.append('g').attr('class', 'region-chrome');
-
-  // Title across the top
-  chrome.append('text')
-    .attr('class', 'region-map-title')
-    .attr('x', W / 2).attr('y', 30)
-    .text('REGIONAL SEATS · 2026');
-
-  // Legend in the upper right — party colour swatches
-  const legendParties = [
-    { p: 'SNP', label: 'SNP' },
-    { p: 'LAB', label: 'Labour' },
-    { p: 'CON', label: 'Conservative' },
-    { p: 'LD',  label: 'Lib Dems' },
-    { p: 'GRN', label: 'Greens' },
-    { p: 'REF', label: 'Reform' },
-  ];
-  const lgX = W - 110, lgY = 50;
-  const rowH = 17, dotR = 5.5, padX = 10, padY = 8;
-  const lgW = 100, lgH = legendParties.length * rowH + padY * 2 - rowH + 16;
-  const lg = chrome.append('g').attr('transform', `translate(${lgX},${lgY})`);
-  lg.append('rect')
-    .attr('class', 'region-legend-bg')
-    .attr('x', 0).attr('y', 0)
-    .attr('width', lgW).attr('height', lgH)
-    .attr('rx', 4).attr('ry', 4);
-  legendParties.forEach((it, i) => {
-    const y = padY + 6 + i * rowH;
-    lg.append('circle')
-      .attr('class', 'region-legend-dot')
-      .attr('cx', padX + dotR).attr('cy', y)
-      .attr('r', dotR).attr('fill', partyColor(it.p));
-    lg.append('text')
-      .attr('class', 'region-legend-text')
-      .attr('x', padX + dotR * 2 + 8).attr('y', y)
-      .text(it.label);
-  });
+  // (Title and legend removed per request — the card heading and tooltips
+  // are sufficient for context.)
 }
 
 function onRegionHoverByName(e, name) {

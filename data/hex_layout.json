@@ -147,11 +147,7 @@
     3,
     8
   ],
-  "Glasgow Maryhill and Springburn": [
-    4,
-    8
-  ],
-  "Glasgow Pollok": [
+  "Glasgow Central": [
     3,
     11
   ],
@@ -290,5 +286,9 @@
   "Galloway and West Dumfries": [
     3,
     14
+  ],
+  "Edinburgh Northern": [
+    9,
+    11
   ]
 }
