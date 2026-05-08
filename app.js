@@ -158,6 +158,10 @@ async function loadData() {
   try {
     state.hexLayout = await fetch('data/hex_layout.json').then(r => r.json());
   } catch (e) { state.hexLayout = null; }
+  // 2026 boundary name aliases — lets BBC-style names resolve to our 2011-2026 names
+  try {
+    state.boundaryAliases = await fetch('data/boundary_aliases_2026.json').then(r => r.json());
+  } catch (e) { state.boundaryAliases = null; }
   // Expected declaration schedule (optional)
   try {
     const sched = await fetch('data/declaration_schedule.json').then(r => r.json());
@@ -1055,7 +1059,7 @@ function renderAllSeatsTable(s) {
           : '<span class="badge pend">pending</span>');
     return `<tr data-name="${r.name}" data-kind="${r.kind}" class="${r.flip ? 'row-flip' : ''}">
       <td><span class="row-kind">${r.kind === 'CON' ? 'Const.' : 'Region'}</span></td>
-      <td><b>${r.name}</b></td>
+      <td><b>${r.name}</b>${r.kind === 'CON' && newBoundaryName(r.name) ? `<br/><span class="muted" style="font-size:10px;">(2026: ${newBoundaryName(r.name)})</span>` : ''}</td>
       <td class="muted">${r.region === r.name ? '—' : r.region}</td>
       <td>${w21Pill}</td>
       <td class="num">${r.m21 != null ? fmtPct(r.m21) : '—'}</td>
@@ -1537,7 +1541,11 @@ function openSeatModal(name) {
   state.modalSeat = name;
   const back = $('#seat-modal-back');
   $('#seat-modal-name-text').textContent = name;
-  $('#seat-modal-region').textContent = `${baseline.region} region · turnout 2021: ${baseline.turnout_pct ?? '—'}%`;
+  const newName = newBoundaryName(name);
+  const regionText = `${baseline.region} region · turnout 2021: ${baseline.turnout_pct ?? '—'}%`;
+  $('#seat-modal-region').innerHTML = newName
+    ? `${regionText}<br/><span style="color: var(--accent); font-size:11px;">2026 ballot name: <b>${newName}</b></span>`
+    : regionText;
   // Star state
   const starBtn = $('#seat-modal-star');
   if (starBtn) {
@@ -2124,13 +2132,29 @@ function normaliseSheetUrl(url) {
 function buildNameLookup() {
   const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
   const lookup = { CON: {}, REG: {} };
+  // Canonical 2011-2026 names
   for (const c of state.results2021.constituencies) {
     lookup.CON[norm(c.name)] = c.name;
   }
   for (const r of REGIONS) {
     lookup.REG[norm(r)] = r;
   }
+  // 2026 boundary aliases (BBC / official current names) — resolve to closest old name
+  if (state.boundaryAliases && state.boundaryAliases.alias_to_old) {
+    for (const [newName, oldName] of Object.entries(state.boundaryAliases.alias_to_old)) {
+      if (lookup.CON[norm(oldName)]) {
+        lookup.CON[norm(newName)] = oldName;
+      }
+    }
+  }
   return { lookup, norm };
+}
+
+// Reverse lookup: given a 2011-2026 name, return its 2026 boundary name (if different).
+function newBoundaryName(oldName) {
+  if (!state.boundaryAliases || !state.boundaryAliases.old_to_new) return null;
+  const v = state.boundaryAliases.old_to_new[oldName];
+  return (v && v !== oldName) ? v : null;
 }
 
 // Parse a CSV from the sheet, return { results, errors }.
@@ -2797,12 +2821,23 @@ function parsePasteText(text) {
   const result = zeroParties();
   let detectedName = null;
 
-  // Try to detect constituency name in first non-numeric line
+  // Try to detect constituency name in first non-numeric line.
+  // Recognises both 2011-2026 names and 2026 boundary names (BBC-style).
+  const aliasMap = (state.boundaryAliases && state.boundaryAliases.alias_to_old) || {};
   for (const line of lines.slice(0, 4)) {
     if (/\d/.test(line)) continue;
-    // Look for known constituency names
+    const lower = line.toLowerCase();
+    // Try 2026 boundary names first (longer / more specific)
+    for (const [newName, oldName] of Object.entries(aliasMap)) {
+      if (lower.includes(newName.toLowerCase())) {
+        detectedName = oldName;
+        break;
+      }
+    }
+    if (detectedName) break;
+    // Then 2011-2026 names
     for (const c of state.results2021.constituencies) {
-      if (line.toLowerCase().includes(c.name.toLowerCase())) {
+      if (lower.includes(c.name.toLowerCase())) {
         detectedName = c.name;
         break;
       }
