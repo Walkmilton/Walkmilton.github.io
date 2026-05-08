@@ -1121,6 +1121,15 @@ function resetMapZoom(svgSelector) {
   z.svg.transition().duration(400).call(z.zoom.transform, d3.zoomIdentity);
 }
 
+// Zoom by a multiplier (1.5 = zoom in, 1/1.5 = zoom out). Smoothly animated.
+// Anchors the zoom on the visible centre of the SVG so it feels like a
+// natural zoom-in-place rather than drifting toward (0,0).
+function zoomMapBy(svgSelector, factor) {
+  const z = _zoomBehaviours[svgSelector];
+  if (!z) return;
+  z.svg.transition().duration(200).call(z.zoom.scaleBy, factor);
+}
+
 function setupMaps() {
   const spc = topojson.feature(state.topo, state.topo.objects.spc);
   const sper = topojson.feature(state.topo, state.topo.objects.sper);
@@ -3293,16 +3302,18 @@ function wire() {
     });
   });
 
-  // Reset-zoom buttons on each map
-  $$('.map-reset-btn').forEach(b => {
+  // Zoom toolbar buttons (+ / − / ⟲) on each map.
+  // Resolves which SVG to act on based on the data-* attribute.
+  function resolveSvg(which) {
+    if (which === 'spc') return state.spcMapView === 'hex' ? '#map-spc-hex' : '#map-spc';
+    if (which === 'sper') return '#map-sper';
+    return null;
+  }
+  $$('.map-ctrl-btn').forEach(b => {
     b.addEventListener('click', () => {
-      const which = b.dataset.reset;
-      if (which === 'spc') {
-        // Reset whichever SPC view is currently shown
-        resetMapZoom(state.spcMapView === 'hex' ? '#map-spc-hex' : '#map-spc');
-      } else if (which === 'sper') {
-        resetMapZoom('#map-sper');
-      }
+      if (b.dataset.zoomIn)  { const sel = resolveSvg(b.dataset.zoomIn);  if (sel) zoomMapBy(sel, 1.5); }
+      if (b.dataset.zoomOut) { const sel = resolveSvg(b.dataset.zoomOut); if (sel) zoomMapBy(sel, 1 / 1.5); }
+      if (b.dataset.reset)   { const sel = resolveSvg(b.dataset.reset);   if (sel) resetMapZoom(sel); }
     });
   });
 

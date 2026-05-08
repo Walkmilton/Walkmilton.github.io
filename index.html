@@ -239,20 +239,29 @@ a { color: var(--accent); text-decoration: none; }
   border-radius: 8px; padding: 6px 10px; font-size: 11px; color: var(--text-2);
   backdrop-filter: blur(6px);
 }
-.map-reset-btn {
+.map-ctrls {
   position: absolute; top: 12px; right: 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  z-index: 5;
+}
+.map-ctrl-btn {
   background: rgba(8,12,18,.7);
   border: 1px solid var(--line);
   color: var(--text-1);
   width: 28px; height: 28px;
   border-radius: 6px;
-  font-size: 14px; cursor: pointer;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer;
   display: grid; place-items: center;
   backdrop-filter: blur(6px);
   transition: background .15s, transform .15s;
+  font-family: inherit;
+  line-height: 1;
 }
-.map-reset-btn:hover { background: var(--bg-3); transform: rotate(-90deg); }
-html[data-theme="light"] .map-reset-btn {
+.map-ctrl-btn:hover { background: var(--bg-3); }
+.map-ctrl-btn:active { transform: scale(0.92); }
+.map-ctrl-btn[data-reset]:hover { transform: rotate(-90deg); }
+html[data-theme="light"] .map-ctrl-btn {
   background: rgba(255,255,255,0.85);
   color: var(--text-1);
 }
@@ -1352,7 +1361,11 @@ html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139
         <div class="map-svg-wrap" id="map-spc-geo-wrap"><svg id="map-spc" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
         <div class="map-svg-wrap" id="map-spc-hex-wrap" style="display:none"><svg id="map-spc-hex" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
         <div class="map-overlay" id="map-spc-overlay">Scroll to zoom · drag to pan · click to enter</div>
-        <button class="map-reset-btn" data-reset="spc" title="Reset zoom">⟲</button>
+        <div class="map-ctrls">
+          <button class="map-ctrl-btn" data-zoom-in="spc" title="Zoom in">+</button>
+          <button class="map-ctrl-btn" data-zoom-out="spc" title="Zoom out">−</button>
+          <button class="map-ctrl-btn" data-reset="spc" title="Reset zoom">⟲</button>
+        </div>
       </div>
     </div>
     <div class="card map-card">
@@ -1360,7 +1373,11 @@ html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139
       <div class="body">
         <div class="map-svg-wrap"><svg id="map-sper" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
         <div class="map-overlay" id="map-sper-overlay">Scroll to zoom · drag to pan · click for list votes</div>
-        <button class="map-reset-btn" data-reset="sper" title="Reset zoom">⟲</button>
+        <div class="map-ctrls">
+          <button class="map-ctrl-btn" data-zoom-in="sper" title="Zoom in">+</button>
+          <button class="map-ctrl-btn" data-zoom-out="sper" title="Zoom out">−</button>
+          <button class="map-ctrl-btn" data-reset="sper" title="Reset zoom">⟲</button>
+        </div>
       </div>
     </div>
   </section>
