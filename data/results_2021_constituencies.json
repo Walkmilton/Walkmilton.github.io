@@ -528,28 +528,6 @@
     }
   },
   {
-    "name": "Dunfermline",
-    "region": "Mid Scotland and Fife",
-    "winner": "SNP",
-    "turnout_pct": 66.0,
-    "vote_pct": {
-      "SNP": 49.0,
-      "LAB": 27.8,
-      "CON": 15.4,
-      "LD": 7.8,
-      "GRN": 0.0,
-      "OTH": 0.0
-    },
-    "votes": {
-      "SNP": null,
-      "LAB": null,
-      "CON": null,
-      "LD": null,
-      "GRN": null,
-      "OTH": null
-    }
-  },
-  {
     "name": "Dundee City East",
     "region": "North East Scotland",
     "winner": "SNP",
@@ -583,6 +561,28 @@
       "LD": 3.9,
       "GRN": 0.0,
       "OTH": 2.6
+    },
+    "votes": {
+      "SNP": null,
+      "LAB": null,
+      "CON": null,
+      "LD": null,
+      "GRN": null,
+      "OTH": null
+    }
+  },
+  {
+    "name": "Dunfermline",
+    "region": "Mid Scotland and Fife",
+    "winner": "SNP",
+    "turnout_pct": 66.0,
+    "vote_pct": {
+      "SNP": 49.0,
+      "LAB": 27.8,
+      "CON": 15.4,
+      "LD": 7.8,
+      "GRN": 0.0,
+      "OTH": 0.0
     },
     "votes": {
       "SNP": null,
@@ -702,6 +702,16 @@
       "GRN": null,
       "OTH": null
     }
+  },
+  {
+    "name": "Edinburgh Northern",
+    "region": "Lothian",
+    "is_new_2026": true,
+    "predecessor": "Edinburgh Northern and Leith",
+    "winner": null,
+    "turnout_pct": null,
+    "vote_pct": null,
+    "votes": null
   },
   {
     "name": "Edinburgh Northern and Leith",
@@ -924,6 +934,16 @@
     }
   },
   {
+    "name": "Glasgow Central",
+    "region": "Glasgow",
+    "is_new_2026": true,
+    "predecessor": "Glasgow Provan",
+    "winner": null,
+    "turnout_pct": null,
+    "vote_pct": null,
+    "votes": null
+  },
+  {
     "name": "Glasgow Kelvin",
     "region": "Glasgow",
     "winner": "SNP",
@@ -935,50 +955,6 @@
       "LD": 2.7,
       "GRN": 25.2,
       "OTH": 0.0
-    },
-    "votes": {
-      "SNP": null,
-      "LAB": null,
-      "CON": null,
-      "LD": null,
-      "GRN": null,
-      "OTH": null
-    }
-  },
-  {
-    "name": "Glasgow Maryhill and Springburn",
-    "region": "Glasgow",
-    "winner": "SNP",
-    "turnout_pct": 52.0,
-    "vote_pct": {
-      "SNP": 59.0,
-      "LAB": 30.5,
-      "CON": 8.0,
-      "LD": 2.5,
-      "GRN": 0.0,
-      "OTH": 0.0
-    },
-    "votes": {
-      "SNP": null,
-      "LAB": null,
-      "CON": null,
-      "LD": null,
-      "GRN": null,
-      "OTH": null
-    }
-  },
-  {
-    "name": "Glasgow Pollok",
-    "region": "Glasgow",
-    "winner": "SNP",
-    "turnout_pct": 54.0,
-    "vote_pct": {
-      "SNP": 53.7,
-      "LAB": 32.7,
-      "CON": 5.5,
-      "LD": 1.5,
-      "GRN": 4.9,
-      "OTH": 1.6
     },
     "votes": {
       "SNP": null,
