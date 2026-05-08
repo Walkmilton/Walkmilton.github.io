@@ -150,6 +150,28 @@ async function loadData() {
   state.predictions = pred;
   for (const c of c21) state.byConstituency[c.name] = c;
   for (const r of r21) state.byRegion[r.name] = r;
+  // Synthesize stub baseline entries for any 2026-only polygons (new seats with
+  // no 2011-2026 predecessor — Glasgow Central, Edinburgh Northern). These go
+  // into byConstituency only — NOT into state.results2021.constituencies — so
+  // projection math (d'Hondt, UNS, BBS) keeps iterating the original 73 entries
+  // and stays internally consistent. The map hover/click code uses
+  // byConstituency for region/baseline info, so the new seats render sensibly.
+  try {
+    const spcGeoms = (topo.objects && topo.objects.spc && topo.objects.spc.geometries) || [];
+    for (const g of spcGeoms) {
+      const nm = g.properties && g.properties.NAME;
+      if (!nm || state.byConstituency[nm]) continue;
+      state.byConstituency[nm] = {
+        name: nm,
+        region: g.properties.REGION || 'Unknown',
+        winner: null,
+        vote_pct: null,
+        votes: null,
+        turnout_pct: null,
+        is_new_2026: true,
+      };
+    }
+  } catch (e) { console.warn('new-2026 stub synth failed', e); }
   // Notables (optional)
   try {
     state.notables = await fetch('data/notables_2026.json').then(r => r.json());
@@ -1508,7 +1530,11 @@ function onConstituencyHover(e, d) {
     const sorted = PARTIES.map(p => [p, rec.vote_pct[p]]).filter(([,v]) => v > 0.5).sort((a, b) => b[1] - a[1]);
     for (const [p, v] of sorted) html += `<div class="row"><span class="ptag"><span class="sw" style="background:${partyColor(p)}"></span>${PARTY_NAMES[p]}</span><b>${fmtPct(v)}</b></div>`;
   }
-  if (baseline) html += `<div class="meta">2021: <b style="color:${partyColor(baseline.winner)}">${PARTY_NAMES[baseline.winner]} hold</b> · turnout ${baseline.turnout_pct ?? '—'}%<br/><span style="color:var(--text-3)">Click to enter or edit results</span></div>`;
+  if (baseline && baseline.is_new_2026) {
+    html += `<div class="meta"><b style="color:var(--accent)">New seat for 2026</b><br/><span style="color:var(--text-3)">No 2021 baseline · Click to enter results</span></div>`;
+  } else if (baseline && baseline.winner) {
+    html += `<div class="meta">2021: <b style="color:${partyColor(baseline.winner)}">${PARTY_NAMES[baseline.winner]} hold</b> · turnout ${baseline.turnout_pct ?? '—'}%<br/><span style="color:var(--text-3)">Click to enter or edit results</span></div>`;
+  }
   showTooltip(html, e);
 }
 function onRegionHover(e, d) {
@@ -1542,7 +1568,9 @@ function openSeatModal(name) {
   const back = $('#seat-modal-back');
   $('#seat-modal-name-text').textContent = name;
   const newName = newBoundaryName(name);
-  const regionText = `${baseline.region} region · turnout 2021: ${baseline.turnout_pct ?? '—'}%`;
+  const regionText = baseline.is_new_2026
+    ? `${baseline.region} region · <b style="color:var(--accent)">New seat for 2026</b> (no 2021 baseline)`
+    : `${baseline.region} region · turnout 2021: ${baseline.turnout_pct ?? '—'}%`;
   $('#seat-modal-region').innerHTML = newName
     ? `${regionText}<br/><span style="color: var(--accent); font-size:11px;">2026 ballot name: <b>${newName}</b></span>`
     : regionText;
@@ -1591,17 +1619,21 @@ function renderSeatModalCompare(name) {
 
   // 2021 panel
   const t21 = $('#seat-modal-2021 tbody');
-  const sorted21 = PARTIES.map(p => [p, baseSh[p] || 0]).sort((a, b) => b[1] - a[1]);
-  t21.innerHTML = sorted21.map(([p, v]) => {
-    const isWin = p === top1[0];
-    const isRun = p === top2[0];
-    const badge = isWin ? '<span class="badge win">Won</span>' : (isRun ? '<span class="badge run">Runner-up</span>' : '');
-    return `<div class="row ${isWin ? 'winner' : ''}">
-      <div class="who"><span class="sw" style="background:${partyColor(p)}"></span>${PARTY_NAMES[p]} ${badge}</div>
-      <div class="pct">${fmtPct(v)}</div>
-      <div class="change"></div>
-    </div>`;
-  }).join('');
+  if (baseline.is_new_2026) {
+    t21.innerHTML = `<div style="padding:18px 0; text-align:center; color:var(--text-3); font-size:12px;">New seat for 2026 — no 2021 baseline</div>`;
+  } else {
+    const sorted21 = PARTIES.map(p => [p, baseSh[p] || 0]).sort((a, b) => b[1] - a[1]);
+    t21.innerHTML = sorted21.map(([p, v]) => {
+      const isWin = p === top1[0];
+      const isRun = p === top2[0];
+      const badge = isWin ? '<span class="badge win">Won</span>' : (isRun ? '<span class="badge run">Runner-up</span>' : '');
+      return `<div class="row ${isWin ? 'winner' : ''}">
+        <div class="who"><span class="sw" style="background:${partyColor(p)}"></span>${PARTY_NAMES[p]} ${badge}</div>
+        <div class="pct">${fmtPct(v)}</div>
+        <div class="change"></div>
+      </div>`;
+    }).join('');
+  }
 
   // Now panel
   const tnow = $('#seat-modal-now tbody');
@@ -2044,7 +2076,9 @@ function updateEntryContext() {
       i.value = entered.votes[p] || '';
     });
   } else {
-    if (baseline) {
+    if (baseline && baseline.is_new_2026) {
+      ctx.innerHTML = `<span style="color:var(--accent)">●</span> New seat for 2026 — no 2021 baseline.`;
+    } else if (baseline && baseline.winner && baseline.vote_pct) {
       const w21 = baseline.winner;
       ctx.innerHTML = `2021: <span style="color:${partyColor(w21)}">●</span> ${PARTY_NAMES[w21]} hold (${fmtPct(baseline.vote_pct[w21])}). Turnout ${baseline.turnout_pct ?? '?'}%`;
     } else { ctx.textContent = ''; }
@@ -2145,6 +2179,15 @@ function buildNameLookup() {
       if (lookup.CON[norm(oldName)]) {
         lookup.CON[norm(newName)] = oldName;
       }
+    }
+  }
+  // New-for-2026 seats with their own polygons but no 2011-2026 predecessor
+  // (Glasgow Central, Edinburgh Northern). They live only in byConstituency
+  // as stubs — register them here so live-sheet rows referencing them resolve.
+  for (const nm of Object.keys(state.byConstituency)) {
+    const b = state.byConstituency[nm];
+    if (b && b.is_new_2026 && !lookup.CON[norm(nm)]) {
+      lookup.CON[norm(nm)] = nm;
     }
   }
   return { lookup, norm };
@@ -2950,6 +2993,8 @@ function renderWatchlist(s) {
     if (winner && rec.vote_pct) {
       const flip = baseline.winner && baseline.winner !== winner ? `<span style="color:var(--warn); font-size:10px; margin-left:4px;">⇆ ${baseline.winner} → ${winner}</span>` : '';
       bottomRow = `<div class="row"><span class="sw" style="background:${partyColor(winner)}"></span><span class="who">${PARTY_NAMES[winner]}${flip}</span><span class="pct">${fmtPct(rec.vote_pct[winner], 1)}</span></div>`;
+    } else if (baseline.is_new_2026) {
+      bottomRow = `<div class="row"><span style="color: var(--text-3); font-size: 11px;">awaiting result · new for 2026</span></div>`;
     } else {
       bottomRow = `<div class="row"><span style="color: var(--text-3); font-size: 11px;">awaiting result · 2021: ${PARTY_NAMES[baseline.winner]}</span></div>`;
     }
