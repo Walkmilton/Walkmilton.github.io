@@ -404,47 +404,104 @@ html[data-theme="light"] .map-ctrl-btn {
 /* hidden file input */
 .file-input { display: none; }
 
-/* ============ Region list-seat dot panels ============ */
+/* ============ Region list-seat dot panels (Sun-style infographic) ============ */
 .region-leader {
-  stroke: rgba(255,255,255,0.35);
-  stroke-width: 1;
-  stroke-dasharray: 2 2;
+  stroke: rgba(255,255,255,0.55);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 2;
   fill: none;
 }
-html[data-theme="light"] .region-leader { stroke: rgba(15,23,42,0.35); }
-.region-panel-bg {
-  fill: rgba(8,12,18,0.85);
-  stroke: rgba(255,255,255,0.18);
-  stroke-width: 1;
-}
-html[data-theme="light"] .region-panel-bg {
-  fill: rgba(255,255,255,0.92);
-  stroke: rgba(15,23,42,0.2);
-}
-.region-panel-title {
-  fill: var(--text-1); font-size: 9px; font-weight: 700;
-  letter-spacing: .04em; text-transform: uppercase;
+html[data-theme="light"] .region-leader { stroke: rgba(15,23,42,0.5); }
+
+/* The label that floats ABOVE each panel, e.g. "MID & FIFE" */
+.region-panel-label {
+  fill: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
   text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: rgba(0,0,0,0.55);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
-.region-seat-dot {
-  stroke: rgba(0,0,0,0.18);
-  stroke-width: 0.6;
+html[data-theme="light"] .region-panel-label {
+  fill: #0f172a;
+  stroke: rgba(255,255,255,0.85);
 }
-.region-seat-dot.empty {
-  fill: var(--bg-3);
-  stroke: var(--line);
-  stroke-width: 0.6;
-}
-.region-poly-base {
-  fill: var(--bg-3);
+
+/* The white box that holds the dots */
+.region-panel-bg {
+  fill: #ffffff;
   stroke: #0a0e14;
   stroke-width: 1.2;
+}
+html[data-theme="light"] .region-panel-bg {
+  fill: #ffffff;
+  stroke: #0f172a;
+  stroke-width: 1.2;
+}
+/* Old in-panel title — keep class for backward compat but hide */
+.region-panel-title { display: none; }
+
+.region-seat-dot {
+  stroke: rgba(0,0,0,0.55);
+  stroke-width: 0.8;
+}
+.region-seat-dot.empty {
+  fill: #e7ebf2;
+  stroke: rgba(15,23,42,0.35);
+  stroke-width: 0.6;
+}
+
+/* Scotland silhouette — solid charcoal grey, no constituency strokes */
+.region-poly-base {
+  fill: #4d5563;
+  stroke: #2c333d;
+  stroke-width: 0.6;
   cursor: pointer;
   transition: fill .15s ease;
 }
-.region-poly-base:hover { fill: var(--bg-2); stroke: var(--accent); stroke-width: 2; }
-html[data-theme="light"] .region-poly-base { fill: #d8dee9; stroke: #ffffff; }
-html[data-theme="light"] .region-poly-base:hover { fill: #c5cdd9; stroke: var(--accent); }
+.region-poly-base:hover { fill: #5d6573; stroke: var(--accent); stroke-width: 1.5; }
+html[data-theme="light"] .region-poly-base { fill: #6b7280; stroke: #4b5563; }
+html[data-theme="light"] .region-poly-base:hover { fill: #7a8290; stroke: var(--accent); }
+
+/* Region map title overlay (top of the SVG) */
+.region-map-title {
+  fill: #ffffff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: rgba(0,0,0,0.55);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+html[data-theme="light"] .region-map-title {
+  fill: #0f172a;
+  stroke: rgba(255,255,255,0.9);
+}
+
+/* Party legend in the corner of the region map */
+.region-legend-bg {
+  fill: rgba(255,255,255,0.96);
+  stroke: #0f172a;
+  stroke-width: 1;
+}
+.region-legend-text {
+  fill: #0f172a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  dominant-baseline: middle;
+}
+.region-legend-dot {
+  stroke: rgba(0,0,0,0.55);
+  stroke-width: 0.8;
+}
 
 /* ============ Hex map ============ */
 .hex-cell {

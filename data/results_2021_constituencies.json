@@ -111,7 +111,7 @@
   },
   {
     "name": "Airdrie and Shotts",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 59.0,
     "vote_pct": {
@@ -133,7 +133,7 @@
   },
   {
     "name": "Almond Valley",
-    "region": "Lothian",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 61.0,
     "vote_pct": {
@@ -375,7 +375,7 @@
   },
   {
     "name": "Coatbridge and Chryston",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 63.0,
     "vote_pct": {
@@ -419,7 +419,7 @@
   },
   {
     "name": "Cumbernauld and Kilsyth",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 65.0,
     "vote_pct": {
@@ -595,7 +595,7 @@
   },
   {
     "name": "East Kilbride",
-    "region": "Central Scotland",
+    "region": "South Scotland",
     "winner": "SNP",
     "turnout_pct": 66.0,
     "vote_pct": {
@@ -617,7 +617,7 @@
   },
   {
     "name": "East Lothian",
-    "region": "South Scotland",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 69.0,
     "vote_pct": {
@@ -661,7 +661,7 @@
   },
   {
     "name": "Edinburgh Central",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 63.0,
     "vote_pct": {
@@ -683,7 +683,7 @@
   },
   {
     "name": "Edinburgh Eastern",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 61.0,
     "vote_pct": {
@@ -705,7 +705,7 @@
   },
   {
     "name": "Edinburgh Northern",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "is_new_2026": true,
     "predecessor": "Edinburgh Northern and Leith",
     "winner": null,
@@ -715,7 +715,7 @@
   },
   {
     "name": "Edinburgh Northern and Leith",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 63.0,
     "vote_pct": {
@@ -737,7 +737,7 @@
   },
   {
     "name": "Edinburgh Pentlands",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 65.0,
     "vote_pct": {
@@ -759,7 +759,7 @@
   },
   {
     "name": "Edinburgh Southern",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "LAB",
     "turnout_pct": 71.0,
     "vote_pct": {
@@ -781,7 +781,7 @@
   },
   {
     "name": "Edinburgh Western",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "LD",
     "turnout_pct": 71.0,
     "vote_pct": {
@@ -825,7 +825,7 @@
   },
   {
     "name": "Falkirk East",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 63.0,
     "vote_pct": {
@@ -847,7 +847,7 @@
   },
   {
     "name": "Falkirk West",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 62.0,
     "vote_pct": {
@@ -1055,7 +1055,7 @@
   },
   {
     "name": "Hamilton, Larkhall and Stonehouse",
-    "region": "Central Scotland",
+    "region": "South Scotland",
     "winner": "SNP",
     "turnout_pct": 61.0,
     "vote_pct": {
@@ -1143,7 +1143,7 @@
   },
   {
     "name": "Linlithgow",
-    "region": "Lothian",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 62.0,
     "vote_pct": {
@@ -1187,7 +1187,7 @@
   },
   {
     "name": "Midlothian North and Musselburgh",
-    "region": "Lothian",
+    "region": "Edinburgh and Lothians East",
     "winner": "SNP",
     "turnout_pct": 61.0,
     "vote_pct": {
@@ -1253,7 +1253,7 @@
   },
   {
     "name": "Motherwell and Wishaw",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 59.0,
     "vote_pct": {
@@ -1561,7 +1561,7 @@
   },
   {
     "name": "Uddingston and Bellshill",
-    "region": "Central Scotland",
+    "region": "Central and Lothians West",
     "winner": "SNP",
     "turnout_pct": 61.0,
     "vote_pct": {

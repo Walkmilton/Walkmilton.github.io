@@ -6,88 +6,436 @@
     "boundary_note": "The Daily Record list uses 2026 boundary names. Where a new boundary covers two old (2011-2026) seats, the same time is applied to both."
   },
   "constituencies": [
-    { "name": "Airdrie and Shotts",                          "expected_time": "2026-05-08T12:00", "tier": "early" },
-    { "name": "Ayr",                                         "expected_time": "2026-05-08T13:00", "tier": "early",  "note": "Tightest 2021 — 170 votes" },
-    { "name": "Coatbridge and Chryston",                     "expected_time": "2026-05-08T13:00", "tier": "early" },
-    { "name": "Na h-Eileanan an Iar",                        "expected_time": "2026-05-08T13:30", "tier": "early",  "note": "Western Isles" },
-    { "name": "Almond Valley",                               "expected_time": "2026-05-08T14:00", "tier": "early" },
-    { "name": "Cumbernauld and Kilsyth",                     "expected_time": "2026-05-08T14:00", "tier": "early" },
-    { "name": "Moray",                                       "expected_time": "2026-05-08T14:00", "tier": "early" },
-    { "name": "Perthshire North",                            "expected_time": "2026-05-08T14:00", "tier": "early",  "note": "FM John Swinney" },
-    { "name": "Perthshire South and Kinross-shire",          "expected_time": "2026-05-08T14:00", "tier": "early" },
-    { "name": "Strathkelvin and Bearsden",                   "expected_time": "2026-05-08T14:00", "tier": "early" },
-    { "name": "Glasgow Anniesland",                          "expected_time": "2026-05-08T14:15", "tier": "early" },
-    { "name": "Cunninghame North",                           "expected_time": "2026-05-08T14:30", "tier": "early" },
-    { "name": "Cunninghame South",                           "expected_time": "2026-05-08T14:30", "tier": "early" },
-    { "name": "Glasgow Provan",                              "expected_time": "2026-05-08T14:30", "tier": "early" },
-    { "name": "Orkney",                                      "expected_time": "2026-05-08T14:30", "tier": "early",  "note": "Liam McArthur (LD)" },
-    { "name": "Shetland",                                    "expected_time": "2026-05-08T14:30", "tier": "early",  "note": "Wishart stepping down" },
-    { "name": "Glasgow Shettleston",                         "expected_time": "2026-05-08T14:45", "tier": "early" },
-    { "name": "Cowdenbeath",                                 "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "East Lothian",                                "expected_time": "2026-05-08T15:00", "tier": "mid",   "note": "Top Labour target" },
-    { "name": "Edinburgh Central",                           "expected_time": "2026-05-08T15:00", "tier": "mid",   "note": "Lorna Slater (Greens) standing" },
-    { "name": "Edinburgh Eastern",                           "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Edinburgh Northern and Leith",                "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Edinburgh Pentlands",                         "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Edinburgh Southern",                          "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Edinburgh Western",                           "expected_time": "2026-05-08T15:00", "tier": "mid",   "note": "Cole-Hamilton (LD leader)" },
-    { "name": "Kirkcaldy",                                   "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Mid Fife and Glenrothes",                     "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Motherwell and Wishaw",                       "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "North East Fife",                             "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Paisley",                                     "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Renfrewshire North and West",                 "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Renfrewshire South",                          "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Argyll and Bute",                             "expected_time": "2026-05-08T15:00", "tier": "mid" },
-    { "name": "Glasgow Southside",                           "expected_time": "2026-05-08T15:15", "tier": "mid",   "note": "Sturgeon retiring" },
-    { "name": "Aberdeen Central",                            "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Aberdeen Donside",                            "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Aberdeen South and North Kincardine",         "expected_time": "2026-05-08T15:30", "tier": "mid",   "note": "Stephen Flynn standing" },
-    { "name": "Aberdeenshire East",                          "expected_time": "2026-05-08T15:30", "tier": "mid",   "note": "Tory–SNP marginal" },
-    { "name": "Aberdeenshire West",                          "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Banffshire and Buchan Coast",                 "expected_time": "2026-05-08T15:30", "tier": "mid",   "note": "Salmond's old seat — 772 maj" },
-    { "name": "Dumfriesshire",                               "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Galloway and West Dumfries",                  "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Glasgow Kelvin",                              "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Glasgow Maryhill and Springburn",             "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "Glasgow Cathcart",                            "expected_time": "2026-05-08T15:45", "tier": "mid",   "note": "Sarwar's bid (new combined seat)" },
-    { "name": "Glasgow Pollok",                              "expected_time": "2026-05-08T15:45", "tier": "mid",   "note": "Yousaf vacating" },
-    { "name": "Angus North and Mearns",                      "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Angus South",                                 "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Caithness, Sutherland and Ross",              "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "SNP–LD marginal" },
-    { "name": "Carrick, Cumnock and Doon Valley",            "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Clackmannanshire and Dunblane",               "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Clydesdale",                                  "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Dundee City East",                            "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "Robison stepping down" },
-    { "name": "Dundee City West",                            "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Dunfermline",                                 "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "East Kilbride",                               "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Eastwood",                                    "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "Jackson Carlaw (Tory)" },
-    { "name": "Falkirk West",                                "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Hamilton, Larkhall and Stonehouse",           "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Kilmarnock and Irvine Valley",                "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Midlothian North and Musselburgh",            "expected_time": "2026-05-08T16:00", "tier": "late",  "note": "Colin Beattie post-Branchform" },
-    { "name": "Rutherglen",                                  "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Stirling",                                    "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Uddingston and Bellshill",                    "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Ettrick, Roxburgh and Berwickshire",          "expected_time": "2026-05-08T16:30", "tier": "late" },
-    { "name": "Falkirk East",                                "expected_time": "2026-05-08T16:30", "tier": "late" },
-    { "name": "Linlithgow",                                  "expected_time": "2026-05-08T16:30", "tier": "late" },
-    { "name": "Greenock and Inverclyde",                     "expected_time": "2026-05-08T16:30", "tier": "late" },
-    { "name": "Midlothian South, Tweeddale and Lauderdale",  "expected_time": "2026-05-08T16:30", "tier": "late" },
-    { "name": "Clydebank and Milngavie",                     "expected_time": "2026-05-08T17:00", "tier": "late" },
-    { "name": "Dumbarton",                                   "expected_time": "2026-05-08T17:00", "tier": "late",  "note": "Jackie Baillie (Lab Deputy Leader)" },
-    { "name": "Inverness and Nairn",                         "expected_time": "2026-05-08T18:30", "tier": "very_late", "note": "Fergus Ewing wildcard" },
-    { "name": "Skye, Lochaber and Badenoch",                 "expected_time": "2026-05-08T18:30", "tier": "very_late", "note": "Kate Forbes stepping down" }
+    {
+      "name": "Airdrie and Shotts",
+      "expected_time": "2026-05-08T12:00",
+      "tier": "early"
+    },
+    {
+      "name": "Ayr",
+      "expected_time": "2026-05-08T13:00",
+      "tier": "early",
+      "note": "Tightest 2021 \u2014 170 votes"
+    },
+    {
+      "name": "Coatbridge and Chryston",
+      "expected_time": "2026-05-08T13:00",
+      "tier": "early"
+    },
+    {
+      "name": "Na h-Eileanan an Iar",
+      "expected_time": "2026-05-08T13:30",
+      "tier": "early",
+      "note": "Western Isles"
+    },
+    {
+      "name": "Almond Valley",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early",
+      "region": "Central and Lothians West"
+    },
+    {
+      "name": "Cumbernauld and Kilsyth",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early"
+    },
+    {
+      "name": "Moray",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early"
+    },
+    {
+      "name": "Perthshire North",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early",
+      "note": "FM John Swinney"
+    },
+    {
+      "name": "Perthshire South and Kinross-shire",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early"
+    },
+    {
+      "name": "Strathkelvin and Bearsden",
+      "expected_time": "2026-05-08T14:00",
+      "tier": "early"
+    },
+    {
+      "name": "Glasgow Anniesland",
+      "expected_time": "2026-05-08T14:15",
+      "tier": "early"
+    },
+    {
+      "name": "Cunninghame North",
+      "expected_time": "2026-05-08T14:30",
+      "tier": "early"
+    },
+    {
+      "name": "Cunninghame South",
+      "expected_time": "2026-05-08T14:30",
+      "tier": "early"
+    },
+    {
+      "name": "Glasgow Provan",
+      "expected_time": "2026-05-08T14:30",
+      "tier": "early"
+    },
+    {
+      "name": "Orkney",
+      "expected_time": "2026-05-08T14:30",
+      "tier": "early",
+      "note": "Liam McArthur (LD)"
+    },
+    {
+      "name": "Shetland",
+      "expected_time": "2026-05-08T14:30",
+      "tier": "early",
+      "note": "Wishart stepping down"
+    },
+    {
+      "name": "Glasgow Shettleston",
+      "expected_time": "2026-05-08T14:45",
+      "tier": "early"
+    },
+    {
+      "name": "Cowdenbeath",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "East Lothian",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid",
+      "note": "Top Labour target"
+    },
+    {
+      "name": "Edinburgh Central",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid",
+      "note": "Lorna Slater (Greens) standing"
+    },
+    {
+      "name": "Edinburgh Eastern",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Edinburgh Northern and Leith",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Edinburgh Pentlands",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Edinburgh Southern",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Edinburgh Western",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid",
+      "note": "Cole-Hamilton (LD leader)"
+    },
+    {
+      "name": "Kirkcaldy",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Mid Fife and Glenrothes",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Motherwell and Wishaw",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "North East Fife",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Paisley",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Renfrewshire North and West",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Renfrewshire South",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Argyll and Bute",
+      "expected_time": "2026-05-08T15:00",
+      "tier": "mid"
+    },
+    {
+      "name": "Glasgow Southside",
+      "expected_time": "2026-05-08T15:15",
+      "tier": "mid",
+      "note": "Sturgeon retiring"
+    },
+    {
+      "name": "Aberdeen Central",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Aberdeen Donside",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Aberdeen South and North Kincardine",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid",
+      "note": "Stephen Flynn standing"
+    },
+    {
+      "name": "Aberdeenshire East",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid",
+      "note": "Tory\u2013SNP marginal"
+    },
+    {
+      "name": "Aberdeenshire West",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Banffshire and Buchan Coast",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid",
+      "note": "Salmond's old seat \u2014 772 maj"
+    },
+    {
+      "name": "Dumfriesshire",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Galloway and West Dumfries",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Glasgow Kelvin",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Glasgow Maryhill and Springburn",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "Glasgow Cathcart",
+      "expected_time": "2026-05-08T15:45",
+      "tier": "mid",
+      "note": "Sarwar's bid (new combined seat)"
+    },
+    {
+      "name": "Glasgow Pollok",
+      "expected_time": "2026-05-08T15:45",
+      "tier": "mid",
+      "note": "Yousaf vacating"
+    },
+    {
+      "name": "Angus North and Mearns",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Angus South",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Caithness, Sutherland and Ross",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "note": "SNP\u2013LD marginal"
+    },
+    {
+      "name": "Carrick, Cumnock and Doon Valley",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Clackmannanshire and Dunblane",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Clydesdale",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Dundee City East",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "note": "Robison stepping down"
+    },
+    {
+      "name": "Dundee City West",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Dunfermline",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "East Kilbride",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "region": "South Scotland"
+    },
+    {
+      "name": "Eastwood",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "note": "Jackson Carlaw (Tory)"
+    },
+    {
+      "name": "Falkirk West",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Hamilton, Larkhall and Stonehouse",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "region": "South Scotland"
+    },
+    {
+      "name": "Kilmarnock and Irvine Valley",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Midlothian North and Musselburgh",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late",
+      "note": "Colin Beattie post-Branchform"
+    },
+    {
+      "name": "Rutherglen",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Stirling",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Uddingston and Bellshill",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Ettrick, Roxburgh and Berwickshire",
+      "expected_time": "2026-05-08T16:30",
+      "tier": "late"
+    },
+    {
+      "name": "Falkirk East",
+      "expected_time": "2026-05-08T16:30",
+      "tier": "late"
+    },
+    {
+      "name": "Linlithgow",
+      "expected_time": "2026-05-08T16:30",
+      "tier": "late"
+    },
+    {
+      "name": "Greenock and Inverclyde",
+      "expected_time": "2026-05-08T16:30",
+      "tier": "late"
+    },
+    {
+      "name": "Midlothian South, Tweeddale and Lauderdale",
+      "expected_time": "2026-05-08T16:30",
+      "tier": "late"
+    },
+    {
+      "name": "Clydebank and Milngavie",
+      "expected_time": "2026-05-08T17:00",
+      "tier": "late"
+    },
+    {
+      "name": "Dumbarton",
+      "expected_time": "2026-05-08T17:00",
+      "tier": "late",
+      "note": "Jackie Baillie (Lab Deputy Leader)"
+    },
+    {
+      "name": "Inverness and Nairn",
+      "expected_time": "2026-05-08T18:30",
+      "tier": "very_late",
+      "note": "Fergus Ewing wildcard"
+    },
+    {
+      "name": "Skye, Lochaber and Badenoch",
+      "expected_time": "2026-05-08T18:30",
+      "tier": "very_late",
+      "note": "Kate Forbes stepping down"
+    }
   ],
   "regions": [
-    { "name": "North East Scotland",     "expected_time": "2026-05-08T15:30", "tier": "mid" },
-    { "name": "South Scotland",          "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "West Scotland",           "expected_time": "2026-05-08T16:00", "tier": "late" },
-    { "name": "Glasgow",                 "expected_time": "2026-05-08T16:15", "tier": "late" },
-    { "name": "Central Scotland",        "expected_time": "2026-05-08T17:00", "tier": "late" },
-    { "name": "Mid Scotland and Fife",   "expected_time": "2026-05-08T17:30", "tier": "late" },
-    { "name": "Lothian",                 "expected_time": "2026-05-08T18:00", "tier": "very_late" },
-    { "name": "Highlands and Islands",   "expected_time": "2026-05-08T19:00", "tier": "very_late" }
+    {
+      "name": "North East Scotland",
+      "expected_time": "2026-05-08T15:30",
+      "tier": "mid"
+    },
+    {
+      "name": "South Scotland",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "West Scotland",
+      "expected_time": "2026-05-08T16:00",
+      "tier": "late"
+    },
+    {
+      "name": "Glasgow",
+      "expected_time": "2026-05-08T16:15",
+      "tier": "late"
+    },
+    {
+      "name": "Central and Lothians West",
+      "expected_time": "2026-05-08T17:00",
+      "tier": "late"
+    },
+    {
+      "name": "Mid Scotland and Fife",
+      "expected_time": "2026-05-08T17:30",
+      "tier": "late"
+    },
+    {
+      "name": "Edinburgh and Lothians East",
+      "expected_time": "2026-05-08T18:00",
+      "tier": "very_late"
+    },
+    {
+      "name": "Highlands and Islands",
+      "expected_time": "2026-05-08T19:00",
+      "tier": "very_late"
+    }
   ]
 }

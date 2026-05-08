@@ -14,7 +14,8 @@ const PARTY_COLORS = {
   LD:  '#FAA61A', GRN: '#5DBB46', REF: '#12B6CF', OTH: '#8a93a3'
 };
 const REGIONS = [
-  'Central Scotland', 'Glasgow', 'Highlands and Islands', 'Lothian',
+  'Central and Lothians West', 'Edinburgh and Lothians East',
+  'Glasgow', 'Highlands and Islands',
   'Mid Scotland and Fife', 'North East Scotland', 'South Scotland', 'West Scotland'
 ];
 const TOTAL_SEATS = 129;
@@ -1215,14 +1216,14 @@ function setupMaps() {
   // regions get manual offsets so their panels don't overlap.
   // Offsets are in viewBox pixels relative to region centroid.
   const REGION_PANEL_OFFSET = {
-    'Highlands and Islands':  [  0,  10],
-    'North East Scotland':    [ 30,   0],
-    'Mid Scotland and Fife':  [-50,   0],
-    'South Scotland':         [  0,  20],
-    'Central Scotland':       [ 95, -10],
-    'Glasgow':                [-90,  35],
-    'Lothian':                [110,  60],
-    'West Scotland':          [-90, -20],
+    'Highlands and Islands':       [-10,   0],
+    'North East Scotland':         [ 40,   0],
+    'Mid Scotland and Fife':       [-60,   0],
+    'South Scotland':              [  0,  35],
+    'Central and Lothians West':   [110, -25],
+    'Glasgow':                     [-95,  50],
+    'Edinburgh and Lothians East': [120,  70],
+    'West Scotland':               [-95, -25],
   };
   state.regionPanelAnchors = {};
   for (const f of sper.features) {
@@ -1407,6 +1408,8 @@ function paintRegionDots(s) {
   let zoomG = svg.select('g.zoom-g');
   if (zoomG.empty()) zoomG = svg;     // fallback for tests
   zoomG.select('g.region-overlay').remove();
+  // Title + legend live on the SVG (not the zoom group) so they don't pan/zoom
+  svg.select('g.region-chrome').remove();
   if (!state.regionPanelAnchors) return;
 
   const layer = zoomG.append('g').attr('class', 'region-overlay');
@@ -1418,7 +1421,10 @@ function paintRegionDots(s) {
     const [px, py] = anchor.panel;
     const [cx, cy] = anchor.centroid;
 
-    // Build dot list — sorted by political position so chips read consistently
+    // Build dot list — sorted by political position so chips read consistently.
+    // Region size varies (7 list seats per region for the dashboard's BBS model,
+    // though we draw exactly LIST_PER_REGION dots regardless of constituency
+    // count in the region).
     const dots = [];
     if (rec && rec.hasData) {
       for (const p of HEMICYCLE_PARTY_ORDER) {
@@ -1428,45 +1434,45 @@ function paintRegionDots(s) {
     }
     while (dots.length < LIST_PER_REGION) dots.push(null);
 
-    // Layout: 2 rows of 4 + 3 (4 on top, 3 centred below)
-    const dotR = 5.2;
-    const spacing = 13;
-    const titleH = 12;
+    // Sun-style layout: white panel with 4-3 dot rows (4 on top, 3 centred
+    // below). Region label sits ABOVE the panel, not inside it.
+    const dotR = 6;
+    const spacing = 15;
     const padX = 10;
-    const padY = 6;
+    const padY = 8;
     const panelW = 4 * spacing + padX;
-    const panelH = titleH + 2 * spacing + padY;
+    const panelH = 2 * spacing + padY;
     const x0 = px - panelW / 2;
     const y0 = py - panelH / 2;
 
     // Leader line from panel edge to centroid (only for offset panels)
-    if (Math.hypot(px - cx, py - cy) > 12) {
+    if (Math.hypot(px - cx, py - cy) > 14) {
       layer.append('line')
         .attr('class', 'region-leader')
         .attr('x1', cx).attr('y1', cy)
         .attr('x2', px).attr('y2', py);
     }
 
-    // Background pill
+    // Region label ABOVE the panel (white with dark stroke for readability)
+    const shortName = region.replace('Highlands and Islands', 'HIGHLANDS & ISLANDS').replace('Mid Scotland and Fife', 'MID & FIFE').replace('North East Scotland', 'NORTH EAST').replace('Central and Lothians West', 'CENTRAL & W LOTHIANS').replace('Edinburgh and Lothians East', 'EDINBURGH & E LOTHIANS').replace('South Scotland', 'SOUTH').replace('West Scotland', 'WEST').replace('Glasgow', 'GLASGOW');
+    layer.append('text')
+      .attr('class', 'region-panel-label')
+      .attr('x', px)
+      .attr('y', y0 - 5)
+      .text(shortName);
+
+    // White panel background
     layer.append('rect')
       .attr('class', 'region-panel-bg')
       .attr('x', x0).attr('y', y0)
       .attr('width', panelW).attr('height', panelH)
-      .attr('rx', 6).attr('ry', 6);
-
-    // Region label inside the panel
-    const shortName = region.replace('Highlands and Islands', 'H. & Islands').replace('Mid Scotland and Fife', 'Mid & Fife').replace('North East Scotland', 'NE Scotland').replace('Central Scotland', 'Central').replace('South Scotland', 'South').replace('West Scotland', 'West');
-    layer.append('text')
-      .attr('class', 'region-panel-title')
-      .attr('x', px)
-      .attr('y', y0 + titleH)
-      .text(shortName);
+      .attr('rx', 3).attr('ry', 3);
 
     // Dot rows: 4 on top, 3 centred below
     const rows = [dots.slice(0, 4), dots.slice(4, 7)];
     rows.forEach((rowDots, rowIdx) => {
       const rowOffsetX = (4 - rowDots.length) * spacing / 2;
-      const rowY = y0 + titleH + 6 + rowIdx * (dotR * 2 + 2);
+      const rowY = y0 + padY / 2 + (rowIdx + 0.5) * spacing;
       rowDots.forEach((p, i) => {
         const dx = x0 + padX / 2 + (i + 0.5) * spacing + rowOffsetX;
         const isProj = !!(rec && rec.hasData && !(state.entered.regions[region] && totals(state.entered.regions[region].listVotes) > 0));
@@ -1475,7 +1481,7 @@ function paintRegionDots(s) {
           .attr('cx', dx).attr('cy', rowY)
           .attr('r', dotR)
           .attr('fill', p ? partyColor(p) : null)
-          .attr('opacity', isProj ? 0.65 : 1);
+          .attr('opacity', isProj ? 0.7 : 1);
       });
     });
 
@@ -1490,6 +1496,50 @@ function paintRegionDots(s) {
       .on('mouseleave', hideTooltip)
       .on('click', () => openRegionModal(region));
   }
+
+  // Title + legend (in screen-space, not affected by pan/zoom)
+  drawRegionMapChrome(svg);
+}
+
+function drawRegionMapChrome(svg) {
+  const W = 600;  // matches viewBox
+  const chrome = svg.append('g').attr('class', 'region-chrome');
+
+  // Title across the top
+  chrome.append('text')
+    .attr('class', 'region-map-title')
+    .attr('x', W / 2).attr('y', 30)
+    .text('REGIONAL SEATS · 2026');
+
+  // Legend in the upper right — party colour swatches
+  const legendParties = [
+    { p: 'SNP', label: 'SNP' },
+    { p: 'LAB', label: 'Labour' },
+    { p: 'CON', label: 'Conservative' },
+    { p: 'LD',  label: 'Lib Dems' },
+    { p: 'GRN', label: 'Greens' },
+    { p: 'REF', label: 'Reform' },
+  ];
+  const lgX = W - 110, lgY = 50;
+  const rowH = 17, dotR = 5.5, padX = 10, padY = 8;
+  const lgW = 100, lgH = legendParties.length * rowH + padY * 2 - rowH + 16;
+  const lg = chrome.append('g').attr('transform', `translate(${lgX},${lgY})`);
+  lg.append('rect')
+    .attr('class', 'region-legend-bg')
+    .attr('x', 0).attr('y', 0)
+    .attr('width', lgW).attr('height', lgH)
+    .attr('rx', 4).attr('ry', 4);
+  legendParties.forEach((it, i) => {
+    const y = padY + 6 + i * rowH;
+    lg.append('circle')
+      .attr('class', 'region-legend-dot')
+      .attr('cx', padX + dotR).attr('cy', y)
+      .attr('r', dotR).attr('fill', partyColor(it.p));
+    lg.append('text')
+      .attr('class', 'region-legend-text')
+      .attr('x', padX + dotR * 2 + 8).attr('y', y)
+      .text(it.label);
+  });
 }
 
 function onRegionHoverByName(e, name) {

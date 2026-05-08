@@ -1,6 +1,6 @@
 [
   {
-    "name": "Central Scotland",
+    "name": "Central and Lothians West",
     "list_votes": {
       "SNP": 148399,
       "LAB": 77623,
@@ -81,7 +81,7 @@
     }
   },
   {
-    "name": "Lothian",
+    "name": "Edinburgh and Lothians East",
     "list_votes": {
       "SNP": 141478,
       "LAB": 76689,
