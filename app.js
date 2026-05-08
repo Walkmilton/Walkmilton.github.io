@@ -1084,6 +1084,43 @@ function renderAllSeatsTable(s) {
 
 /* ---------------- Maps ---------------- */
 let projectionFns = {};
+// Attach pan/zoom behaviour to an SVG. All map content goes inside a single
+// transform group so wheel/drag/double-click only changes that group, not
+// the whole SVG (so SVG-relative things like overlays still work). Returns
+// the zoom group + the d3.zoom behaviour so we can reset programmatically.
+const _zoomBehaviours = {};
+function attachZoom(svgSelector) {
+  const svg = d3.select(svgSelector);
+  // Single child group for all zoomable content.
+  let zoomG = svg.select('g.zoom-g');
+  if (zoomG.empty()) zoomG = svg.append('g').attr('class', 'zoom-g');
+
+  const zoom = d3.zoom()
+    .scaleExtent([1, 8])
+    .filter((event) => {
+      // Allow wheel + drag + dblclick. Block right-click, ctrl-click, and
+      // touch events that originate on a clickable feature so seat modals
+      // still open. d3.zoom by default ignores touchstart on non-passive
+      // listeners which can fight scroll on mobile — keep the default.
+      if (event.type === 'mousedown' && event.button !== 0) return false;
+      return !event.ctrlKey || event.type === 'wheel';
+    })
+    .on('zoom', (e) => {
+      zoomG.attr('transform', e.transform);
+    });
+
+  svg.call(zoom);
+  // Double-click already zooms in by default; preserve that.
+  _zoomBehaviours[svgSelector] = { svg, zoom, zoomG };
+  return zoomG;
+}
+
+function resetMapZoom(svgSelector) {
+  const z = _zoomBehaviours[svgSelector];
+  if (!z) return;
+  z.svg.transition().duration(400).call(z.zoom.transform, d3.zoomIdentity);
+}
+
 function setupMaps() {
   const spc = topojson.feature(state.topo, state.topo.objects.spc);
   const sper = topojson.feature(state.topo, state.topo.objects.sper);
@@ -1100,7 +1137,11 @@ function setupMaps() {
   const pathR = d3.geoPath(projectionR);
   projectionFns.sper = pathR;
 
-  const cg = svgSpc.append('g').attr('class', 'cg');
+  // Wrap both maps in zoom groups
+  const zoomGSpc = attachZoom('#map-spc');
+  const zoomGSper = attachZoom('#map-sper');
+
+  const cg = zoomGSpc.append('g').attr('class', 'cg');
   cg.selectAll('path')
     .data(spc.features)
     .join('path')
@@ -1112,7 +1153,7 @@ function setupMaps() {
     .on('mouseleave', hideTooltip)
     .on('click', (e, d) => openSeatModal(d.properties.NAME));
 
-  const rgOnSpc = svgSpc.append('g').attr('class', 'rg-overlay');
+  const rgOnSpc = zoomGSpc.append('g').attr('class', 'rg-overlay');
   rgOnSpc.selectAll('path')
     .data(sper.features)
     .join('path')
@@ -1123,7 +1164,7 @@ function setupMaps() {
     .attr('pointer-events', 'none');
 
   // Neutral grey region polygons — colour comes from the dot panels instead
-  const rg = svgSper.append('g').attr('class', 'rg');
+  const rg = zoomGSper.append('g').attr('class', 'rg');
   rg.selectAll('path')
     .data(sper.features)
     .join('path')
@@ -1206,7 +1247,9 @@ function setupHexMap() {
     return [x, y];
   }
 
-  const g = svg.append('g').attr('class', 'hex-g');
+  // Wrap hex content in a zoom group + attach pan/zoom behaviour.
+  const zoomG = attachZoom('#map-spc-hex');
+  const g = zoomG.append('g').attr('class', 'hex-g');
   cells.forEach(([name, [col, row]]) => {
     const [x, y] = pos(col, row);
     const path = g.append('path')
@@ -1324,12 +1367,14 @@ function paintMaps(s) {
  * so the panels read consistently with the hemicycle.
  */
 function paintRegionDots(s) {
+  // Render into the zoom group so dots pan/zoom with the map polygons.
   const svg = d3.select('#map-sper');
-  // Clear previous overlay layer
-  svg.select('g.region-overlay').remove();
+  let zoomG = svg.select('g.zoom-g');
+  if (zoomG.empty()) zoomG = svg;     // fallback for tests
+  zoomG.select('g.region-overlay').remove();
   if (!state.regionPanelAnchors) return;
 
-  const layer = svg.append('g').attr('class', 'region-overlay');
+  const layer = zoomG.append('g').attr('class', 'region-overlay');
 
   for (const region of REGIONS) {
     const anchor = state.regionPanelAnchors[region];
@@ -3245,6 +3290,19 @@ function wire() {
     b.addEventListener('click', () => {
       setSpcMapView(b.dataset.view);
       paintMaps(computeSeats());
+    });
+  });
+
+  // Reset-zoom buttons on each map
+  $$('.map-reset-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const which = b.dataset.reset;
+      if (which === 'spc') {
+        // Reset whichever SPC view is currently shown
+        resetMapZoom(state.spcMapView === 'hex' ? '#map-spc-hex' : '#map-spc');
+      } else if (which === 'sper') {
+        resetMapZoom('#map-sper');
+      }
     });
   });
 

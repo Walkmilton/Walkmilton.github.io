@@ -239,6 +239,25 @@ a { color: var(--accent); text-decoration: none; }
   border-radius: 8px; padding: 6px 10px; font-size: 11px; color: var(--text-2);
   backdrop-filter: blur(6px);
 }
+.map-reset-btn {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(8,12,18,.7);
+  border: 1px solid var(--line);
+  color: var(--text-1);
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  font-size: 14px; cursor: pointer;
+  display: grid; place-items: center;
+  backdrop-filter: blur(6px);
+  transition: background .15s, transform .15s;
+}
+.map-reset-btn:hover { background: var(--bg-3); transform: rotate(-90deg); }
+html[data-theme="light"] .map-reset-btn {
+  background: rgba(255,255,255,0.85);
+  color: var(--text-1);
+}
+.map-svg-wrap svg { cursor: grab; }
+.map-svg-wrap svg:active { cursor: grabbing; }
 
 /* ============ Lower row: data entry + comparisons ============ */
 .lower-row {
@@ -1332,14 +1351,16 @@ html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139
       <div class="body">
         <div class="map-svg-wrap" id="map-spc-geo-wrap"><svg id="map-spc" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
         <div class="map-svg-wrap" id="map-spc-hex-wrap" style="display:none"><svg id="map-spc-hex" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
-        <div class="map-overlay" id="map-spc-overlay">Click a constituency to enter results</div>
+        <div class="map-overlay" id="map-spc-overlay">Scroll to zoom · drag to pan · click to enter</div>
+        <button class="map-reset-btn" data-reset="spc" title="Reset zoom">⟲</button>
       </div>
     </div>
     <div class="card map-card">
       <h2>Regional list map · 8 regions × 7 list seats <span class="right">Each dot = one list MSP, by party</span></h2>
       <div class="body">
         <div class="map-svg-wrap"><svg id="map-sper" viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet"></svg></div>
-        <div class="map-overlay" id="map-sper-overlay">Click a region to enter list votes</div>
+        <div class="map-overlay" id="map-sper-overlay">Scroll to zoom · drag to pan · click for list votes</div>
+        <button class="map-reset-btn" data-reset="sper" title="Reset zoom">⟲</button>
       </div>
     </div>
   </section>
