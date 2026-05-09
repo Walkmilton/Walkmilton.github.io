@@ -620,6 +620,32 @@ html[data-theme="light"] .hemicycle .seat-dot { stroke: rgba(0,0,0,0.25); }
 }
 #view-year:focus { outline: none; border-color: var(--accent); }
 
+/* FINAL RESULTS mode: hide live polling, manual entry, and projection toggle.
+   Election is over; the snapshot is canonical. */
+body.final-results-mode .live-btn,
+body.final-results-mode #live-status,
+body.final-results-mode #entry-form,
+body.final-results-mode .toggle-group,
+body.final-results-mode #paste-btn,
+body.final-results-mode #reset-btn,
+body.final-results-mode .map-overlay {
+  display: none !important;
+}
+.final-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
 /* When viewing historical year, highlight that fact */
 html[data-historical] .live-btn,
 html[data-historical] #export-btn,
@@ -1291,8 +1317,8 @@ html[data-theme="light"] .status-cell .badge.pend { background: rgba(100,116,139
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V11M3 11l9-7 9 7M3 11l9 4 9-4M21 21V11M9 21v-7h6v7"/></svg>
       </div>
       <div>
-        <h1>Holyrood 2026 — Live Results</h1>
-        <div class="sub">Scottish Parliament election · poll closes Thu 7 May, 22:00 · count begins Fri 8 May</div>
+        <h1>Holyrood 2026 — Final Results <span class="final-badge">FINAL</span></h1>
+        <div class="sub">Scottish Parliament election · 7 May 2026 · all 73 constituencies + 8 regions declared</div>
       </div>
     </div>
     <div class="controls">

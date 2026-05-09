@@ -205,6 +205,41 @@ async function loadData() {
       state.historical[y] = await fetch(`data/historical/history_${y}.json`).then(r => r.json());
     } catch (e) {}
   }));
+  // Final 2026 results snapshot — frozen tally from the spreadsheet.
+  // When present, this OVERRIDES live mode and any cached localStorage state
+  // so every visitor sees the same final numbers.
+  try {
+    state.finalSnapshot = await fetch('data/final_results_2026.json').then(r => r.json());
+  } catch (e) { state.finalSnapshot = null; }
+}
+
+// Apply the frozen final-results snapshot as the canonical entered state.
+// Overrides localStorage so visitors always see the final tally on load.
+function applyFinalSnapshot() {
+  if (!state.finalSnapshot) return;
+  const snap = state.finalSnapshot;
+  state.entered = state.entered || { constituencies: {}, regions: {} };
+  state.entered.constituencies = {};
+  state.entered.regions = {};
+  // Constituencies: copy votes
+  for (const [name, rec] of Object.entries(snap.constituencies || {})) {
+    state.entered.constituencies[name] = {
+      votes: { ...rec.votes },
+      declaredTs: rec.declaredTs || Date.now(),
+    };
+  }
+  // Regions: copy list votes
+  for (const [name, rec] of Object.entries(snap.regions || {})) {
+    state.entered.regions[name] = {
+      listVotes: { ...rec.listVotes },
+      declaredTs: rec.declaredTs || Date.now(),
+    };
+  }
+  // Mode: declared (no projection needed when everything's in)
+  state.mode = 'declared';
+  // Disable live polling — the data is final
+  state.live = state.live || {};
+  state.live.running = false;
 }
 
 function loadFromStorage() {
@@ -3531,15 +3566,10 @@ async function boot() {
   loadFromStorage();
   loadLive();
 
-  // Pre-fill the default live URL for visitors who haven't set their own,
-  // so the live-mode modal opens with the URL already populated. We do NOT
-  // auto-start polling — the user has to click "Start live mode" to begin.
-  if (DEFAULT_LIVE_URL && !state.live.url) {
-    state.live.url = DEFAULT_LIVE_URL;
-    state.live.intervalSec = state.live.intervalSec || DEFAULT_LIVE_INTERVAL_SEC;
-    // state.live.running stays as loaded — false for new visitors,
-    // true only if they had it running last session.
-  }
+  // FINAL RESULTS MODE: the snapshot baked into data/final_results_2026.json
+  // is the canonical post-election tally. Apply it after loading from storage
+  // so it overrides any cached state from earlier sessions.
+  applyFinalSnapshot();
 
   applyTheme();
   applyTvMode();
@@ -3550,11 +3580,9 @@ async function boot() {
   wire();
   rerender();
   updateLiveStatus();
-  // Only restart polling if the user explicitly had it running last session.
-  // New visitors stay paused until they click Start.
-  if (state.live.running && state.live.url) {
-    startLive();
-  }
+  // Live polling is permanently OFF — election is over, results are frozen.
+  // (We deliberately don't call startLive() any more.)
+  document.body.classList.add('final-results-mode');
   console.log('[Holyrood 2026] Ready.', {
     constituencies: state.results2021.constituencies.length,
     regions: state.results2021.regions.length,
